@@ -20,6 +20,59 @@ namespace App.Data.Repositories.Base
 			httpContext = _httpContext;
 		}
 
+		public virtual async Task DeleteAsync(AppEntityBase entity)
+		{
+			var now = DateTime.Now;
+			entity.DeletedDate = now;
+			if (httpContext != null)
+			{
+				entity.UpdatedBy = CurrentUserId();
+			}
+			await db.SaveChangesAsync();
+		}
+
+		public virtual async Task<TEntity> GetOneAsync<TEntity>(int id) where TEntity : AppEntityBase
+		{
+			return await db.Set<TEntity>()
+						.SingleOrDefaultAsync(m => m.DeletedDate == null && m.Id == id);
+		}
+
+		public virtual async Task<TEntity> GetOneAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
+		{
+			return await db.Set<TEntity>()
+						.Where(m => m.DeletedDate == null)
+						.SingleOrDefaultAsync(expr);
+		}
+
+		public virtual async Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
+		{
+			return await db.Set<TEntity>().AnyAsync(expr);
+		}
+
+		public virtual IOrderedQueryable<TEntity> GetAll<TEntity>() where TEntity : AppEntityBase
+		{
+			return db.Set<TEntity>()
+						.Where(m => m.DeletedDate == null)
+						.OrderByDescending(m => m.DisplayOrder)
+						.ThenByDescending(m => m.Id);
+		}
+
+		public virtual IOrderedQueryable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
+		{
+			return db.Set<TEntity>()
+						.Where(expr)
+						.OrderByDescending(m => m.DisplayOrder)
+						.ThenByDescending(m => m.Id);
+		}
+
+		public virtual async Task Create<TEntity>(TEntity entity) where TEntity : AppEntityBase
+		{
+			this.BeforeAdd(entity);
+			await db.Set<TEntity>().AddAsync(entity);
+			await db.SaveChangesAsync();
+		}
+
+		#region Helpers
 		protected void BeforeAdd(AppEntityBase entity, bool isDeleted = false)
 		{
 			var now = DateTime.Now;
@@ -51,37 +104,6 @@ namespace App.Data.Repositories.Base
 			}
 		}
 
-		public virtual async Task DeleteAsync(AppEntityBase entity)
-		{
-			var now = DateTime.Now;
-			entity.DeletedDate = now;
-			if (httpContext != null)
-			{
-				entity.UpdatedBy = CurrentUserId();
-			}
-			await db.SaveChangesAsync();
-		}
-
-		public virtual async Task<TEntity> GetOneAsync<TEntity>(int id) where TEntity : AppEntityBase
-		{
-			return await db.Set<TEntity>()
-						.SingleOrDefaultAsync(m => m.DeletedDate == null && m.Id == id);
-		}
-
-		public virtual async Task<TEntity> GetOneAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
-		{
-			return await db.Set<TEntity>()
-						.Where(m => m.DeletedDate == null)
-						.SingleOrDefaultAsync(expr);
-		}
-
-		public virtual async Task Create<TEntity>(TEntity entity) where TEntity : AppEntityBase
-		{
-			this.BeforeAdd(entity);
-			await db.Set<TEntity>().AddAsync(entity);
-			await db.SaveChangesAsync();
-		}	
-
 		protected int? CurrentUserId()
 		{
 			var nameIdentifier = httpContext.HttpContext.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
@@ -91,5 +113,6 @@ namespace App.Data.Repositories.Base
 			}
 			return null;
 		}
+		#endregion
 	}
 }

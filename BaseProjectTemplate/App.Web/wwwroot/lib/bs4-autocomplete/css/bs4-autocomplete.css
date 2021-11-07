@@ -1,0 +1,74 @@
+button.form-control.bs4-dropdown {
+	white-space: nowrap;
+	word-break: keep-all;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding-right: 2rem;
+	position: relative;
+}
+
+	button.form-control.bs4-dropdown::after {
+		display: inline-block;
+		margin-left: 0.255em;
+		vertical-align: 0.255em;
+		content: "";
+		position: absolute;
+		top: 1rem;
+		right: 0.5rem;
+		border-top: 0.3em solid;
+		border-right: 0.3em solid transparent;
+		border-bottom: 0;
+		border-left: 0.3em solid transparent;
+	}
+
+.bs4-dropdown-container .dropdown-menu .dropdown-content {
+	overflow: auto;
+}
+
+.dropdown-content > .dropdown-item {
+	display: flex;
+	justify-content: space-between;
+}
+
+	.dropdown-content > .dropdown-item > span {
+		white-space: nowrap;
+		word-break: keep-all;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	.dropdown-content > .dropdown-item > button {
+		background-color: transparent;
+		margin-right: -12px;
+		margin-top: 3px;
+		font-weight: 500;
+		height: 100%;
+		font-size: 1.5rem;
+		line-height: 1rem;
+		outline: none;
+		border: none;
+		display: none;
+	}
+
+	.dropdown-content > .dropdown-item.active > button {
+		display: inline-block;
+		color: inherit;
+	}
+/* Custom scrollbar */
+.dropdown-content::-webkit-scrollbar {
+	width: 3px;
+	border-radius: 2px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+	background: rgba(241, 241, 241, 0.5);
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+	background: rgba(136, 136, 136, 0.5);
+	border-radius: 2px;
+}
+
+	.dropdown-content::-webkit-scrollbar-thumb:hover {
+		background: rgba(85, 85, 85, 0.5);
+	}

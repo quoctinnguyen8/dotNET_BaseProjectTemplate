@@ -1,0 +1,68 @@
+/**
+ * @author Script47 (https://github.com/Script47/Toast)
+ * @description Toast - A Bootstrap 4.2+ jQuery plugin for the toast component
+ * @version 1.2.0
+ * Modified by tinnq 06/2021
+ **/
+.toast-container {
+	position: fixed;
+	z-index: 2055;
+	margin: 30px;
+	& > .toast {
+		min-width: 250px;
+		background: transparent;
+		border: none;
+		& > .toast-header {
+			border: none;
+			& strong {
+				padding-right: 20px;
+			}
+		}
+		& > .toast-body {
+			background: white;
+		}
+	}
+}
+
+.top- {
+	@mixin top0 {
+		top: 0;
+	}
+
+	&right {
+		@include top0();
+		right: 0;
+	}
+
+	&left {
+		@include top0();
+		left: 0;
+	}
+
+	&center {
+		@include top0();
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.bottom- {
+	@mixin btm {
+		bottom: 0;
+	}
+	&right {
+		@include btm();
+		right: 0;
+	}
+
+	&left {
+		@include btm();
+		left: 0;
+	}
+
+	&center {
+		@include btm();
+		transform: translateX(-50%);
+		left: 50%;
+	}
+}

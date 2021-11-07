@@ -1,48 +1,78 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - App.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">App.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>@ViewBag.Title</title>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - App.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/adminLTE/plugins/fontawesome-free/css/all.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/adminLTE/dist/css/adminlte.min.css">
+
+	<link href="~/lib/bs4-toast-snackbar/css/toast-snackbar.css" rel="stylesheet" asp-append-version="true"/>
+
+	<link href="~/css/site.css" rel="stylesheet" asp-append-version="true"/>
+
+	@RenderSection("head", false)
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+		<partial name="_HeaderBar" />
+
+		<partial name="_MainNavBar" />
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Main content -->
+			<section class="content p-4">
+
+				<!-- Default box -->
+				<div class="card">
+					<div class="card-header">
+						<h3 class="h3">@ViewBag.Title</h3>
+
+						@*<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>*@
+					</div>
+					<div class="card-body">
+						@RenderBody()
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer class="main-footer">
+			Project
+		</footer>
+
+	</div>
+	<partial name="_ChangePassword" model="null" />
+	<!-- ./wrapper -->
+	<!-- jQuery -->
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Thư viện toast-->
+	<script src="~/lib/bs4-toast-snackbar/js/toast-snackbar.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/adminLTE/dist/js/adminlte.min.js"></script>
+	<partial name="_ValidationScriptsPartial" />
+	<partial name="_Noti" />
+	@RenderSection("scripts", false)
 </body>
 </html>

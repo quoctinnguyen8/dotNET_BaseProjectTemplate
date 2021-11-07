@@ -1,0 +1,10 @@
+﻿@if (TempData["Err"] != null)
+{
+	<script>Toast.danger("@TempData["Err"]");</script>
+	TempData["Err"] = null;
+}
+else if (TempData["Success"] != null)
+{
+	<script>Toast.success("@TempData["Success"]");</script>
+	TempData["Success"]= null;
+}

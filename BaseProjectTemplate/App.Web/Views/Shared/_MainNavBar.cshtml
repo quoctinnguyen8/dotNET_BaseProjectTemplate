@@ -1,0 +1,73 @@
+﻿@using App.Web.Common
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+	<a href="/" class="brand-link">
+		<span class="brand-text font-weight-light d-block text-center">@AppConst.APP_NAME</span>
+	</a>
+
+	<div class="sidebar">
+		<!-- Sidebar Menu -->
+		<nav class="mt-2">
+			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				@{
+					// Xem file NavBar.cs trong thư mục Common để hiểu đoạn này
+
+					var cControllerName = Context.Request.RouteValues["controller"].ToString();
+				}
+				@foreach (var item in NavBar.Items)
+				{
+					<li class="nav-item">
+						<a asp-controller="@item.Controller" asp-action="@item.Action"
+						   class="nav-link@(cControllerName == item.Controller?" active" : "")">
+							<i class="nav-icon fas @item.Icon"></i>
+							<p>@item.DisplayText</p>
+						</a>
+					</li>
+				}
+
+				<li class="nav-item">
+					<a href="#" data-toggle="modal" data-target="#mChangePassword"
+					   class="nav-link">
+						<i class="nav-icon fas fa-key"></i>
+						<p>Đổi mật khẩu</p>
+					</a>
+				</li>
+
+				@*<li class="nav-item">
+			<a href="#" class="nav-link">
+				<i class="nav-icon fas fa-th"></i>
+				<p>
+					Menu 2
+					<span class="right badge badge-danger">New</span>
+				</p>
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a href="#" class="nav-link">
+				<i class="nav-icon fas fa-tachometer-alt"></i>
+				<p>
+					Menu nhiều cấp
+					<i class="right fas fa-angle-left"></i>
+				</p>
+			</a>
+			<ul class="nav nav-treeview">
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Menu con 1</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>Menu con 1</p>
+					</a>
+				</li>
+			</ul>
+		</li>*@
+			</ul>
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+</aside>

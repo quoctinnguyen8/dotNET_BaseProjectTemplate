@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entities
 {
-	public class AppUser : AppBaseEntity
+	public class AppUser : AppEntityBase
 	{
 		public string Username { get; set; }
-		public string PasswordHash { get; set; }
-		public string PasswordSalt { get; set; }
+		public byte[] PasswordHash { get; set; }
+		public byte[] PasswordSalt { get; set; }
 		public string FullName { get; set; }
 		public string PhoneNumber1 { get; set; }
 		public string PhoneNumber2 { get; set; }

@@ -15,17 +15,17 @@ namespace App.Web.Controllers
 {
 	public class UserController : AppControllerBase
 	{
-		readonly UserRepository userRepository;
+		readonly RepositoryBase repository;
 
-		public UserController(UserRepository _userRepository, IMapper _mapper) : base(_mapper)
+		public UserController(RepositoryBase _repository, IMapper _mapper) : base(_mapper)
 		{
-			this.userRepository = _userRepository;
+			this.repository = _repository;
 		}
 
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			// Chú ý dấu ngoặc khi dùng await cùng với GenRowIndex
-			var data = (await userRepository
+			var data = (await repository
 				.GetAll<AppUser, UserListItemVM>(
 					u => u.Username != this.CurrentUsername,
 					u => new UserListItemVM
@@ -54,7 +54,7 @@ namespace App.Web.Controllers
 				return View(model);
 			}
 
-			if (await userRepository.AnyAsync<AppUser>(u => u.Username == model.Username))
+			if (await repository.AnyAsync<AppUser>(u => u.Username == model.Username))
 			{
 				SetErrorMesg("Tên đăng nhập này đã tồn tại");
 				return View(model);
@@ -64,16 +64,75 @@ namespace App.Web.Controllers
 			{
 				this.HashHMACSHA512(model);
 				var user = mapper.Map<AppUser>(model);
-				await userRepository.AddAsync(user);
+				await repository.AddAsync(user);
 				SetSuccessMesg("Thêm tài khoản thành công");
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)
 			{
 				LogExceptionToConsole(ex);
-				SetErrorMesg(EXCEPTION_ERR_MESG);
 				return View(model);
 			}
+		}
+
+		public async Task<IActionResult> Edit(int id)
+		{
+			var user = await repository.GetOneAsync<AppUser>(id);
+			if (user == null)
+			{
+				SetErrorMesg("Tài khoản không tồn tại");
+				return RedirectToAction(nameof(Index));
+			}
+			var userEditVM = mapper.Map<UserAddOrEditVM>(user);
+			return View(userEditVM);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(UserAddOrEditVM model)
+		{
+			var user = await repository.GetOneAsync<AppUser>(model.Id);
+			if (!ModelState.IsValid)
+			{
+				SetErrorMesg(MODEL_STATE_INVALID_MESG);
+				return View(model);
+			}
+			if (user == null)
+			{
+				SetErrorMesg("Tài khoản không tồn tại");
+				return RedirectToAction(nameof(Index));
+			}
+			if (model.Username != user.Username)
+			{
+				SetErrorMesg("Không được thay đổi tên đăng nhập");
+				return View(model);
+			}
+
+			try
+			{
+				HashHMACSHA512(model);		//Cập nhật mật khẩu
+				mapper.Map(model, user);
+				await repository.UpdateAsync<AppUser>(user);
+				SetSuccessMesg($"Cập nhật tài khoản [{user.Username}] thành công");
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+				LogExceptionToConsole(ex);
+				return View(model);
+			}
+		}
+
+		public async Task<IActionResult> Delete(int id)
+		{
+			var user = await repository.GetOneAsync<AppUser>(id);
+			if (user == null)
+			{
+				SetErrorMesg("Tài khoản không tồn tại hoặc đã được xóa trước đó");
+				return RedirectToAction(nameof(Index));
+			}
+			await repository.DeleteAsync(user);
+			SetSuccessMesg($"Tài khoản [{user.Username}] được xóa thành công");
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

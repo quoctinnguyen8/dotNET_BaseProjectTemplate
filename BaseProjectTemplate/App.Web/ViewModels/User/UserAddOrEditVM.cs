@@ -11,6 +11,8 @@ namespace App.Web.ViewModels.User
 {
 	public class UserAddOrEditVM
 	{
+		public int Id { get; set; }
+
 		[AppRequired]
 		[AppUsername]
 		[AppStringLength(VM.UserVM.USERNAME_MINLEN, DB.AppUser.USERNAME_LENGTH)]

@@ -1,6 +1,7 @@
 ﻿using App.Data.Entities;
 using App.Data.Repositories;
 using App.Share.Extensions;
+using App.Web.Common.Consts;
 using App.Web.ViewModels.Account;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
@@ -15,20 +16,14 @@ namespace App.Web.Controllers
 {
 	public class AccountController : AppControllerBase
 	{
-		readonly UserRepository userRepository;
-		public AccountController(UserRepository _userRepository, IMapper _mapper) : base(_mapper)
+		readonly RepositoryBase userRepository;
+
+		public AccountController(RepositoryBase _userRepository, IMapper _mapper) : base(_mapper)
 		{
 			userRepository = _userRepository;
 		}
 
-		public IActionResult Login()
-		{
-			if (User.Identity.IsAuthenticated)
-			{
-				return HomePage();
-			}
-			return View();
-		}
+		public IActionResult Login() => User.Identity.IsAuthenticated ? HomePage() : View();
 
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginVM model)
@@ -57,14 +52,14 @@ namespace App.Web.Controllers
 							new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
 							new Claim(ClaimTypes.Name, user.Username)
 						};
-			var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+			var claimsIdentity = new ClaimsIdentity(claims, AppConst.COOKIES_AUTH);
 			var principal = new ClaimsPrincipal(claimsIdentity);
 			var authenPropeties = new AuthenticationProperties()
 			{
-				ExpiresUtc = DateTime.UtcNow.AddHours(6),
+				ExpiresUtc = DateTime.UtcNow.AddHours(AppConst.LOGIN_TIMEOUT),
 				IsPersistent = model.RememberMe
 			};
-			await HttpContext.SignInAsync("Cookies", principal, authenPropeties);
+			await HttpContext.SignInAsync(AppConst.COOKIES_AUTH, principal, authenPropeties);
 
 			var returnUrl = Request.Query["ReturnUrl"].ToString();
 			if (returnUrl.IsNullOrEmpty())
@@ -76,7 +71,7 @@ namespace App.Web.Controllers
 
 		public async Task<IActionResult> Logout()
 		{
-			await HttpContext.SignOutAsync("Cookies");
+			await HttpContext.SignOutAsync(AppConst.COOKIES_AUTH);
 			return RedirectToAction(nameof(Login));
 		}
 

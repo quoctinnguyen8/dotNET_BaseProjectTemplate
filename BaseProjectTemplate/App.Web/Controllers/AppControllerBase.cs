@@ -16,7 +16,7 @@ namespace App.Web.Controllers
 	public class AppControllerBase : Controller
 	{
 		protected const int DEFAULT_PAGE_SIZE = 15;
-		protected const string EXCEPTION_ERR_MESG = "Đã xảy ra lỗi trong quá trình xử lý dữ liệu";
+		protected const string EXCEPTION_ERR_MESG = "Đã xảy ra lỗi trong quá trình xử lý dữ liệu (500)";
 		protected const string MODEL_STATE_INVALID_MESG = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại";
 
 		protected readonly IMapper mapper;
@@ -40,6 +40,7 @@ namespace App.Web.Controllers
 			Console.WriteLine(ex.Message);
 			Console.WriteLine(ex.InnerException);
 			Console.WriteLine(ex.StackTrace);
+			SetErrorMesg(EXCEPTION_ERR_MESG);
 		}
 
 		protected void HashHMACSHA512(UserAddOrEditVM user)

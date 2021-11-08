@@ -1,0 +1,37 @@
+﻿@model App.Web.ViewModels.User.UserAddOrEditVM
+
+<div class="form-group">
+	<label asp-for="Password" class="control-label">Mật khẩu</label>
+	<input asp-for="Password" class="form-control" />
+	<span asp-validation-for="Password" class="text-danger"></span>
+</div>
+<div class="form-group">
+	<label asp-for="ConfirmPwd" class="control-label">Xác nhận mật khẩu</label>
+	<input asp-for="ConfirmPwd" class="form-control" />
+	<span asp-validation-for="ConfirmPwd" class="text-danger"></span>
+</div>
+<div class="form-group">
+	<label asp-for="FullName" class="control-label">Họ tên</label>
+	<input asp-for="FullName" class="form-control" />
+	<span asp-validation-for="FullName" class="text-danger"></span>
+</div>
+<div class="form-group">
+	<label asp-for="Email" class="control-label">Email</label>
+	<input asp-for="Email" class="form-control" />
+	<span asp-validation-for="Email" class="text-danger"></span>
+</div>
+<div class="form-group">
+	<label asp-for="PhoneNumber1" class="control-label">Số điện thoại</label>
+	<input asp-for="PhoneNumber1" class="form-control" />
+	<span asp-validation-for="PhoneNumber1" class="text-danger"></span>
+</div>
+<div class="form-group">
+	<label asp-for="PhoneNumber2" class="control-label">SĐT dự phòng</label>
+	<input asp-for="PhoneNumber2" class="form-control" />
+	<span asp-validation-for="PhoneNumber2" class="text-danger"></span>
+</div>
+<div class="form-group">
+	<label asp-for="Address" class="control-label">Địa chỉ</label>
+	<input asp-for="Address" class="form-control" />
+	<span asp-validation-for="Address" class="text-danger"></span>
+</div>

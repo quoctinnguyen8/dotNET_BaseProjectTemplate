@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace App.Data.Repositories
 {
-	public abstract class RepositoryBase
+	public class RepositoryBase
 	{
 		protected readonly WebAppDbContext db;
 		protected readonly IHttpContextAccessor httpContext;
@@ -21,17 +21,12 @@ namespace App.Data.Repositories
 			httpContext = _httpContext;
 		}
 
-		public virtual async Task DeleteAsync(AppEntityBase entity)
+		public virtual async Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
 		{
-			var now = DateTime.Now;
-			entity.DeletedDate = now;
-			if (httpContext != null)
-			{
-				entity.UpdatedBy = CurrentUserId();
-			}
-			await db.SaveChangesAsync();
+			return await db.Set<TEntity>().AnyAsync(expr);
 		}
 
+		#region GetOne
 		public virtual async Task<TEntity> GetOneAsync<TEntity>(int id) where TEntity : AppEntityBase
 		{
 			return await db.Set<TEntity>()
@@ -71,12 +66,9 @@ namespace App.Data.Repositories
 			LogToConsole(query);
 			return await query.SingleOrDefaultAsync();
 		}
+		#endregion
 
-		public virtual async Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
-		{
-			return await db.Set<TEntity>().AnyAsync(expr);
-		}
-
+		#region GetAll
 		public virtual IOrderedQueryable<TEntity> GetAll<TEntity>() where TEntity : AppEntityBase
 		{
 			return db.Set<TEntity>()
@@ -113,11 +105,13 @@ namespace App.Data.Repositories
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()
+						.Where(m => m.DeletedDate == null)
 						.Where(expr)
 						.OrderByDescending(m => m.DisplayOrder)
 						.ThenByDescending(m => m.Id)
 						.Select(selector);
 		}
+		#endregion
 
 		public virtual async Task AddAsync<TEntity>(TEntity entity, bool isDeleted = false) where TEntity : AppEntityBase
 		{
@@ -126,10 +120,42 @@ namespace App.Data.Repositories
 			await db.SaveChangesAsync();
 		}
 
+		/// <summary>
+		/// Nếu dữ liệu cần thêm > 1000 record mỗi lần thì không nên dùng hàm này
+		/// </summary>
+		public virtual async Task AddAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : AppEntityBase
+		{
+			var len = entities.Count();
+			for (int i = 0; i < len; i++)
+			{
+				this.BeforeAdd(entities.ElementAt(i));
+			}
+			await db.AddRangeAsync(entities);
+			await db.SaveChangesAsync();
+		}
+
 		public virtual async Task UpdateAsync<TEntity>(TEntity entity) where TEntity : AppEntityBase
 		{
 			this.BeforeUpdate(entity);
 			db.Update(entity);
+			await db.SaveChangesAsync();
+		}
+
+		public virtual async Task DeleteAsync(AppEntityBase entity)
+		{
+			var now = DateTime.Now;
+			entity.DeletedDate = now;
+			if (httpContext != null)
+			{
+				entity.UpdatedBy = CurrentUserId();
+			}
+			db.Update(entity);
+			await db.SaveChangesAsync();
+		}
+
+		public virtual async Task HardDeleteAsync(AppEntityBase entity)
+		{
+			db.Remove(entity);
 			await db.SaveChangesAsync();
 		}
 

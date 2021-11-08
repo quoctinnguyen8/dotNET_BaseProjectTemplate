@@ -1,5 +1,6 @@
 ﻿using App.Data;
 using App.Data.Repositories;
+using App.Web.Common.Consts;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,14 +22,14 @@ namespace App.Web.WebConfig
 			});
 
 			// Đăng ký repositories
-			services.AddScoped<UserRepository>();
+			services.AddScoped<RepositoryBase>();
 
 
 			// Cấu hình đăng nhập
-			services.AddAuthentication("Cookies").AddCookie(options =>
+			services.AddAuthentication(AppConst.COOKIES_AUTH).AddCookie(options =>
 			{
-				options.LoginPath = "/login";
-				options.ExpireTimeSpan = TimeSpan.FromHours(6);
+				options.LoginPath = AppConst.LOGIN_PATH;
+				options.ExpireTimeSpan = TimeSpan.FromHours(AppConst.LOGIN_TIMEOUT);
 				options.Cookie.HttpOnly = true;
 			});
 

@@ -20,7 +20,7 @@
 						<a asp-controller="@item.Controller" asp-action="@item.Action"
 						   class="nav-link@(cControllerName == item.Controller?" active" : "")">
 							<i class="nav-icon fas @item.Icon"></i>
-							<p>@item.DisplayText</p>
+							<p class="text-nowrap">@item.DisplayText</p>
 						</a>
 					</li>
 				}
@@ -29,7 +29,7 @@
 					<a href="#" data-toggle="modal" data-target="#mChangePassword"
 					   class="nav-link">
 						<i class="nav-icon fas fa-key"></i>
-						<p>Đổi mật khẩu</p>
+						<p class="text-nowrap">Đổi mật khẩu</p>
 					</a>
 				</li>
 

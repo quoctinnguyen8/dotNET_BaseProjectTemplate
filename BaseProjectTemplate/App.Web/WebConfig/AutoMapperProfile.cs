@@ -12,8 +12,11 @@ namespace App.Web.WebConfig
 	{
 		public AutoMapperProfile()
 		{
-			// Map dữ liệu từ kiểu CreateUserVM sang AppUser
+			// Map dữ liệu từ kiểu UserAddOrEditVM sang AppUser
 			CreateMap<UserAddOrEditVM, AppUser>();
+
+			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
+			CreateMap<AppUser, UserAddOrEditVM>();
 		}
 	}
 }

@@ -11,15 +11,20 @@ namespace App.Data
 {
 	public class WebAppDbContext : DbContext
 	{
+		public DbSet<AppRole> AppPolicies { get; set; }
+		public DbSet<AppRolePermission> AppRolePermissions { get; set; }
 		public DbSet<AppUser> AppUsers { get; set; }
-
+		public DbSet<MstPermission> MstPermissions { get; set; }
 
 		public WebAppDbContext(DbContextOptions options) : base(options)
 		{
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.ApplyConfiguration<AppUser>(new AppUserConfig());
+			modelBuilder.ApplyConfiguration(new AppUserConfig());
+			modelBuilder.ApplyConfiguration(new AppRoleConfig());
+			modelBuilder.ApplyConfiguration(new AppRolePermissionConfig());
+			modelBuilder.ApplyConfiguration(new MstPermissionConfig());
 		}
 	}
 }

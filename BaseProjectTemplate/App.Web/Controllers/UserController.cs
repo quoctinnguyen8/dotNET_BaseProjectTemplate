@@ -65,7 +65,7 @@ namespace App.Web.Controllers
 				this.HashHMACSHA512(model);
 				var user = mapper.Map<AppUser>(model);
 				await repository.AddAsync(user);
-				SetSuccessMesg("Thêm tài khoản thành công");
+				SetSuccessMesg($"Thêm tài khoản [{user.Username}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)

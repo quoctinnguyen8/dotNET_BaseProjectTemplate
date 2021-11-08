@@ -15,7 +15,7 @@ namespace App.Web.Common
 		public string Controller { get; set; }
 		public string DisplayText { get; set; }
 		public string Icon { get; set; }
-		public string Policy { get; set; }
+		public string Role { get; set; }
 		public List<MenuItem> ChildrenItems { get; set; }
 	}
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -6,7 +7,7 @@ namespace DNews.Shared.Attributes
 	{
 		public AppConfirmPwdAttribute(string otherProperty = "Password") : base(otherProperty)
 		{
-			this.ErrorMessage = $"Mật khẩu không khớp";
+			this.ErrorMessage = AttributeErrMesg.CONFIRM_PWD;
 		}
 	}
 }

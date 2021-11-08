@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -7,7 +8,7 @@ namespace DNews.Shared.Attributes
 		public AppStringLengthAttribute(int minimumLength, int maximumLength) : base(maximumLength)
 		{
 			this.MinimumLength = minimumLength;
-			this.ErrorMessage = $"Phải từ {minimumLength} ký tự đến {maximumLength} ký tự";
+			this.ErrorMessage = string.Format(AttributeErrMesg.STRING_LEN, minimumLength, maximumLength);
 		}
 	}
 }

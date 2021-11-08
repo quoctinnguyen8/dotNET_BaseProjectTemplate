@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -10,7 +11,7 @@ namespace DNews.Shared.Attributes
 
 		public AppMaxLengthAttribute(int length) : base(length)
 		{
-			this.ErrorMessage= $"Không được nhiều hơn {length} ký tự";
+			this.ErrorMessage= string.Format(AttributeErrMesg.MAXLEN, length);
 		}
 	}
 }

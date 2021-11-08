@@ -1,5 +1,5 @@
 ﻿using App.Share.Consts;
-using App.Web.Common.Const;
+using App.Web.Common.Consts;
 using DNews.Shared.Attributes;
 using System;
 using System.Collections.Generic;

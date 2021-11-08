@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -6,7 +7,7 @@ namespace DNews.Shared.Attributes
 	{
 		public AppUsernameAttribute(string pattern = @"^(?!.*[_.]{2})[a-zA-Z0-9._]+$") : base(pattern)
 		{
-			this.ErrorMessage = "Tên đăng nhập không hợp lệ";
+			this.ErrorMessage = AttributeErrMesg.USERNAME;
 
 			/*
 			^(?!.*[_.]{2})[a-zA-Z0-9._]+$

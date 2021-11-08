@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace App.Web.Common.Const
+namespace App.Web.Common.Consts
 {
 	public class AppConst
 	{

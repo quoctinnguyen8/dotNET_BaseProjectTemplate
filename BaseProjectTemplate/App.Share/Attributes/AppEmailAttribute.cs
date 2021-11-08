@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -6,7 +7,7 @@ namespace DNews.Shared.Attributes
 	{
 		public AppEmailAttribute(string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$") : base(pattern)
 		{
-			this.ErrorMessage = "Địa chỉ mail không hợp lệ";
+			this.ErrorMessage = AttributeErrMesg.EMAIL;
 		}
 	}
 }

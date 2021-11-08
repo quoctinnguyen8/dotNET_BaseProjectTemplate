@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -6,7 +7,7 @@ namespace DNews.Shared.Attributes
 	{
 		public AppRangeAttribute(double minimum, double maximum) : base(minimum, maximum)
 		{
-			this.ErrorMessage = $"Phải thuộc khoảng {minimum} - {maximum}";
+			this.ErrorMessage = string.Format(AttributeErrMesg.RANGE, minimum, maximum);
 		}
 	}
 }

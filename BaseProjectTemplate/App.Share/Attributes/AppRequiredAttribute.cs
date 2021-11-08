@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Share.Consts;
+using System.ComponentModel.DataAnnotations;
 
 namespace DNews.Shared.Attributes
 {
@@ -6,7 +7,7 @@ namespace DNews.Shared.Attributes
 	{
 		public AppRequiredAttribute():base()
 		{
-			this.ErrorMessage = "Trường này là bắt buộc";
+			this.ErrorMessage = AttributeErrMesg.REQUIRED;
 		}
 	}
 }

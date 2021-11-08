@@ -20,7 +20,7 @@ namespace App.Data.Entities
 		public string Avatar { get; set; }
 		public DateTime? BlockedTo { get; set; }
 		public DateTime? BlockedBy { get; set; }
-		public int AppRoleId { get; set; }
+		public int? AppRoleId { get; set; }
 
 		public AppRole AppRole { get; set; }
 	}

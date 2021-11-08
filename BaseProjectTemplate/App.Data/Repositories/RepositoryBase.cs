@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Data.Repositories.Base
+namespace App.Data.Repositories
 {
 	public abstract class RepositoryBase
 	{
@@ -86,7 +86,7 @@ namespace App.Data.Repositories.Base
 						.ThenByDescending(m => m.Id);
 		}
 
-		public virtual IEnumerable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, TViewModel>> selector)
+		public virtual IQueryable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
 			where TViewModel : class
 		{
@@ -107,7 +107,7 @@ namespace App.Data.Repositories.Base
 						.ThenByDescending(m => m.Id);
 		}
 
-		public virtual IEnumerable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, bool>> expr, Expression<Func<TEntity, TViewModel>> selector)
+		public virtual IQueryable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, bool>> expr, Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
 			where TViewModel : class
 		{
@@ -119,9 +119,9 @@ namespace App.Data.Repositories.Base
 						.Select(selector);
 		}
 
-		public virtual async Task Create<TEntity>(TEntity entity) where TEntity : AppEntityBase
+		public virtual async Task AddAsync<TEntity>(TEntity entity, bool isDeleted = false) where TEntity : AppEntityBase
 		{
-			this.BeforeAdd(entity);
+			this.BeforeAdd(entity, isDeleted);
 			await db.Set<TEntity>().AddAsync(entity);
 			await db.SaveChangesAsync();
 		}
@@ -134,10 +134,7 @@ namespace App.Data.Repositories.Base
 		}
 
 		#region Helpers
-		public WebAppDbContext GetDbContext()
-		{
-			return this.db;
-		}
+		public WebAppDbContext DbContext { get => this.db; }
 
 		protected void BeforeAdd(AppEntityBase entity, bool isDeleted = false)
 		{

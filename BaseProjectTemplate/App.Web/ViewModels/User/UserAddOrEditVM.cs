@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.Web.ViewModels.User
 {
-	public class CreateUserVM
+	public class UserAddOrEditVM
 	{
 		[AppRequired]
 		[AppUsername]

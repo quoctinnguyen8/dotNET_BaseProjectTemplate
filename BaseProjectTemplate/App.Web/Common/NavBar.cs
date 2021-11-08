@@ -24,10 +24,10 @@ namespace App.Web.Common
 		public static List<MenuItem> Items = new List<MenuItem> {
 			new MenuItem
 			{
-				Action = "Create",
+				Action = "Index",
 				Controller = "User",
-				DisplayText = "Thêm tài khoản (demo)",
-				Icon = "fa-user-plus"
+				DisplayText = "Quản lý tài khoản",
+				Icon = "fa-user-cog"
 			}
 		};
 	}

@@ -1,7 +1,7 @@
-﻿@model App.Web.ViewModels.User.CreateUserVM
+﻿@model App.Web.ViewModels.User.UserAddOrEditVM
 
 @{
-    ViewData["Title"] = "Tạo tài khoản";
+	ViewData["Title"] = "Tạo tài khoản";
 }
 
 <div class="row">
@@ -53,12 +53,9 @@
 				<button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Nhập lại</button>
 			</div>
 		</form>
-    </div>
+	</div>
 </div>
-
-<div>
-	<a class="btn btn-link" asp-action="Index">Về trang danh sách</a>
-</div>
+<partial name="_BackToList" />
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

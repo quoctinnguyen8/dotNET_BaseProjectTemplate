@@ -30,19 +30,12 @@
 			<!-- Main content -->
 			<section class="content p-4">
 
+				<partial name="_Noti" />
+
 				<!-- Default box -->
 				<div class="card">
 					<div class="card-header">
 						<h3 class="h3">@ViewBag.Title</h3>
-
-						@*<div class="card-tools">
-								<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-									<i class="fas fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-									<i class="fas fa-times"></i>
-								</button>
-							</div>*@
 					</div>
 					<div class="card-body">
 						@RenderBody()
@@ -72,7 +65,7 @@
 	<!-- AdminLTE App -->
 	<script src="/adminLTE/dist/js/adminlte.min.js"></script>
 	<partial name="_ValidationScriptsPartial" />
-	<partial name="_Noti" />
+	<script src="~/js/site.js" asp-append-version="true"></script>
 	@RenderSection("scripts", false)
 </body>
 </html>

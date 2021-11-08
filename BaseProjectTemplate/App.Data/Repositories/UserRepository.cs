@@ -1,5 +1,4 @@
 ﻿using App.Data.Entities;
-using App.Data.Repositories.Base;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

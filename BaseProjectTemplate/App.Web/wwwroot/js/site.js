@@ -1,4 +1,7 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿$(function () {
+	// tinnq
+	// Tự động ẩn cảnh báo sau 5 giây
+	$(".alert.js-alert").delay(5000).slideUp(500, function () {
+		$(this).alert('close');
+	});
+});

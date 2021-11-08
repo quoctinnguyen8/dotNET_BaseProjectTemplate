@@ -23,7 +23,7 @@ namespace App.Data.Configurations
 			// Tên đăng nhập là varchar, bắt buộc & không trùng lặp
 			builder.Property(m => m.Username)
 				.HasMaxLength(DB.AppUser.USERNAME_LENGTH)
-				.IsUnicode(false)
+				.IsUnicode(false)	// varchar (không chứa unicode)
 				.IsRequired();
 			builder.HasIndex(m => m.Username).IsUnique();
 

@@ -18,6 +18,11 @@ namespace App.Web.Controllers
 			mapper = _mapper;
 		}
 
+		protected RedirectToActionResult HomePage()
+		{
+			return RedirectToAction("Index", "Home");
+		}
+
 		protected void HashHMACSHA512(CreateUserVM user)
 		{
 			HMACSHA512 hmac = new();

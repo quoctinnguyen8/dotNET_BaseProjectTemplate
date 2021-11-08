@@ -33,7 +33,7 @@
 						<p class="login-box-msg text-danger">@TempData["Mesg"]</p>
 					}
 					<div class="input-group mb-3">
-						<input asp-for="Username" type="text" autofocus class="form-control" placeholder="Tài khoản">
+						<input asp-for="Username" type="text" autofocus class="form-control" required placeholder="Tài khoản">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu">
+						<input asp-for="Password" type="password" class="form-control" required placeholder="Mật khẩu">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>

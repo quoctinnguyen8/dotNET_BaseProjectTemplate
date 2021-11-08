@@ -25,6 +25,22 @@ namespace App.Web.ViewModels.User
 		[AppConfirmPwd]
 		[DataType(DataType.Password)]
 		public string ConfirmPwd { get; set; }
+
+		[AppRequired]
+		public string FullName { get; set; }
+
+		[AppRequired]
+		[AppPhone]
+		public string PhoneNumber1 { get; set; }
+
+		[AppPhone]
+		public string PhoneNumber2 { get; set; }
+
+		[AppRequired]
+		[AppEmail]
+		public string Email { get; set; }
+		public string Address { get; set; }
+
 		public byte[] PasswordHash { get; internal set; }
 		public byte[] PasswordSalt { get; internal set; }
 	}

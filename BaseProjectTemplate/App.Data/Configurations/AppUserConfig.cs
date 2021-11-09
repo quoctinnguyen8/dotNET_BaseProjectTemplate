@@ -1,4 +1,5 @@
-﻿using App.Data.Entities;
+﻿using App.Data.DataSeeders;
+using App.Data.Entities;
 using App.Data.Entities.Base;
 using App.Share.Consts;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +59,10 @@ namespace App.Data.Configurations
 			builder.HasOne(m => m.AppRole)
 				.WithMany(m => m.AppUsers)
 				.HasForeignKey(m => m.AppRoleId);
-				//.OnDelete(DeleteBehavior.NoAction);
+			//.OnDelete(DeleteBehavior.NoAction);
+
+			// Tạo data
+			builder.SeedData();
 		}
 	}
 }

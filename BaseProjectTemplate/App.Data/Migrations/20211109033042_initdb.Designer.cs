@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    [Migration("20211108175418_update-FK-AppRoleId")]
-    partial class updateFKAppRoleId
+    [Migration("20211109033042_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -184,6 +184,24 @@ namespace App.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("AppUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Thành phố Hồ Chí Minh",
+                            CreatedBy = -1,
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin_test@gmail.com",
+                            FullName = "Obama",
+                            PasswordHash = new byte[] { 54, 69, 233, 193, 29, 232, 81, 37, 98, 159, 17, 80, 7, 137, 154, 70, 3, 182, 85, 26, 84, 135, 198, 192, 36, 179, 103, 1, 80, 70, 89, 83, 56, 59, 83, 203, 38, 249, 35, 66, 43, 77, 208, 145, 237, 206, 83, 120, 224, 164, 74, 208, 3, 120, 182, 89, 119, 172, 192, 85, 253, 53, 243, 208 },
+                            PasswordSalt = new byte[] { 214, 156, 49, 82, 85, 158, 170, 114, 128, 174, 238, 168, 83, 87, 237, 152, 229, 109, 87, 1, 180, 134, 186, 150, 134, 78, 13, 192, 144, 22, 210, 154, 113, 125, 225, 181, 45, 187, 209, 127, 103, 90, 57, 196, 203, 193, 245, 0, 229, 100, 145, 160, 22, 152, 33, 181, 35, 74, 99, 236, 115, 91, 194, 45, 110, 58, 17, 249, 89, 132, 51, 130, 121, 84, 190, 180, 109, 172, 158, 225, 166, 203, 227, 253, 24, 157, 114, 247, 146, 204, 145, 241, 212, 148, 119, 71, 139, 139, 41, 118, 52, 49, 11, 179, 180, 25, 175, 232, 233, 138, 195, 24, 81, 155, 142, 245, 34, 133, 129, 74, 42, 93, 137, 231, 63, 143, 229, 45 },
+                            PhoneNumber1 = "0928666158",
+                            PhoneNumber2 = "0928666156",
+                            UpdatedBy = -1,
+                            UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("App.Data.Entities.MstPermission", b =>
@@ -221,91 +239,91 @@ namespace App.Data.Migrations
                         {
                             Id = 1103,
                             Code = "CREATE",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppRole"
                         },
                         new
                         {
                             Id = 1105,
                             Code = "DELETE",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppRole"
                         },
                         new
                         {
                             Id = 1104,
                             Code = "UPDATE",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppRole"
                         },
                         new
                         {
                             Id = 1102,
                             Code = "VIEW_DETAIL",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppRole"
                         },
                         new
                         {
                             Id = 1101,
                             Code = "VIEW_LIST",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppRole"
                         },
                         new
                         {
                             Id = 1006,
                             Code = "BLOCK",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1003,
                             Code = "CREATE",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1008,
                             Code = "DELETE",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1007,
                             Code = "UNBLOCK",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1004,
                             Code = "UPDATE",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1005,
                             Code = "UPDATE_PWD",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1002,
                             Code = "VIEW_DETAIL",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         },
                         new
                         {
                             Id = 1001,
                             Code = "VIEW_LIST",
-                            CreatedDate = new DateTime(2021, 11, 9, 0, 54, 18, 476, DateTimeKind.Local).AddTicks(2636),
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Table = "AppUser"
                         });
                 });

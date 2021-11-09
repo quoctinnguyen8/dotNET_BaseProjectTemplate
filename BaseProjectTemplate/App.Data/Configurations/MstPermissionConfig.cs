@@ -32,7 +32,7 @@ namespace App.Data.Configurations
 				.HasMaxLength(DB.MstPermission.TABLE_LENGTH)
 				.IsUnicode(false)	// varchar (không chứa unicode)
 				.IsRequired();
-			builder.Property(m => m.Groupname)
+			builder.Property(m => m.GroupName)
 				.HasMaxLength(DB.MstPermission.TABLE_LENGTH)
 				.IsUnicode()
 				.IsRequired();

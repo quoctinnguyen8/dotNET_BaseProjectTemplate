@@ -35,7 +35,7 @@ namespace App.Share.Consts
 			public const short CODE_LENGTH					= 50;
 			public const short TABLE_LENGTH					= 50;
 			public const short GROUPNAME_LENGHT				= 100;
-			public const short DESC_LENGHT				= 100;
+			public const short DESC_LENGHT					= 100;
 		}
 	}
 }

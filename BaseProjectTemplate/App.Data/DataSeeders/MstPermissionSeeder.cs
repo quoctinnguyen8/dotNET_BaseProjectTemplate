@@ -23,7 +23,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.CREATE,
 					Code = "CREATE",
 					Table = DB.AppRole.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Thêm quyền",
 					CreatedDate = now
 				},
@@ -32,7 +32,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.DELETE,
 					Code = "DELETE",
 					Table = DB.AppRole.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Xóa quyền",
 					CreatedDate = now
 				},
@@ -41,7 +41,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.UPDATE,
 					Code = "UPDATE",
 					Table = DB.AppRole.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Sửa quyền",
 					CreatedDate = now
 				},
@@ -50,7 +50,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.VIEW_DETAIL,
 					Code = "VIEW_DETAIL",
 					Table = DB.AppRole.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Xem chi tiết quyền",
 					CreatedDate = now
 				},
@@ -59,7 +59,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.VIEW_LIST,
 					Code = "VIEW_LIST",
 					Table = DB.AppRole.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Xem danh sách quyền",
 					CreatedDate = now
 				}
@@ -73,7 +73,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.BLOCK,
 					Code = "BLOCK",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Khóa người dùng",
 					CreatedDate = now
 				},
@@ -82,7 +82,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.CREATE,
 					Code = "CREATE",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Thêm người dùng",
 					CreatedDate = now
 				},
@@ -91,7 +91,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.DELETE,
 					Code = "DELETE",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Xóa người dùng",
 					CreatedDate = now
 				},
@@ -100,7 +100,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.UNBLOCK,
 					Code = "UNBLOCK",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Mở khóa người dùng",
 					CreatedDate = now
 				},
@@ -109,7 +109,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.UPDATE,
 					Code = "UPDATE",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Cập nhật người dùng",
 					CreatedDate = now
 				},
@@ -118,7 +118,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.UPDATE_PWD,
 					Code = "UPDATE_PWD",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Đổi mật khẩu",
 					CreatedDate = now
 				},
@@ -127,7 +127,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.VIEW_DETAIL,
 					Code = "VIEW_DETAIL",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Xem chi tiết người dùng",
 					CreatedDate = now
 				},
@@ -136,7 +136,7 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.VIEW_LIST,
 					Code = "VIEW_LIST",
 					Table = DB.AppUser.TABLE_NAME,
-					Groupname = groupName,
+					GroupName = groupName,
 					Desc = "Xem danh sách người dùng",
 					CreatedDate = now
 				}

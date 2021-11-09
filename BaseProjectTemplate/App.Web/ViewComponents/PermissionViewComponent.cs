@@ -22,7 +22,7 @@ namespace App.Web.ViewComponents
 			var data = await repository
 							.GetAllMst<MstPermission>()
 							.AsEnumerable()
-							.GroupBy(x => x.Groupname)
+							.GroupBy(x => x.GroupName)
 							.ToListAsync();
 			return View(data);
 		}

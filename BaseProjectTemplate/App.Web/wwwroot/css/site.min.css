@@ -1,1 +1,1 @@
-﻿.required:after{content:' *';color:#f00;}.fit{width:1%;white-space:nowrap;}
+﻿.required:after{content:' *';color:#f00;}.fit{width:1%;white-space:nowrap;}.hover\:pointer:hover{cursor:pointer;}.hover\:text-primary{transition:color .3s;}.hover\:text-primary:hover{color:var(--primary);}

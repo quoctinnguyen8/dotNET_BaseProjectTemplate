@@ -4,7 +4,24 @@
 		color: red;
 	}
 }
+
 .fit {
 	width: 1%;
 	white-space: nowrap;
+}
+
+.hover\: {
+	$transitionTime: 0.3s;
+
+	&pointer:hover {
+		cursor: pointer;
+	}
+
+	&text-primary {
+		transition: color $transitionTime;
+
+		&:hover {
+			color: var(--primary);
+		}
+	}
 }

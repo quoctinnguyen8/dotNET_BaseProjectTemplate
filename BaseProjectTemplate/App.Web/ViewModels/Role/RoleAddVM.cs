@@ -16,6 +16,8 @@ namespace App.Web.ViewModels.Role
 		[AppRequired]
 		[AppStringLength(2, DB.AppRole.DESC_LENGTH)]
 		public string Desc { get; set; }
-		public string StringListIdPermission { get; set; }
+
+		// Chuỗi chứa permissionId, phân tách bởi dấu phẩy
+		public string PermissionIds { get; set; }
 	}
 }

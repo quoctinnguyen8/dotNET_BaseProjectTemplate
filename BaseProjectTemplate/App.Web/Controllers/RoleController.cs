@@ -30,32 +30,31 @@ namespace App.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(RoleAddVM model)
 		{
-			if(model.StringListIdPermission == null)
+			if(model.PermissionIds == null)
 			{
 				SetErrorMesg(MODEL_STATE_INVALID_MESG);
 				return View(model);
 			}
-			var arrIdPermission = model.StringListIdPermission.Split(',');
+			var arrIdPermission = model.PermissionIds.Split(',');
 
-			var role = new AppRole();
+			var role = new AppRole
+			{
+				Name = model.Name,
+				Desc = model.Desc
+			};
 			try
 			{
-				role.Name = model.Name;
-				role.Desc = model.Desc;
 				await repository.AddAsync(role);
-
 				foreach (var item in arrIdPermission)
 				{
 					var idPer = Convert.ToInt32(item);
-					Console.WriteLine(idPer);
 					role.AppRolePermissions.Add(new AppRolePermission
 					{
 						MstPermissionId = idPer
 					});
 				}
-				Console.WriteLine(role.AppRolePermissions);
-				await repository.AddAsync<AppRolePermission>(role.AppRolePermissions);
-				SetSuccessMesg($"Thêm Role thành công");
+				await repository.AddAsync(role.AppRolePermissions);
+				SetSuccessMesg($"Thêm vai trò [{role.Name}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
 			catch(Exception ex)

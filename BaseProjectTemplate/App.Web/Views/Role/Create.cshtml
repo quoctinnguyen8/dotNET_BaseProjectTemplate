@@ -1,34 +1,50 @@
 ﻿@model App.Web.ViewModels.Role.RoleAddVM
 
 @{
-	ViewData["Title"] = "Thêm quyền";
+	ViewData["Title"] = "Thêm vai trò";
 }
 
 <form asp-action="Create">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-12">
+			<h5 class="my-3">Thông tin vai trò</h5>
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<div class="form-group">
-				<label asp-for="Name" class="control-label">Tên quyền</label>
-				<input asp-for="Name" class="form-control" />
-				<span asp-validation-for="Name" class="text-danger"></span>
+			<input asp-for="PermissionIds" class="d-none" />
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label asp-for="Name" class="control-label">Tên vai trò</label>
+						<input asp-for="Name" class="form-control" />
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label asp-for="Desc" class="control-label">Mô tả</label>
+						<input asp-for="Desc" class="form-control" />
+						<span asp-validation-for="Desc" class="text-danger"></span>
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<label asp-for="Desc" class="control-label">Mô tả</label>
-				<input asp-for="Desc" class="form-control" />
-				<span asp-validation-for="Desc" class="text-danger"></span>
-			</div>
+		</div>
+		<div class="col-12 my-3">
+			<h5>Các hành động được phép</h5>
+		</div>
+		@await Component.InvokeAsync("Permission")
+	</div>
+	<div class="row">
+		<div class="col">
 			<div class="form-group">
 				<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
 				<button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Nhập lại</button>
 			</div>
 		</div>
-		@await Component.InvokeAsync("Permission")
 	</div>
 </form>
 
 <partial name="_BackToList" />
 
 @section scripts {
-	<script src="~/js/Role/createRole.js" asp-append-version="true"></script>
+	<script src="~/lib/masonry/masonry.pkgd.min.js"></script>
+	<script src="~/js/role/create-role.js" asp-append-version="true"></script>
 }

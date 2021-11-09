@@ -14,13 +14,17 @@ namespace App.Data.DataSeeders
 		public static void SeedData(this EntityTypeBuilder<MstPermission> builder)
 		{
 			var now = new DateTime(year: 2021, month: 11, day: 10);
+			var groupName = "";
 			// Permission liên quan đến bảng AppRole
+			groupName = "Quản lý phân quyền";
 			builder.HasData(
 				new MstPermission
 				{
 					Id = AuthConst.AppRole.CREATE,
 					Code = "CREATE",
 					Table = DB.AppRole.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Thêm quyền",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -28,6 +32,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.DELETE,
 					Code = "DELETE",
 					Table = DB.AppRole.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Xóa quyền",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -35,6 +41,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.UPDATE,
 					Code = "UPDATE",
 					Table = DB.AppRole.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Sửa quyền",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -42,6 +50,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.VIEW_DETAIL,
 					Code = "VIEW_DETAIL",
 					Table = DB.AppRole.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Xem chi tiết quyền",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -49,17 +59,22 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppRole.VIEW_LIST,
 					Code = "VIEW_LIST",
 					Table = DB.AppRole.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Xem danh sách quyền",
 					CreatedDate = now
 				}
 			);
 
 			// Permission liên quan đến bảng AppUser
+			groupName = "Quản lý người dùng";
 			builder.HasData(
 				new MstPermission
 				{
 					Id = AuthConst.AppUser.BLOCK,
 					Code = "BLOCK",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Khóa người dùng",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -67,6 +82,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.CREATE,
 					Code = "CREATE",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Thêm người dùng",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -74,6 +91,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.DELETE,
 					Code = "DELETE",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Xóa người dùng",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -81,6 +100,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.UNBLOCK,
 					Code = "UNBLOCK",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Mở khóa người dùng",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -88,6 +109,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.UPDATE,
 					Code = "UPDATE",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Cập nhật người dùng",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -95,6 +118,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.UPDATE_PWD,
 					Code = "UPDATE_PWD",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Đổi mật khẩu",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -102,6 +127,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.VIEW_DETAIL,
 					Code = "VIEW_DETAIL",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Xem chi tiết người dùng",
 					CreatedDate = now
 				},
 				new MstPermission
@@ -109,6 +136,8 @@ namespace App.Data.DataSeeders
 					Id = AuthConst.AppUser.VIEW_LIST,
 					Code = "VIEW_LIST",
 					Table = DB.AppUser.TABLE_NAME,
+					Groupname = groupName,
+					Desc = "Xem danh sách người dùng",
 					CreatedDate = now
 				}
 			);

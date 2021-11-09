@@ -32,6 +32,14 @@ namespace App.Data.Configurations
 				.HasMaxLength(DB.MstPermission.TABLE_LENGTH)
 				.IsUnicode(false)	// varchar (không chứa unicode)
 				.IsRequired();
+			builder.Property(m => m.Groupname)
+				.HasMaxLength(DB.MstPermission.TABLE_LENGTH)
+				.IsUnicode()
+				.IsRequired();
+			builder.Property(m => m.Desc)
+				.HasMaxLength(DB.MstPermission.TABLE_LENGTH)
+				.IsUnicode()
+				.IsRequired();
 
 			// Tạo data ban đầu
 			builder.SeedData();

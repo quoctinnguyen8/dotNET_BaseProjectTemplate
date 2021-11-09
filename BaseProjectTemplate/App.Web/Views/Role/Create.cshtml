@@ -1,0 +1,34 @@
+﻿@model App.Web.ViewModels.Role.RoleAddVM
+
+@{
+	ViewData["Title"] = "Thêm quyền";
+}
+
+<form asp-action="Create">
+	<div class="row">
+		<div class="col-md-4">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Name" class="control-label">Tên quyền</label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Desc" class="control-label">Mô tả</label>
+				<input asp-for="Desc" class="form-control" />
+				<span asp-validation-for="Desc" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
+				<button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Nhập lại</button>
+			</div>
+		</div>
+		@await Component.InvokeAsync("Permission")
+	</div>
+</form>
+
+<partial name="_BackToList" />
+
+@section scripts {
+	<script src="~/js/Role/createRole.js" asp-append-version="true"></script>
+}

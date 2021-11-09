@@ -28,6 +28,13 @@ namespace App.Web.Common
 				Controller = "User",
 				DisplayText = "Quản lý tài khoản",
 				Icon = "fa-user-cog"
+			},
+			new MenuItem
+			{
+				Action = "Index",
+				Controller = "Role",
+				DisplayText = "Quản lý phân quyền",
+				Icon = "fa-user-shield"
 			}
 		};
 	}

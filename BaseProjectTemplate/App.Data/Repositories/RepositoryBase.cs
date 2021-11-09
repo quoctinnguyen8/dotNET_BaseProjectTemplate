@@ -90,6 +90,27 @@ namespace App.Data.Repositories
 						.Select(selector);
 		}
 
+		public virtual IOrderedQueryable<TEntity> GetAllMst<TEntity>() where TEntity : MstEntityBase
+		{
+			return db.Set<TEntity>()
+						.AsNoTracking()
+						.Where(m => m.DeletedDate == null)
+						.OrderByDescending(m => m.DisplayOrder)
+						.ThenByDescending(m => m.Id);
+		}
+
+		public virtual IQueryable<TViewModel> GetAllMst<TEntity, TViewModel>(Expression<Func<TEntity, TViewModel>> selector)
+			where TEntity : MstEntityBase
+			where TViewModel : class
+		{
+			return db.Set<TEntity>()
+						.AsNoTracking()
+						.Where(m => m.DeletedDate == null)
+						.OrderByDescending(m => m.DisplayOrder)
+						.ThenByDescending(m => m.Id)
+						.Select(selector);
+		}
+
 		public virtual IEnumerable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
 		{
 			return db.Set<TEntity>()

@@ -1,0 +1,23 @@
+﻿@model List<IGrouping<string, App.Data.Entities.MstPermission>>
+
+<div class="col-md-8">
+	<div class="row">
+		<input id="listCheckedPermission" name="StringListIdPermission" type="hidden" />
+		@foreach (var item in Model)
+		{
+			<div class="col-md-4">
+				<h3>@item.Key</h3>
+				@foreach (var per in item)
+				{
+					<div class="form-group">
+						<div class="custom-control custom-switch">
+							<input id="permission-@per.Id" type="checkbox" data-id="@per.Id"
+								class="custom-control-input check-permission" />
+							<label for="permission-@per.Id" class="custom-control-label form-check-label">@per.Desc</label>
+						</div>
+					</div>
+				}
+			</div>
+		}
+	</div>
+</div>

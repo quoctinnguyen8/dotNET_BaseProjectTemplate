@@ -174,14 +174,29 @@ namespace App.Data.Repositories
 			await db.SaveChangesAsync();
 		}
 
-		public virtual async Task HardDeleteAsync(AppEntityBase entity)
+		public virtual async Task HardDeleteAsync<TEntity>(int id) where TEntity : AppEntityBase
 		{
-			db.Remove(entity);
-			await db.SaveChangesAsync();
+			var tableName = GetTableName<TEntity>();
+			var deleteQuery = $"DELETE {tableName} WHERE Id = {id}";
+			LogToConsole(deleteQuery);
+			await db.Database.ExecuteSqlRawAsync(deleteQuery);
+		}
+
+		public virtual async Task HardDeleteAsync<TEntity>(IEnumerable<int> ids) where TEntity : AppEntityBase
+		{
+			var tableName = GetTableName<TEntity>();
+			var deleteQuery = $"DELETE {tableName} WHERE Id IN ({string.Join(',', ids)})";
+			LogToConsole(deleteQuery);
+			await db.Database.ExecuteSqlRawAsync(deleteQuery);
 		}
 
 		#region Helpers
 		public WebAppDbContext DbContext { get => this.db; }
+
+		protected string GetTableName<TEntity>() where TEntity : AppEntityBase
+		{
+			return db.Model.FindEntityType(typeof(TEntity)).GetTableName();
+		}
 
 		protected void BeforeAdd(AppEntityBase entity, bool isDeleted = false)
 		{
@@ -227,6 +242,10 @@ namespace App.Data.Repositories
 		protected void LogToConsole(IQueryable query)
 		{
 			Console.WriteLine($"{DateTime.Now:dd/MM/yyyy HH:mm:ss}\n{query.ToQueryString()}");
+		}
+		protected void LogToConsole(string query)
+		{
+			Console.WriteLine($"{DateTime.Now:dd/MM/yyyy HH:mm:ss}\n{query}");
 		}
 		#endregion
 	}

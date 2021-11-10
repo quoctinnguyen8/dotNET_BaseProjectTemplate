@@ -180,6 +180,8 @@ namespace App.Data.Repositories
 			var deleteQuery = $"DELETE {tableName} WHERE Id = {id}";
 			LogToConsole(deleteQuery);
 			await db.Database.ExecuteSqlRawAsync(deleteQuery);
+			
+
 		}
 
 		public virtual async Task HardDeleteAsync<TEntity>(IEnumerable<int> ids) where TEntity : AppEntityBase

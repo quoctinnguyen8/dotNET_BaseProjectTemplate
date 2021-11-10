@@ -1,9 +1,11 @@
 ﻿using App.Data.Entities;
 using App.Data.Repositories;
 using App.Web.Common;
+using App.Web.ViewModels.Role;
 using App.Web.ViewModels.User;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,7 +44,20 @@ namespace App.Web.Controllers
 			return View(data);
 		}
 
-		public IActionResult Create() => View();
+		public async Task<IActionResult> Create(int page = 1, int size = DEFAULT_PAGE_SIZE)
+		{
+			var data = (await repository
+				.GetAll<AppRole, RoleListItemVM>(
+					u => new RoleListItemVM
+					{
+						Id = u.Id,
+						Name = u.Name
+
+					})
+				.ToPagedListAsync(page, size));
+			ViewBag.Role = new SelectList(data, "Id", "Name");
+			return View();
+		} 
 
 		[HttpPost]
 		public async Task<IActionResult> Create(UserAddOrEditVM model)

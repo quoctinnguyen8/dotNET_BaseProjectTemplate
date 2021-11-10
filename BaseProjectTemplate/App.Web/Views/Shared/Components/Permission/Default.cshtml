@@ -1,11 +1,11 @@
 ﻿@model List<IGrouping<string, App.Data.Entities.MstPermission>>
 
-<div class="col-md-8 col-xl-12">
+<div class="col-12">
 	<div class="row js-masonry">
 		@foreach (var item in Model)
 		{
 
-			<div class="col-sm-6 col-xl-3 js-group-permission">
+			<div class="col-sm-6 col-md-4 col-xl-3 js-group-permission">
 				<div class="card">
 					<div class="card-header">
 						<h5 class="card-title">@item.Key</h5>

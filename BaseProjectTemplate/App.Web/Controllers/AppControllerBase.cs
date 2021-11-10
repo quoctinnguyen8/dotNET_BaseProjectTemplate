@@ -18,6 +18,7 @@ namespace App.Web.Controllers
 		protected const int DEFAULT_PAGE_SIZE = 15;
 		protected const string EXCEPTION_ERR_MESG = "Đã xảy ra lỗi trong quá trình xử lý dữ liệu (500)";
 		protected const string MODEL_STATE_INVALID_MESG = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại";
+		protected const string PAGE_NOT_FOUND = "Không tìm thấy trang";
 
 		protected readonly IMapper mapper;
 		protected int CurrentUserId { get => Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)); }

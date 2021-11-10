@@ -80,7 +80,7 @@ namespace App.Web.Controllers
 			var user = await repository.GetOneAsync<AppUser>(id);
 			if (user == null)
 			{
-				SetErrorMesg("Tài khoản không tồn tại");
+				SetErrorMesg(PAGE_NOT_FOUND);
 				return RedirectToAction(nameof(Index));
 			}
 			var userEditVM = mapper.Map<UserAddOrEditVM>(user);
@@ -98,7 +98,7 @@ namespace App.Web.Controllers
 			}
 			if (user == null)
 			{
-				SetErrorMesg("Tài khoản không tồn tại");
+				SetErrorMesg(PAGE_NOT_FOUND);
 				return RedirectToAction(nameof(Index));
 			}
 			if (model.Username != user.Username)

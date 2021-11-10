@@ -63,5 +63,27 @@ namespace App.Web.Controllers
 				return View();
 			}
 		}
+
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (!id.HasValue)
+			{
+				SetErrorMesg(PAGE_NOT_FOUND);
+				return RedirectToAction(nameof(Index));
+			}
+			var data = await repository.GetOneAsync<AppRole, RoleEditVM>(id.Value, r => new RoleEditVM
+			{
+				Id = r.Id,
+				Name = r.Name,
+				Desc = r.Desc,
+				PermissionIds = string.Join(',', r.AppRolePermissions.Select(rp => rp.MstPermissionId)),
+			});
+			if (data == null)
+			{
+				SetErrorMesg(PAGE_NOT_FOUND);
+				return RedirectToAction(nameof(Index));
+			}
+			return View(data);
+		}
 	}
 }

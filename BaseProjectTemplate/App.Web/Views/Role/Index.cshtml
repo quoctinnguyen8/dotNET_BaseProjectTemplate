@@ -1,4 +1,4 @@
-﻿@model IEnumerable<App.Data.Entities.AppRole>
+﻿@model IEnumerable<App.Web.ViewModels.Role.RoleListItemVM>
 
 @{
 	ViewData["Title"] = "Danh sách các quyền";
@@ -19,12 +19,12 @@
 		</thead>
 		<tbody>
 			@foreach (var item in Model)
-			{ 
+			{
 				<tr>
-					<td class="fit">@item.Id</td>
+					<td class="fit">@item.RowIndex</td>
 					<td>@Html.DisplayFor(modelItem => item.Name)</td>
 					<td>@Html.DisplayFor(modelItem => item.Desc)</td>
-					<td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+					<td class="fit">@item.CreatedDate?.ToDMYHM()</td>
 					<td class="fit">
 						<a href="#"
 						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
@@ -38,3 +38,5 @@
 		</tbody>
 	</table>
 </div>
+
+<partial name="_Pager" />

@@ -1,11 +1,12 @@
-﻿var isUpdatePage = false;
-var inpListIdPer = $('#PermissionIds');
+﻿var inpListIdPer = $('#PermissionIds');
 var arrIdPer = [];
 
 var inpDeletedId = $('#DeletedPermissionIds');
 var inpAddedId = $('#AddedPermissionIds');
 var deletedIds = [];
 var addedIds = [];
+
+const IS_UPDATE_PAGE = inpDeletedId.length;
 
 $(document).ready(function () {
 	// khởi tạo layout masonry
@@ -17,7 +18,6 @@ $(document).ready(function () {
 
 	// Logic ở trang update
 	if (inpListIdPer.val()) {
-		isUpdatePage = true;		// nếu có dữ liệu thì đánh dấu là trang sửa
 		arrIdPer = inpListIdPer.val().split(',');
 		arrIdPer.forEach((id, i) => {
 			var checkbox = $(`.check-permission[data-id="${id}"]`).prop('checked', true);
@@ -29,7 +29,7 @@ $(document).ready(function () {
 // Sự kiện check cho cả trang thêm và sửa
 $('.check-permission').change(function (ev) {
 	let idPer = $(ev.currentTarget).attr('data-id');
-	if (isUpdatePage) {
+	if (IS_UPDATE_PAGE) {
 		// Xóa item trong mảng added và deleted nếu có
 		function removeUpdatedId() {
 			let i_addedId = addedIds.indexOf(idPer);
@@ -66,6 +66,19 @@ $('.check-permission').change(function (ev) {
 		inpListIdPer.val(arrIdPer.join(','));
 	}
 	autoChangeCheckAll(this);
+});
+
+$("form").on("reset", function (ev) {
+	if (IS_UPDATE_PAGE) {
+		setTimeout(() => {
+			arrIdPer.forEach((id, i) => {
+				var checkbox = $(`.check-permission[data-id="${id}"]`).prop('checked', true);
+				autoChangeCheckAll(checkbox);
+			});
+			deletedIds = [];
+			addedIds = [];
+		}, 0);
+	}
 });
 
 // sự kiện cho checkbox 'chọn tất cả'

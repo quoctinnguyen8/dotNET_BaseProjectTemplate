@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using X.PagedList;
 using App.Web.Common;
 using App.Web.ViewModels.Role;
+using App.Share.Extensions;
 
 namespace App.Web.Controllers
 {
@@ -19,11 +20,18 @@ namespace App.Web.Controllers
 		{
 			this.repository = _repository;
 		}
-		public async Task<IActionResult> Index()
+		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
-			var data = await repository
-				.GetAll<AppRole>()
-				.ToListAsync();
+			var data = (await repository
+				.GetAll<AppRole, RoleListItemVM>(selector: r=>new RoleListItemVM
+				{
+					Id = r.Id,
+					CreatedDate=r.CreatedDate,
+					Desc=r.Desc,
+					Name=r.Name
+				})
+				.ToPagedListAsync(page, size))
+				.GenRowIndex();
 			return View(data);
 		}
 		public IActionResult Create() => View();
@@ -89,37 +97,50 @@ namespace App.Web.Controllers
 
 		public async Task<IActionResult> Edit(RoleEditVM model)
 		{
+			if (!ModelState.IsValid)
+			{
+				SetErrorMesg(MODEL_STATE_INVALID_MESG);
+				return RedirectToAction(nameof(Index));
+			}
 			var role = await repository.GetOneAsync<AppRole>(model.Id);
-			var rolePermisstions = repository.GetAll<AppRolePermission>(s => s.AppRoleId == role.Id).ToList();
-
+			var curPermisssionIds = repository
+								.GetAll<AppRolePermission>(where: s => s.AppRoleId == role.Id)
+								.ToList();
 			if (role == null)
 			{
 				SetErrorMesg(PAGE_NOT_FOUND);
 				return RedirectToAction(nameof(Index));
 			}
-			var arrIdDeletedPermission = model.DeletedPermissionIds == null ? null : model.DeletedPermissionIds.Split(',');
-			var arrIdAddedPermission = model.AddedPermissionIds == null ? null : model.AddedPermissionIds.Split(',');
-			if (arrIdDeletedPermission != null)
+
+			// danh sách permission bị xóa khỏi role
+			var deletedPermissionIds = model.DeletedPermissionIds.IsNullOrEmpty() ? null : model.DeletedPermissionIds.Split(',').Select(i => Convert.ToInt32(i));
+			// danh sách permission được thêm vào role
+			var addedPermissionIds = model.AddedPermissionIds.IsNullOrEmpty() ? null : model.AddedPermissionIds.Split(',').Select(i => Convert.ToInt32(i));
+
+			var rolePermissionIds = curPermisssionIds
+								.Where(x => deletedPermissionIds != null && deletedPermissionIds.Contains(x.MstPermissionId))
+								.Select(x => x.Id);
+
+			if (deletedPermissionIds != null && deletedPermissionIds.Any())
 			{
-				foreach (var rolePer in rolePermisstions)
-				{
-					if (arrIdDeletedPermission.Contains(rolePer.MstPermissionId.ToString()))
-					{
-						repository.HardDeleteAsync<AppRolePermission>(rolePer.Id);
-					}
-				}
+				await repository.HardDeleteAsync<AppRolePermission>(rolePermissionIds);
 			}
-			if (arrIdAddedPermission != null)
+
+			if (addedPermissionIds != null && addedPermissionIds.Any())
 			{
-				foreach (var item in arrIdAddedPermission)
+				var addedRolePermisson = new List<AppRolePermission>();
+				foreach (var item in addedPermissionIds)
 				{
-					var idPer = Convert.ToInt32(item);
-					role.AppRolePermissions.Add(new AppRolePermission
+					addedRolePermisson.Add(new AppRolePermission
 					{
-						MstPermissionId = idPer
+						AppRoleId = role.Id,
+						MstPermissionId = item
 					});
 				}
+				await repository.AddAsync(addedRolePermisson);
 			}
+			role.Name = model.Name;
+			role.Desc = model.Desc;
 			await repository.UpdateAsync(role);
 			SetSuccessMesg($"Cập nhật vai trò [{role.Name}] thành công");
 			return RedirectToAction(nameof(Index));

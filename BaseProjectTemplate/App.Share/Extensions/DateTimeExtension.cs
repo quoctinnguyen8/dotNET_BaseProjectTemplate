@@ -17,11 +17,11 @@ namespace App.Share.Extensions
 			return date?.ToString("dd/MM/yyyy");
 		}
 
-		public static string ToDMYMS(this DateTime? date)
+		public static string ToDMYHM(this DateTime? date)
 		{
 			return date?.ToString("dd/MM/yyyy hh:mm");
 		}
-		public static string ToDMYMS(this DateTime date)
+		public static string ToDMYHM(this DateTime date)
 		{
 			return date.ToString("dd/MM/yyyy hh:mm");
 		}

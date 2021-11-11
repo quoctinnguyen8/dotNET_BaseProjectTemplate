@@ -36,7 +36,6 @@ namespace App.Data.Repositories
 
 		public virtual async Task<TViewModel> GetOneAsync<TEntity, TViewModel>(int id, Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
-			where TViewModel : class
 		{
 			var query = db.Set<TEntity>()
 						.AsNoTracking()
@@ -46,22 +45,21 @@ namespace App.Data.Repositories
 			return await query.SingleOrDefaultAsync();
 		}
 
-		public virtual async Task<TEntity> GetOneAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
+		public virtual async Task<TEntity> GetOneAsync<TEntity>(Expression<Func<TEntity, bool>> where) where TEntity : AppEntityBase
 		{
 			return await db.Set<TEntity>()
 						.AsNoTracking()
 						.Where(m => m.DeletedDate == null)
-						.SingleOrDefaultAsync(expr);
+						.SingleOrDefaultAsync(where);
 		}
 
-		public virtual async Task<TViewModel> GetOneAsync<TEntity, TViewModel>(Expression<Func<TEntity, bool>> expr, Expression<Func<TEntity, TViewModel>> selector)
+		public virtual async Task<TViewModel> GetOneAsync<TEntity, TViewModel>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
-			where TViewModel : class
 		{
 			var query = db.Set<TEntity>()
 						.AsNoTracking()
 						.Where(m => m.DeletedDate == null)
-						.Where(expr)
+						.Where(where)
 						.Select(selector);
 			LogToConsole(query);
 			return await query.SingleOrDefaultAsync();
@@ -80,7 +78,6 @@ namespace App.Data.Repositories
 
 		public virtual IQueryable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
-			where TViewModel : class
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()
@@ -101,7 +98,6 @@ namespace App.Data.Repositories
 
 		public virtual IQueryable<TViewModel> GetAllMst<TEntity, TViewModel>(Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : MstEntityBase
-			where TViewModel : class
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()
@@ -111,23 +107,22 @@ namespace App.Data.Repositories
 						.Select(selector);
 		}
 
-		public virtual IEnumerable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
+		public virtual IEnumerable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> where) where TEntity : AppEntityBase
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()
-						.Where(expr)
+						.Where(where)
 						.OrderByDescending(m => m.DisplayOrder)
 						.ThenByDescending(m => m.Id);
 		}
 
-		public virtual IQueryable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, bool>> expr, Expression<Func<TEntity, TViewModel>> selector)
+		public virtual IQueryable<TViewModel> GetAll<TEntity, TViewModel>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
-			where TViewModel : class
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()
 						.Where(m => m.DeletedDate == null)
-						.Where(expr)
+						.Where(where)
 						.OrderByDescending(m => m.DisplayOrder)
 						.ThenByDescending(m => m.Id)
 						.Select(selector);
@@ -180,12 +175,14 @@ namespace App.Data.Repositories
 			var deleteQuery = $"DELETE {tableName} WHERE Id = {id}";
 			LogToConsole(deleteQuery);
 			await db.Database.ExecuteSqlRawAsync(deleteQuery);
-			
-
 		}
 
 		public virtual async Task HardDeleteAsync<TEntity>(IEnumerable<int> ids) where TEntity : AppEntityBase
 		{
+			if (ids == null || !ids.Any())
+			{
+				throw new Exception("Danh sách ID rỗng");
+			}
 			var tableName = GetTableName<TEntity>();
 			var deleteQuery = $"DELETE {tableName} WHERE Id IN ({string.Join(',', ids)})";
 			LogToConsole(deleteQuery);

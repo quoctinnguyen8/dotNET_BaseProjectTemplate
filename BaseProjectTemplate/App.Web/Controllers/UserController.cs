@@ -44,20 +44,8 @@ namespace App.Web.Controllers
 			return View(data);
 		}
 
-		public async Task<IActionResult> Create(int page = 1, int size = DEFAULT_PAGE_SIZE)
-		{
-			var data = (await repository
-				.GetAll<AppRole, RoleListItemVM>(
-					u => new RoleListItemVM
-					{
-						Id = u.Id,
-						Name = u.Name
-
-					})
-				.ToPagedListAsync(page, size));
-			ViewBag.Role = new SelectList(data, "Id", "Name");
-			return View();
-		} 
+		public IActionResult Create()=>View();
+		
 
 		[HttpPost]
 		public async Task<IActionResult> Create(UserAddOrEditVM model)

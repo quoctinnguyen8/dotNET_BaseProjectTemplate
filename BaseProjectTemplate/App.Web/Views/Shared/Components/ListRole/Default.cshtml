@@ -1,0 +1,5 @@
+﻿@model IEnumerable<App.Data.Entities.AppRole>
+@foreach(var item in Model)
+{
+	<option value="@item.Id">@item.Name</option>
+}

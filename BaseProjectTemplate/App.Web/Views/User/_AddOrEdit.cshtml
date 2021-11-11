@@ -12,7 +12,9 @@
 </div>
 <div class="form-group">
 	<label asp-for="AppRoleId" class="control-label">Xác nhận mật khẩu</label>
-	<select asp-items="@(ViewBag.Role as SelectList)" asp-for="AppRoleId" class="form-control" ></select>
+	<select asp-for="AppRoleId" class="form-control" >
+		<vc:list-role></vc:list-role>
+	</select>
 	<span asp-validation-for="AppRoleId" class="text-danger"></span>
 </div>
 <div class="form-group">

@@ -22,7 +22,7 @@ namespace App.Web.ViewModels.Account
 
 		[DataType(DataType.Password)]
 		[AppConfirmPwd("NewPwd")]
-		public string ConfirmPwd { get; set; }
+		public string ConfirmPassword { get; set; }
 
 		public bool LogoutAfterChangePwd { get; set; }
 	}

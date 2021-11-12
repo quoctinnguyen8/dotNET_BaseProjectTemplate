@@ -3,10 +3,12 @@
 @{
 	ViewData["Title"] = "Tạo tài khoản";
 }
-
+@section head{
+	<link href="~/lib/bs4-autocomplete/css/bs4-autocomplete.css" rel="stylesheet" />
+}
 <div class="row">
 	<div class="col-md-5">
-		<form asp-action="Create">
+		<form asp-action="Create" autocomplete="off">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
 				<label asp-for="Username" class="control-label">Tên đăng nhập</label>
@@ -22,6 +24,9 @@
 	</div>
 </div>
 <partial name="_BackToList" />
-@section scripts {
-	
+@section scripts{
+	<script src="~/lib/bs4-autocomplete/js/bs4-autocomplete.js"></script>
+	<script>
+		$('select').autocomplete();
+	</script>
 }

@@ -87,8 +87,9 @@ namespace App.Web.Controllers
 				return Redirect(Request.Headers["Referer"].ToString());
 			}
 
-			var newPwdHash = this.HashHMACSHA512WithKey(model.NewPwd, user.PasswordSalt);
-			user.PasswordHash = newPwdHash;
+			var hashResult = this.HashHMACSHA512(model.NewPwd);
+			user.PasswordHash = hashResult.Value;
+			user.PasswordSalt = hashResult.Key;
 			await userRepository.UpdateAsync<AppUser>(user);
 
 			if (model.LogoutAfterChangePwd)

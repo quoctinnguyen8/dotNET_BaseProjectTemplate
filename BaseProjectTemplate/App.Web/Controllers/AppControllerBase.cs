@@ -1,4 +1,5 @@
-﻿using App.Web.ViewModels;
+﻿using App.Web.Common;
+using App.Web.ViewModels;
 using App.Web.ViewModels.User;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,16 @@ namespace App.Web.Controllers
 			HMACSHA512 hmac = new(key);
 			var pwdByte = Encoding.UTF8.GetBytes(pwd);
 			return hmac.ComputeHash(pwdByte);
+		}
+
+		protected HashResult HashHMACSHA512(string pwd)
+		{
+			var hashResult = new HashResult();
+			HMACSHA512 hmac = new();
+			var pwdByte = Encoding.UTF8.GetBytes(pwd);
+			hashResult.Value = hmac.ComputeHash(pwdByte);
+			hashResult.Key = hmac.Key;
+			return hashResult;
 		}
 	}
 }

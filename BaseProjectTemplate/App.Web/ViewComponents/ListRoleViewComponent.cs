@@ -17,11 +17,12 @@ namespace App.Web.ViewComponents
 		{
 			this.repository = _db;
 		}	
-		public async Task<IViewComponentResult> InvokeAsync()
+		public async Task<IViewComponentResult> InvokeAsync(int? seletetedId)
 		{
 			var data = await repository
 					.GetAll<AppRole>()
 					.ToListAsync();
+			ViewBag.SelectedId = seletetedId;
 			return View(data);
 		}
 	}

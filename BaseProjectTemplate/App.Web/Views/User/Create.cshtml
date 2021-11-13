@@ -7,14 +7,9 @@
 	<link href="~/lib/bs4-autocomplete/css/bs4-autocomplete.css" rel="stylesheet" />
 }
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-12">
 		<form asp-action="Create" autocomplete="off">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<div class="form-group">
-				<label asp-for="Username" class="control-label">Tên đăng nhập</label>
-				<input asp-for="Username" class="form-control" />
-				<span asp-validation-for="Username" class="text-danger"></span>
-			</div>
 			<partial name="_AddOrEdit" />
 			<div class="form-group">
 				<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
@@ -26,7 +21,5 @@
 <partial name="_BackToList" />
 @section scripts{
 	<script src="~/lib/bs4-autocomplete/js/bs4-autocomplete.js"></script>
-	<script>
-		$('select').autocomplete();
-	</script>
+	<script src="~/js/user/create-edit-user.js"></script>
 }

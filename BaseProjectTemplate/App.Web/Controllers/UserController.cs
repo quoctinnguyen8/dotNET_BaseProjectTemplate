@@ -44,7 +44,7 @@ namespace App.Web.Controllers
 			return View(data);
 		}
 
-		public IActionResult Create()=>View();
+		public IActionResult Create() => View();
 
 		[HttpPost]
 		public async Task<IActionResult> Create(UserAddOrEditVM model)

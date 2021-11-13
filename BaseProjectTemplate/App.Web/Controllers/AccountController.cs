@@ -83,8 +83,8 @@ namespace App.Web.Controllers
 			var encryptPassword = this.HashHMACSHA512WithKey(model.Pwd, user.PasswordSalt);
 			if (!encryptPassword.SequenceEqual(user.PasswordHash))
 			{
-				TempData["Err"] = "Mật khẩu cũ không chính xác";
-				return Redirect(Request.Headers["Referer"].ToString());
+				SetErrorMesg("Mật khẩu cũ không chính xác");
+				return Redirect(Referer);
 			}
 
 			var hashResult = this.HashHMACSHA512(model.NewPwd);
@@ -97,8 +97,8 @@ namespace App.Web.Controllers
 				return RedirectToAction(nameof(Logout));
 			}
 
-			TempData["Success"] = "Đổi mật khẩu thành công";
-			return Redirect(Request.Headers["Referer"].ToString());
+			SetSuccessMesg("Đổi mật khẩu thành công");
+			return Redirect(Referer);
 		}
 	}
 }

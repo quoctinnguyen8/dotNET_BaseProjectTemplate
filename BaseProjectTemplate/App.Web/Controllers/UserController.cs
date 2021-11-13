@@ -62,7 +62,9 @@ namespace App.Web.Controllers
 
 			try
 			{
-				this.HashHMACSHA512(model);
+				var hashResult = HashHMACSHA512(model.Password);
+				model.PasswordHash = hashResult.Value;
+				model.PasswordSalt = hashResult.Key;
 				var user = mapper.Map<AppUser>(model);
 				await repository.AddAsync(user);
 				SetSuccessMesg($"Thêm tài khoản [{user.Username}] thành công");
@@ -80,7 +82,7 @@ namespace App.Web.Controllers
 			var user = await repository.GetOneAsync<AppUser>(id);
 			if (user == null)
 			{
-				SetErrorMesg(PAGE_NOT_FOUND);
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
 			var userEditVM = mapper.Map<UserAddOrEditVM>(user);
@@ -98,7 +100,7 @@ namespace App.Web.Controllers
 			}
 			if (user == null)
 			{
-				SetErrorMesg(PAGE_NOT_FOUND);
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
 			if (model.Username != user.Username)
@@ -109,7 +111,10 @@ namespace App.Web.Controllers
 
 			try
 			{
-				HashHMACSHA512(model);		//Cập nhật mật khẩu
+				//Cập nhật mật khẩu
+				var hashResult = HashHMACSHA512(model.Password);
+				model.PasswordHash = hashResult.Value;
+				model.PasswordSalt = hashResult.Key;
 				mapper.Map(model, user);
 				await repository.UpdateAsync<AppUser>(user);
 				SetSuccessMesg($"Cập nhật tài khoản [{user.Username}] thành công");

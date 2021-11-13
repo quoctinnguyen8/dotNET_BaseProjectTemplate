@@ -76,7 +76,7 @@ namespace App.Web.Controllers
 		{
 			if (!id.HasValue)
 			{
-				SetErrorMesg(PAGE_NOT_FOUND);
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
 			var data = await repository.GetOneAsync<AppRole, RoleEditVM>(id.Value, r => new RoleEditVM
@@ -88,7 +88,7 @@ namespace App.Web.Controllers
 			});
 			if (data == null)
 			{
-				SetErrorMesg(PAGE_NOT_FOUND);
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
 			return View(data);
@@ -108,7 +108,7 @@ namespace App.Web.Controllers
 								.ToList();
 			if (role == null)
 			{
-				SetErrorMesg(PAGE_NOT_FOUND);
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
 

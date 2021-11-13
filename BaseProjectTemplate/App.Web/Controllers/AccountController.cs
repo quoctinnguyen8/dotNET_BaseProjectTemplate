@@ -76,5 +76,29 @@ namespace App.Web.Controllers
 		}
 
 		public IActionResult AccessDenied() => View();
+
+		public async Task<IActionResult> ChangePassword(ChangePassword model)
+		{
+			var user = await userRepository.GetOneAsync<AppUser>(this.CurrentUserId);
+			var encryptPassword = this.HashHMACSHA512WithKey(model.Pwd, user.PasswordSalt);
+			if (!encryptPassword.SequenceEqual(user.PasswordHash))
+			{
+				SetErrorMesg("Mật khẩu cũ không chính xác");
+				return Redirect(Referer);
+			}
+
+			var hashResult = this.HashHMACSHA512(model.NewPwd);
+			user.PasswordHash = hashResult.Value;
+			user.PasswordSalt = hashResult.Key;
+			await userRepository.UpdateAsync<AppUser>(user);
+
+			if (model.LogoutAfterChangePwd)
+			{
+				return RedirectToAction(nameof(Logout));
+			}
+
+			SetSuccessMesg("Đổi mật khẩu thành công");
+			return Redirect(Referer);
+		}
 	}
 }

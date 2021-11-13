@@ -1,0 +1,14 @@
+﻿@model IEnumerable<App.Data.Entities.AppRole>
+@{
+	int? selectedId = (int?)ViewBag.SelectedId;
+}
+@foreach (var item in Model)
+{
+	if (selectedId.HasValue && selectedId.Value == item.Id)
+	{
+		<option selected="selected" value="@item.Id">@item.Name</option>
+		continue;
+	}
+	<option value="@item.Id">@item.Name</option>
+
+}

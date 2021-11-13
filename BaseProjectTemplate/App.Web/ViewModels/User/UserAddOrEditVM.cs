@@ -43,6 +43,7 @@ namespace App.Web.ViewModels.User
 		public string Email { get; set; }
 		public string Address { get; set; }
 		public int? AppRoleId { get; set; }
+		public DateTime? UpdatedDate { get; set; }
 
 		public byte[] PasswordHash { get; internal set; }
 		public byte[] PasswordSalt { get; internal set; }

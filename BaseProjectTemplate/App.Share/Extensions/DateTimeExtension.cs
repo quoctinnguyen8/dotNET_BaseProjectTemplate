@@ -14,12 +14,20 @@ namespace App.Share.Extensions
 		}
 		public static string ToDMY(this DateTime? date)
 		{
-			return date?.ToString("dd/MM/yyyy");
+			if (!date.HasValue)
+			{
+				return "01/01/1900";
+			}
+			return date.Value.ToString("dd/MM/yyyy");
 		}
 
 		public static string ToDMYHM(this DateTime? date)
 		{
-			return date?.ToString("dd/MM/yyyy hh:mm");
+			if (!date.HasValue)
+			{
+				return "01/01/1900 00:00";
+			}
+			return date.Value.ToString("dd/MM/yyyy hh:mm");
 		}
 		public static string ToDMYHM(this DateTime date)
 		{

@@ -8,6 +8,9 @@
 }
 <div class="row">
 	<div class="col-12">
+		<div class="small mb-2">
+			Cập nhật lần cuối lúc @Model?.UpdatedDate.ToDMYHM()
+		</div>
 		<form asp-action="Edit" autocomplete="off">
 			<input asp-for="Id" type="hidden" />
 			<input asp-for="Username" type="hidden" />

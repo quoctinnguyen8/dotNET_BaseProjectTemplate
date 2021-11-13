@@ -26,8 +26,8 @@
 			{
 			<tr>
 				<td class="fit">@item.RowIndex</td>
-				<td>@Html.DisplayFor(modelItem => item.Username)</td>
-				<td>@Html.DisplayFor(modelItem => item.FullName)</td>
+				<td>@item.Username</td>
+				<td>@item.FullName</td>
 				<td>@item.PhoneNumber1</td>
 				<td>@item.Email</td>
 				<td>@item.RoleName</td>
@@ -38,7 +38,8 @@
 					<a asp-action="Edit" asp-route-id="@item.Id"
 					   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
 					<a asp-action="Delete" asp-route-id="@item.Id"
-					   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-trash"></i></a>
+					   class="btn btn-outline-secondary btn-sm js-delete-confirm"
+					   data-msg="Xác nhận xóa tài khoản [@item.Username]?"><i class="fa fas fa-trash"></i></a>
 				</td>
 			</tr>
 			}

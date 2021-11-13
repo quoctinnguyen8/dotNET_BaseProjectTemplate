@@ -1,4 +1,5 @@
 ﻿using App.Data.Entities;
+using App.Web.ViewModels.Role;
 using App.Web.ViewModels.User;
 using AutoMapper;
 using System;
@@ -17,6 +18,9 @@ namespace App.Web.WebConfig
 
 			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
 			CreateMap<AppUser, UserAddOrEditVM>();
+
+			// Map dữ liệu từ kiểu AppRole sang RoleListItemVM
+			CreateMap<AppRole, RoleListItemVM>();
 		}
 
 		// Cấu hình mapping cho UserController, action Index

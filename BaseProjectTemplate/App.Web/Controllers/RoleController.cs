@@ -23,13 +23,7 @@ namespace App.Web.Controllers
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			var data = (await repository
-				.GetAll<AppRole, RoleListItemVM>(selector: r=>new RoleListItemVM
-				{
-					Id = r.Id,
-					CreatedDate=r.CreatedDate,
-					Desc=r.Desc,
-					Name=r.Name
-				})
+				.GetAll<AppRole, RoleListItemVM>(selector: r => mapper.Map<RoleListItemVM>(r))
 				.ToPagedListAsync(page, size))
 				.GenRowIndex();
 			return View(data);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.Web.WebConfig
 {
-	public class AutoMapperProfile:Profile
+	public class AutoMapperProfile : Profile
 	{
 		public AutoMapperProfile()
 		{
@@ -18,5 +18,13 @@ namespace App.Web.WebConfig
 			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
 			CreateMap<AppUser, UserAddOrEditVM>();
 		}
+
+		// Cấu hình mapping cho UserController, action Index
+		public static MapperConfiguration UserIndexConf = new MapperConfiguration(mapper =>
+		{
+			// Map dữ liệu từ AppUser sang UserListItemVM, map thuộc tính RoleName
+			mapper.CreateMap<AppUser, UserListItemVM>()
+				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole.Name));
+		});
 	}
 }

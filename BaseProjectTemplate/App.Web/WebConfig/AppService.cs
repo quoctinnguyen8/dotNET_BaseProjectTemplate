@@ -24,7 +24,6 @@ namespace App.Web.WebConfig
 			// Đăng ký repositories
 			services.AddScoped<RepositoryBase>();
 
-
 			// Cấu hình đăng nhập
 			services.AddAuthentication(AppConst.COOKIES_AUTH).AddCookie(options =>
 			{
@@ -32,7 +31,6 @@ namespace App.Web.WebConfig
 				options.ExpireTimeSpan = TimeSpan.FromHours(AppConst.LOGIN_TIMEOUT);
 				options.Cookie.HttpOnly = true;
 			});
-
 
 			// Cấu hình AutoMapper
 			var mapperConfig = new MapperConfiguration(config =>

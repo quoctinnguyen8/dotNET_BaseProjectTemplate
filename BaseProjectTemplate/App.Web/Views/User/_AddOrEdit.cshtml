@@ -4,7 +4,7 @@
 	<div class="col-sm-5">
 		<div class="form-group">
 			<label asp-for="Username" class="control-label">Tên đăng nhập</label>
-			@if (Model == null)
+			@if (ViewContext.GetCurrentActionName() == "Create")
 			{
 				<input asp-for="Username" class="form-control" />
 			}

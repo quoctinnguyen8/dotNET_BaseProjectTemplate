@@ -111,6 +111,7 @@ namespace App.Data.Repositories
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()
+						.Where(m => m.DeletedDate == null)
 						.Where(where)
 						.OrderByDescending(m => m.DisplayOrder)
 						.ThenByDescending(m => m.Id);

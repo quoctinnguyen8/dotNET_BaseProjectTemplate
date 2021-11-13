@@ -1,4 +1,5 @@
 ﻿using App.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,15 @@ namespace App.Web.Common
 			}
 			return list;
 		}
+
+		public static string GetCurrentActionName(this ViewContext viewContext)
+		{
+			return viewContext.RouteData.Values["action"].ToString();
+		}
+		public static string GetCurrentControllerName(this ViewContext viewContext)
+		{
+			return viewContext.RouteData.Values["controller"].ToString();
+		}
+
 	}
 }

@@ -107,7 +107,7 @@ namespace App.Data.Repositories
 						.Select(selector);
 		}
 
-		public virtual IEnumerable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> where) where TEntity : AppEntityBase
+		public virtual IQueryable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> where) where TEntity : AppEntityBase
 		{
 			return db.Set<TEntity>()
 						.AsNoTracking()

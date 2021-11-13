@@ -3,7 +3,9 @@ using App.Data.Repositories;
 using App.Web.Common;
 using App.Web.ViewModels.Role;
 using App.Web.ViewModels.User;
+using App.Web.WebConfig;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -28,17 +30,8 @@ namespace App.Web.Controllers
 		{
 			// Chú ý dấu ngoặc khi dùng await cùng với GenRowIndex
 			var data = (await repository
-				.GetAll<AppUser, UserListItemVM>(
-					u => u.Username != this.CurrentUsername,
-					u => new UserListItemVM
-					{
-						Id = u.Id,
-						Username = u.Username,
-						FullName = u.FullName,
-						Email = u.Email,
-						PhoneNumber1 = u.PhoneNumber1,
-						CreatedDate = u.CreatedDate
-					})
+				.GetAll<AppUser>(u => u.Username != this.CurrentUsername)
+				.ProjectTo<UserListItemVM>(AutoMapperProfile.UserIndexConf)
 				.ToPagedListAsync(page, size))
 				.GenRowIndex();
 			return View(data);

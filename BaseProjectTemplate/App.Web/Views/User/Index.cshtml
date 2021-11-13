@@ -16,6 +16,7 @@
 				<th>Họ tên</th>
 				<th>SĐT</th>
 				<th>Email</th>
+				<th>Vai trò</th>
 				<th>Ngày tạo</th>
 				<th></th>
 			</tr>
@@ -23,32 +24,23 @@
 		<tbody>
 			@foreach (var item in Model)
 			{
-				<tr>
-					<td class="fit">@item.RowIndex</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Username)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.FullName)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.PhoneNumber1)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Email)
-					</td>
-					<td>
-						@item.CreatedDate.ToDMY()
-					</td>
-					<td class="fit">
-						<a asp-action="Details" asp-route-id="@item.Id"
-						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
-						<a asp-action="Edit" asp-route-id="@item.Id"
-						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
-						<a asp-action="Delete" asp-route-id="@item.Id"
-						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-trash"></i></a>
-					</td>
-				</tr>
+			<tr>
+				<td class="fit">@item.RowIndex</td>
+				<td>@Html.DisplayFor(modelItem => item.Username)</td>
+				<td>@Html.DisplayFor(modelItem => item.FullName)</td>
+				<td>@item.PhoneNumber1</td>
+				<td>@item.Email</td>
+				<td>@item.RoleName</td>
+				<td>@item.CreatedDate.ToDMY()</td>
+				<td class="fit">
+					<a asp-action="Details" asp-route-id="@item.Id"
+					   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
+					<a asp-action="Edit" asp-route-id="@item.Id"
+					   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
+					<a asp-action="Delete" asp-route-id="@item.Id"
+					   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-trash"></i></a>
+				</td>
+			</tr>
 			}
 		</tbody>
 	</table>

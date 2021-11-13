@@ -76,6 +76,7 @@ $.fn.extend({
 
 			// Sự kiện khi click vào item của dropdown
 			dropdownlist.on("click", "a:not(.disabled)", function (ev) {
+				ev.preventDefault();
 				let aEle = $(this);
 				let value = aEle.attr("data-value");
 				if (value) {

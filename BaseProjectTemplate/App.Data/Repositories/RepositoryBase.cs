@@ -53,6 +53,14 @@ namespace App.Data.Repositories
 						.SingleOrDefaultAsync(where);
 		}
 
+		public virtual IQueryable<TEntity> Get<TEntity>(Expression<Func<TEntity, bool>> where) where TEntity : AppEntityBase
+		{
+			return db.Set<TEntity>()
+						.AsNoTracking()
+						.Where(m => m.DeletedDate == null)
+						.Where(where);
+		}
+
 		public virtual async Task<TViewModel> GetOneAsync<TEntity, TViewModel>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TViewModel>> selector)
 			where TEntity : AppEntityBase
 		{

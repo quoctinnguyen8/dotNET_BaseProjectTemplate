@@ -63,7 +63,7 @@ $('.check-permission').change(function (ev) {
 		else {
 			arrIdPer.splice(arrIdPer.indexOf(idPer), 1);
 		}
-		inpListIdPer.val(arrIdPer.join(','));
+		inpListIdPer.val(arrIdPer.join(',')).valid();
 	}
 	autoChangeCheckAll(this);
 });

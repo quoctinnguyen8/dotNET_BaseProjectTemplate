@@ -27,11 +27,11 @@ namespace App.Share.Extensions
 			{
 				return "01/01/1900 00:00";
 			}
-			return date.Value.ToString("dd/MM/yyyy hh:mm");
+			return date.Value.ToString("dd/MM/yyyy HH:mm");
 		}
 		public static string ToDMYHM(this DateTime date)
 		{
-			return date.ToString("dd/MM/yyyy hh:mm");
+			return date.ToString("dd/MM/yyyy HH:mm");
 		}
 	}
 }

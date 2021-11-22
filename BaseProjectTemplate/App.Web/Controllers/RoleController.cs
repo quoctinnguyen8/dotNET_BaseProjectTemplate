@@ -10,6 +10,9 @@ using X.PagedList;
 using App.Web.Common;
 using App.Web.ViewModels.Role;
 using App.Share.Extensions;
+using AutoMapper.QueryableExtensions;
+using App.Web.WebConfig;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Web.Controllers
 {
@@ -87,8 +90,8 @@ namespace App.Web.Controllers
 			}
 			return View(data);
 		}
-		[HttpPost]
 
+		[HttpPost]
 		public async Task<IActionResult> Edit(RoleEditVM model)
 		{
 			if (!ModelState.IsValid)
@@ -138,6 +141,25 @@ namespace App.Web.Controllers
 			await repository.UpdateAsync(role);
 			SetSuccessMesg($"Cập nhật vai trò [{role.Name}] thành công");
 			return RedirectToAction(nameof(Index));
+		}
+	
+		public async Task<IActionResult> Delete(int? id)
+		{
+			if (!id.HasValue)
+			{
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
+				return RedirectToAction(nameof(Index));
+			}
+
+			var data = await repository.Get<AppRole>(where: r => r.Id == id.Value)
+						.ProjectTo<RoleDeleteVM>(AutoMapperProfile.RoleDeleteConf)
+						.SingleOrDefaultAsync();
+			if (data == null)
+			{
+				SetErrorMesg(PAGE_NOT_FOUND_MESG);
+				return RedirectToAction(nameof(Index));
+			}
+			return View(data);
 		}
 	}
 }

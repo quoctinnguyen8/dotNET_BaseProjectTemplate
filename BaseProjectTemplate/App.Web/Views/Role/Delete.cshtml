@@ -1,0 +1,63 @@
+﻿@model App.Web.ViewModels.Role.RoleDeleteVM
+
+@{
+	ViewData["Title"] = $"Xác nhận xóa vai trò [{Model.Name}]";
+}
+@section head{ 
+	<link href="~/lib/bs4-autocomplete/css/bs4-autocomplete.css" rel="stylesheet" />
+}
+
+<form asp-action="Delete">
+	<div class="row">
+
+		<div class="col-md-4 col-xl-3">
+			<h5>Thông tin vai trò</h5>
+			<small>Tạo lúc @Model.CreatedDate.ToDMYHM()</small> | 
+			<small>Cập nhật lần cuối lúc @Model.UpdatedDate.ToDMYHM()</small>
+			<div class="form-group">
+				<label>Mã vai trò</label>
+				<input class="form-control" readonly value="@Model.Id" />
+			</div>
+			<div class="form-group">
+				<label>Tên vai trò</label>
+				<input class="form-control" readonly value="@Model.Name" />
+			</div>
+			<div class="form-group">
+				<label>Mô tả</label>
+				<input class="form-control" readonly value="@Model.Desc" />
+			</div>
+			<div class="form-group">
+				<label asp-for="NewId">Vai trò thay thế</label>
+				<select asp-for="NewId" class="form-control">
+					<vc:list-role seleteted-id="null" exclude-ids="new int[] { Model.Id }"></vc:list-role>
+				</select>
+				<span asp-validation-for="NewId" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="col-md-8 col-xl-9">
+			<h5>Tài khoản bị ảnh hưởng (@Model.AppUsers.Count)</h5>
+			<div class="row">
+				@for (int i = 0; i < Model.AppUsers.Count; i++)
+				{
+					<div class="col-md-6 col-lg-4 col-xl-3">
+						<p class="hover:text-primary text-bold">@(i+1). @Model.AppUsers[i].Username</p>
+					</div>
+				}
+			</div>
+		</div>
+
+		<div class="col-12 text-center">
+			<button type="button" class="btn btn-danger px-4">
+				<i class="fa fa-trash mr-2"></i> Xóa vai trò này
+			</button>
+		</div>
+	</div>
+</form>
+
+<partial name="_BackToList" />
+
+@section scripts{
+	<script src="~/lib/bs4-autocomplete/js/bs4-autocomplete.js"></script>
+	<script src="~/js/role/delete-role.js" asp-append-version="true"></script>
+}

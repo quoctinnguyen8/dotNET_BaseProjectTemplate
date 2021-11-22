@@ -1,4 +1,5 @@
 ﻿using App.Share.Consts;
+using App.Web.Common.Consts;
 using DNews.Shared.Attributes;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,15 @@ namespace App.Web.ViewModels.Role
 	{
 		public int Id { get; set; }
 		[AppRequired]
-		[AppStringLength(2, DB.AppRole.NAME_LENGTH)]
+		[AppMaxLength(DB.AppRole.NAME_LENGTH)]
 		public string Name { get; set; }
 		[AppRequired]
-		[AppStringLength(2, DB.AppRole.DESC_LENGTH)]
+		[AppMaxLength(DB.AppRole.DESC_LENGTH)]
 		public string Desc { get; set; }
 
 		// Chuỗi chứa permissionId hiện tại, phân tách bởi dấu phẩy
+		[AppRequired(ErrorMessage = VM.RoleVM.PERMISSION_IDS_REQUIRED_ERR_MESG)]
+		[AppRegex(VM.RoleVM.PERMISSION_IDS_REGEX, ErrorMessage = VM.RoleVM.PERMISSION_IDS_REGEX_ERR_MESG)]
 		public string PermissionIds { get; set; }
 
 		// Chuỗi chứa permissionId sẽ được xóa, phân tách bởi dấu phẩy

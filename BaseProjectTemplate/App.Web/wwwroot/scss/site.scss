@@ -10,6 +10,14 @@
 	white-space: nowrap;
 }
 
+.fake-d-none {
+	display: block !important;
+	width: 0;
+	height: 0;
+	padding: 0 !important;
+	border: 0 !important;
+}
+
 .hover\: {
 	$transitionTime: 0.3s;
 

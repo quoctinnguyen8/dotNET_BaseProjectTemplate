@@ -26,7 +26,7 @@
 		</div>
 		<div class="form-group">
 			<label asp-for="AppRoleId" class="control-label">Vai trò trên trang</label>
-			<select id="AppRoleId" asp-for="AppRoleId" class="form-control">
+			<select asp-for="AppRoleId" class="form-control">
 				<vc:list-role seleteted-id="@Model?.AppRoleId"></vc:list-role>
 			</select>
 			<span asp-validation-for="AppRoleId" class="text-danger"></span>

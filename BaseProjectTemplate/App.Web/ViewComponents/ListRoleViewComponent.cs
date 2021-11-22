@@ -17,10 +17,10 @@ namespace App.Web.ViewComponents
 		{
 			this.repository = _db;
 		}	
-		public async Task<IViewComponentResult> InvokeAsync(int? seletetedId)
+		public async Task<IViewComponentResult> InvokeAsync(int? seletetedId, IEnumerable<int> excludeIds = null)
 		{
 			var data = await repository
-					.GetAll<AppRole>()
+					.GetAll<AppRole>(where: r => excludeIds != null && excludeIds.Any() && !excludeIds.Contains(r.Id))
 					.ToListAsync();
 			ViewBag.SelectedId = seletetedId;
 			return View(data);

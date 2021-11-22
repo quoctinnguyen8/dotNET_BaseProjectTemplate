@@ -30,7 +30,7 @@
 						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
 						<a asp-action="Edit" asp-route-id="@item.Id"
 						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
-						<a href="#"
+						<a asp-action="Delete" asp-route-id="@item.Id"
 						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-trash"></i></a>
 					</td>
 				</tr>

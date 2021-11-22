@@ -30,5 +30,14 @@ namespace App.Web.WebConfig
 			mapper.CreateMap<AppUser, UserListItemVM>()
 				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole.Name));
 		});
+
+		// Cấu hình mapping cho RoleController, action Delete
+		public static MapperConfiguration RoleDeleteConf = new MapperConfiguration(mapper =>
+		{
+			// Map dữ liệu thuộc tính con
+			mapper.CreateMap<AppUser, RoleDeleteVM_User>();
+			// Map dữ liệu thuộc tính cha
+			mapper.CreateMap<AppRole, RoleDeleteVM>();
+		});
 	}
 }

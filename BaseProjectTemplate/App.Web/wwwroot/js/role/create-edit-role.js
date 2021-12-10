@@ -8,6 +8,24 @@ var addedIds = [];
 
 const IS_UPDATE_PAGE = inpDeletedId.length;
 
+if (IS_UPDATE_PAGE) {
+	// Ràng buộc dữ liệu đặc biệt cho trang update
+	// Nếu xóa hết permission thì không cho lưu
+	$.validator.addMethod(
+		"deleteAllPermission",
+		function (value, element) {
+			deletedIds.sort();
+			arrIdPer.sort();
+			if (addedIds.length > 0) {
+				return true;
+			}
+			return !(deletedIds.length === arrIdPer.length && deletedIds.every((value, index) => value === arrIdPer[index]));
+		}
+	);
+	$.validator.unobtrusive.adapters.addBool('deleteAllPermission');
+}
+
+
 $(document).ready(function () {
 	// khởi tạo layout masonry
 	$('.js-masonry').masonry({
@@ -17,7 +35,7 @@ $(document).ready(function () {
 	});
 
 	// Logic ở trang update
-	if (inpListIdPer.val()) {
+	if (IS_UPDATE_PAGE) {
 		arrIdPer = inpListIdPer.val().split(',');
 		arrIdPer.forEach((id, i) => {
 			var checkbox = $(`.check-permission[data-id="${id}"]`).prop('checked', true);
@@ -92,7 +110,7 @@ $('.check-all').change(function (ev) {
 	}
 });
 
-// tự thay đổi trạng thái checkbox 'chọn tất cả'
+// tự thay đổi trạng thái checkbox 'chọn tất cả' khi thỏa mãn điều kiện
 function autoChangeCheckAll(checkbox) {
 	let parent = $(checkbox).closest('.js-group-permission');
 	let checkboxes = parent.find('.check-permission');

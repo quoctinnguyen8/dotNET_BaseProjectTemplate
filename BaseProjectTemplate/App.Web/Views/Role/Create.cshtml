@@ -7,7 +7,7 @@
 <form asp-action="Create">
 	<div class="row">
 		<div class="col-md-12">
-			<h5 class="my-3">Thông tin vai trò &nbsp;<span asp-validation-for="PermissionIds" class="text-danger small"></span></h5>
+			<h5 class="my-3">Thông tin vai trò</h5>
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<input asp-for="PermissionIds" class="fake-d-none" />
 			<div class="row">
@@ -29,6 +29,7 @@
 		</div>
 		<div class="col-12 my-3">
 			<h5>Các hành động được phép</h5>
+			<span asp-validation-for="PermissionIds" class="text-danger"></span>
 		</div>
 		@await Component.InvokeAsync("Permission")
 	</div>

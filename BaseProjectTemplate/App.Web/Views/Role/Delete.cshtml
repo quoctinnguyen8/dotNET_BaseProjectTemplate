@@ -12,12 +12,8 @@
 
 		<div class="col-md-4 col-xl-3">
 			<h5>Thông tin vai trò</h5>
-			<small>Tạo lúc @Model.CreatedDate.ToDMYHM()</small> | 
-			<small>Cập nhật lần cuối lúc @Model.UpdatedDate.ToDMYHM()</small>
-			<div class="form-group">
-				<label>Mã vai trò</label>
-				<input class="form-control" readonly value="@Model.Id" />
-			</div>
+			<p class="small mb-1">Tạo lúc @Model.CreatedDate.ToDMYHM()</p>
+			<p class="small mb-2">Cập nhật lần cuối lúc @Model.UpdatedDate.ToDMYHM()</p>
 			<div class="form-group">
 				<label>Tên vai trò</label>
 				<input class="form-control" readonly value="@Model.Name" />

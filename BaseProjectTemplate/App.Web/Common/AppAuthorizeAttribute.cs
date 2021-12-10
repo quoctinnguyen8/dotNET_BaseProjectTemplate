@@ -1,9 +1,11 @@
 ﻿using App.Web.Common.Consts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace App.Web.Common
@@ -14,23 +16,26 @@ namespace App.Web.Common
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 	public class AppAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
 	{
-		readonly int userPermission;
-		public AppAuthorizeAttribute(int _permission)
+		private int actionPermission;
+		public AppAuthorizeAttribute(int permission)
 		{
-			userPermission = _permission;
+			actionPermission = permission;
 		}
 		public void OnAuthorization(AuthorizationFilterContext context)
 		{
+			var isAuthorized = false;
 			if (!AppConst.ENABLE_AUTH)
 			{
 				return;
 			}
 			var user = context.HttpContext.User;
-			
-			//if (!isAuthorized)
-			//{
-			//	context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-			//}
+			var userPermission = user.FindFirstValue(AppClaimTypes.Permissions);
+			isAuthorized = userPermission.Contains(this.actionPermission.ToString());
+
+			if (!isAuthorized)
+			{
+				context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using App.Data.Entities;
 using App.Data.Repositories;
+using App.Share.Consts;
 using App.Web.Common;
 using App.Web.ViewModels.Role;
 using App.Web.ViewModels.User;
@@ -72,6 +73,7 @@ namespace App.Web.Controllers
 			}
 		}
 
+		[AppAuthorize(AuthConst.AppUser.UPDATE)]
 		public async Task<IActionResult> Edit(int id)
 		{
 			var user = await repository.GetOneAsync<AppUser>(id);
@@ -85,6 +87,7 @@ namespace App.Web.Controllers
 		}
 
 		[HttpPost]
+		[AppAuthorize(AuthConst.AppUser.UPDATE)]
 		public async Task<IActionResult> Edit(UserAddOrEditVM model)
 		{
 			var user = await repository.GetOneAsync<AppUser>(model.Id);
@@ -127,6 +130,7 @@ namespace App.Web.Controllers
 			}
 		}
 
+		[AppAuthorize(AuthConst.AppUser.DELETE)]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var user = await repository.GetOneAsync<AppUser>(id);

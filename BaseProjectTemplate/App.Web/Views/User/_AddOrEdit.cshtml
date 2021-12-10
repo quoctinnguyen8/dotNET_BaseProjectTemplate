@@ -20,7 +20,7 @@
 			<label asp-for="Password" class="control-label">Mật khẩu</label>
 			@if (disabled)
 			{
-				<input class="form-control" disabled value="********" />
+				<input class="form-control" type="password" disabled value="********" />
 			}
 			else
 			{
@@ -32,7 +32,7 @@
 			<label asp-for="ConfirmPwd" class="control-label">Xác nhận mật khẩu</label>
 			@if (disabled)
 			{
-				<input class="form-control" disabled value="********"/>
+				<input class="form-control" type="password" disabled value="********"/>
 			}
 			else
 			{

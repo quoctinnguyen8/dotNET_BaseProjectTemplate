@@ -28,7 +28,21 @@ namespace App.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginVM model)
 		{
-			var user = await userRepository.GetOneAsync<AppUser>(x => x.Username == model.Username.ToLower());
+			var user = await userRepository.GetOneAsync<AppUser, UserDataForApp>(
+							where: x => x.Username == model.Username.ToLower(),
+							selector: x => new UserDataForApp {
+								Username = x.Username,
+								Avatar = x.Avatar,
+								BlockedBy = x.BlockedBy,
+								BlockedTo = x.BlockedTo,
+								Email = x.Email,
+								FullName = x.FullName,
+								PasswordHash = x.PasswordHash,
+								PasswordSalt = x.PasswordSalt,
+								PhoneNumber1 = x.PhoneNumber1,
+								RoleName = x.AppRole == null ? "" : x.AppRole.Name,
+								Permission = string.Join(',', x.AppRole.AppRolePermissions.Select(p => p.MstPermissionId))
+							});
 			if (user == null)
 			{
 				TempData["Mesg"] = "Tài khoản không tồn tại";
@@ -50,7 +64,12 @@ namespace App.Web.Controllers
 
 			var claims = new List<Claim> {
 							new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-							new Claim(ClaimTypes.Name, user.Username)
+							new Claim(ClaimTypes.Name, user.Username),
+							new Claim(ClaimTypes.Email, user.Email),
+							new Claim(AppClaimTypes.FullName, user.FullName),
+							new Claim(AppClaimTypes.PhoneNumber, user.PhoneNumber1),
+							new Claim(AppClaimTypes.RoleName, user.RoleName),
+							new Claim(AppClaimTypes.Permissions, user.Permission),
 						};
 			var claimsIdentity = new ClaimsIdentity(claims, AppConst.COOKIES_AUTH);
 			var principal = new ClaimsPrincipal(claimsIdentity);

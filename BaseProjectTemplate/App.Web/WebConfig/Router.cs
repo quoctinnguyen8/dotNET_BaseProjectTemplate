@@ -20,6 +20,16 @@ namespace App.Web.WebConfig
 						action = "Login"
 					});
 
+			// Đường dẫn cho trang lỗi
+			endpoints.MapControllerRoute(
+					name: "error",
+					pattern: "error/{statusCode}",
+					defaults: new
+					{
+						controller = "Home",
+						action = "Error"
+					});
+
 			// Mặc định
 			endpoints.MapControllerRoute(
 					name: "default",

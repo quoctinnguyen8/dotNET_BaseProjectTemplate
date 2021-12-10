@@ -1,5 +1,7 @@
 ﻿@model App.Web.ViewModels.User.UserAddOrEditVM
-
+@{
+	var disabled = ViewContext.GetCurrentActionName() == "Create" ? false : true;
+}
 <div class="row">
 	<div class="col-sm-5">
 		<div class="form-group">
@@ -16,13 +18,27 @@
 		</div>
 		<div class="form-group">
 			<label asp-for="Password" class="control-label">Mật khẩu</label>
-			<input asp-for="Password" class="form-control" />
-			<span asp-validation-for="Password" class="text-danger"></span>
+			@if (disabled)
+			{
+				<input class="form-control" disabled value="********" />
+			}
+			else
+			{
+				<input asp-for="Password" class="form-control" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+			}
 		</div>
 		<div class="form-group">
 			<label asp-for="ConfirmPwd" class="control-label">Xác nhận mật khẩu</label>
-			<input asp-for="ConfirmPwd" class="form-control" />
-			<span asp-validation-for="ConfirmPwd" class="text-danger"></span>
+			@if (disabled)
+			{
+				<input class="form-control" disabled value="********"/>
+			}
+			else
+			{
+				<input asp-for="ConfirmPwd" class="form-control" />
+				<span asp-validation-for="ConfirmPwd" class="text-danger"></span>
+			}
 		</div>
 		<div class="form-group">
 			<label asp-for="AppRoleId" class="control-label">Vai trò trên trang</label>

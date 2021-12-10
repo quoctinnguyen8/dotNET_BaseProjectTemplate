@@ -88,6 +88,10 @@ namespace App.Web.Controllers
 		public async Task<IActionResult> Edit(UserAddOrEditVM model)
 		{
 			var user = await repository.GetOneAsync<AppUser>(model.Id);
+			// Không check các trường dưới dây khi cập nhật
+			ModelState.Remove("Password");
+			ModelState.Remove("ConfirmPwd");
+
 			if (!ModelState.IsValid)
 			{
 				SetErrorMesg(MODEL_STATE_INVALID_MESG);
@@ -106,12 +110,13 @@ namespace App.Web.Controllers
 
 			try
 			{
-				//Cập nhật mật khẩu
-				var hashResult = HashHMACSHA512(model.Password);
-				model.PasswordHash = hashResult.Value;
-				model.PasswordSalt = hashResult.Key;
-				mapper.Map(model, user);
-				await repository.UpdateAsync<AppUser>(user);
+				user.Address = model.Address;
+				user.AppRoleId = model.AppRoleId;
+				user.Email = model.Email;
+				user.FullName = model.FullName;
+				user.PhoneNumber1 = model.PhoneNumber1;
+				user.PhoneNumber2 = model.PhoneNumber2;
+				await repository.UpdateAsync(user);
 				SetSuccessMesg($"Cập nhật tài khoản [{user.Username}] thành công");
 				return RedirectToAction(nameof(Index));
 			}

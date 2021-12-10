@@ -38,9 +38,11 @@ namespace App.Web.Controllers
 			return View(data);
 		}
 
+		[AppAuthorize(AuthConst.AppUser.CREATE)]
 		public IActionResult Create() => View();
 
 		[HttpPost]
+		[AppAuthorize(AuthConst.AppUser.CREATE)]
 		public async Task<IActionResult> Create(UserAddOrEditVM model)
 		{
 			model.Username = model.Username.ToLower();

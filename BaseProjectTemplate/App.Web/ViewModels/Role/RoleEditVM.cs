@@ -19,7 +19,6 @@ namespace App.Web.ViewModels.Role
 		public string Desc { get; set; }
 
 		// Chuỗi chứa permissionId hiện tại, phân tách bởi dấu phẩy
-		[AppRequired(ErrorMessage = VM.RoleVM.PERMISSION_IDS_REQUIRED_ERR_MESG)]
 		[AppRegex(VM.RoleVM.PERMISSION_IDS_REGEX, ErrorMessage = VM.RoleVM.PERMISSION_IDS_REGEX_ERR_MESG)]
 		public string PermissionIds { get; set; }
 

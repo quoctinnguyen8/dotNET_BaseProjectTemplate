@@ -32,6 +32,7 @@ namespace App.Web.Controllers
 			return View(data);
 		}
 		public IActionResult Create() => View();
+
 		[HttpPost]
 		public async Task<IActionResult> Create(RoleAddVM model)
 		{
@@ -112,11 +113,18 @@ namespace App.Web.Controllers
 			// danh sách permission bị xóa khỏi role
 			var deletedPermissionIds = model.DeletedPermissionIds.IsNullOrEmpty() ? null : model.DeletedPermissionIds.Split(',').Select(i => Convert.ToInt32(i));
 			// danh sách permission được thêm vào role
-			var addedPermissionIds = model.AddedPermissionIds.IsNullOrEmpty() ? null : model.AddedPermissionIds.Split(',').Select(i => Convert.ToInt32(i));
-
+			var addedPermissionIds = model.AddedPermissionIds.IsNullOrEmpty() ? null : model.AddedPermissionIds.Split(',').Select(i => Convert.ToInt32(i)).OrderBy(i => i);
+			// danh sách permission hiện tại
 			var rolePermissionIds = curPermisssionIds
 								.Where(x => deletedPermissionIds != null && deletedPermissionIds.Contains(x.MstPermissionId))
-								.Select(x => x.Id);
+								.Select(x => x.Id)
+								.OrderBy(x => x);
+			// nếu xóa hết permission mà không thêm mới thì không cho thêm
+			if ((addedPermissionIds == null || !addedPermissionIds.Any()) && deletedPermissionIds != null && rolePermissionIds.SequenceEqual(deletedPermissionIds))
+			{
+				SetErrorMesg(MODEL_STATE_INVALID_MESG);
+				return RedirectToAction(nameof(Edit), new { id = model.Id });
+			}
 
 			if (deletedPermissionIds != null && deletedPermissionIds.Any())
 			{

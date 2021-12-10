@@ -9,9 +9,9 @@
 		<div class="col-md-12">
 			<h5 class="my-3">Thông tin vai trò</h5>
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input asp-for="PermissionIds" class="d-none" />
-			<input asp-for="DeletedPermissionIds" class="d-none" />
-			<input asp-for="AddedPermissionIds" class="d-none" />
+			<input asp-for="PermissionIds" class="fake-d-none" />
+			<input asp-for="DeletedPermissionIds" class="fake-d-none" data-val="true" data-val-deleteAllPermission="@VM.RoleVM.PERMISSION_IDS_REQUIRED_ERR_MESG"/>
+			<input asp-for="AddedPermissionIds" class="fake-d-none" />
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -31,7 +31,9 @@
 		</div>
 		<div class="col-12 my-3">
 			<h5>Các hành động được phép</h5>
+			<span asp-validation-for="DeletedPermissionIds" class="text-danger"></span>
 		</div>
+
 		@await Component.InvokeAsync("Permission")
 	</div>
 	<div class="row">

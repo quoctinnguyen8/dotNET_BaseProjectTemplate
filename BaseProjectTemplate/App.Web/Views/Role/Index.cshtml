@@ -24,7 +24,7 @@
 					<td class="fit">@item.RowIndex</td>
 					<td>@Html.DisplayFor(modelItem => item.Name)</td>
 					<td>@Html.DisplayFor(modelItem => item.Desc)</td>
-					<td class="fit">@item.CreatedDate?.ToDMYHM()</td>
+					<td class="fit">@item.CreatedDate.ToDMYHM()</td>
 					<td class="fit">
 						<a href="#"
 						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>

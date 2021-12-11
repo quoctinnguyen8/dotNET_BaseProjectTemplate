@@ -1,8 +1,10 @@
-﻿using App.Web.ViewModels;
+﻿using App.Web.Common.Consts;
+using App.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using X.PagedList;
 
@@ -31,6 +33,10 @@ namespace App.Web.Common
 		{
 			return viewContext.RouteData.Values["controller"].ToString();
 		}
-
+		public static bool IsInPermission(this ClaimsPrincipal user, int actionPermission)
+		{
+			var userPermission = user.FindFirstValue(AppClaimTypes.Permissions);
+			return userPermission.Contains(actionPermission.ToString());
+		}
 	}
 }

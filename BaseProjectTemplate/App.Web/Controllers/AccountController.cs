@@ -1,6 +1,7 @@
 ﻿using App.Data.Entities;
 using App.Data.Repositories;
 using App.Share.Extensions;
+using App.Web.Common;
 using App.Web.Common.Consts;
 using App.Web.ViewModels.Account;
 using AutoMapper;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -80,6 +82,7 @@ namespace App.Web.Controllers
 			};
 			await HttpContext.SignInAsync(AppConst.COOKIES_AUTH, principal, authenPropeties);
 
+			CreateDirIfNotExist(model.Username);
 			var returnUrl = Request.Query["ReturnUrl"].ToString();
 			if (returnUrl.IsNullOrEmpty())
 			{
@@ -118,6 +121,20 @@ namespace App.Web.Controllers
 
 			SetSuccessMesg("Đổi mật khẩu thành công");
 			return Redirect(Referer);
+		}
+
+		// Tạo thư mục lưu file cho user khi đăng nhập (nếu chưa có)
+		private static void CreateDirIfNotExist(string username)
+		{
+			var userPath = $"{AppConst.SYSTEM_FILE_PATH}/{username}";
+			var fullPath = PathHelper.MapPath(userPath);
+			if (!Directory.Exists(fullPath))
+			{
+				Directory.CreateDirectory(fullPath);
+				// Thêm file tạm để giữ folder
+				var file = PathHelper.MapPath($"{userPath}/{username}.txt");
+				System.IO.File.WriteAllText(file, $"Hello {username}!");
+			}
 		}
 	}
 }

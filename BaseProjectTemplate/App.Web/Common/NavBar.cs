@@ -35,6 +35,13 @@ namespace App.Web.Common
 				Controller = "Role",
 				DisplayText = "Quản lý phân quyền",
 				Icon = "fa-user-shield"
+			},
+			new MenuItem
+			{
+				Action = "Index",
+				Controller = "FileManager",
+				DisplayText = "Quản lý tệp",
+				Icon = "fa-folder-open"
 			}
 		};
 	}

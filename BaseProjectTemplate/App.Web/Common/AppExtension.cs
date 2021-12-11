@@ -1,4 +1,5 @@
-﻿using App.Share.Extensions;
+﻿using App.Share.Consts;
+using App.Share.Extensions;
 using App.Web.Common.Consts;
 using App.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -40,6 +41,10 @@ namespace App.Web.Common
 			if (userPermission.IsNullOrEmpty())
 			{
 				return false;
+			}
+			if (actionPermission == AuthConst.NO_PERMISSION)
+			{
+				return true;
 			}
 			return userPermission.Contains(actionPermission.ToString());
 		}

@@ -16,12 +16,59 @@
 				}
 				@foreach (var item in NavBar.Items)
 				{
-					<li class="nav-item">
-						<a asp-controller="@item.Controller" asp-action="@item.Action"
-						   class="nav-link@(cControllerName == item.Controller?" active" : "")">
+					if (!User.IsInPermission(item.Permission))
+					{
+						continue;
+					}
+					string href = "#";
+					if (!(item.Action + item.Controller).IsNullOrEmpty())
+					{
+						href = Url.Action(item.Action, item.Controller);
+					}
+					var menuOpenClass = "";
+					var activeClass = "";
+
+					var itemIsOpened = item.ChildrenItems != null && item.ChildrenItems.Any(i => i.Controller == cControllerName);
+					if (itemIsOpened)
+					{
+						menuOpenClass = " menu-open";
+						activeClass = " active";
+					}
+					else if (item.Controller == cControllerName)
+					{
+						activeClass = " active";
+					}
+
+					<li class="nav-item@(menuOpenClass)">
+						<a href="@href" class="nav-link@(activeClass)">
 							<i class="nav-icon fas @item.Icon"></i>
-							<p class="text-nowrap">@item.DisplayText</p>
+							<p class="text-nowrap">
+								@item.DisplayText
+								@if (href == "#" && item.ChildrenItems != null)
+								{
+									<i class="fas fa-angle-left right"></i>
+								}
+							</p>
 						</a>
+						@if (href == "#" && item.ChildrenItems != null)
+						{
+							<ul class="nav nav-treeview">
+								@foreach (var sub in item.ChildrenItems)
+								{
+									if (!User.IsInPermission(sub.Permission))
+									{
+										continue;
+									}
+									activeClass = sub.Controller == cControllerName ? " active" : "";
+									<li class="nav-item">
+										<a asp-controller="@sub.Controller" asp-action="@sub.Action" class="nav-link@(activeClass)">
+											<i class="fas nav-icon @sub.Icon ml-3"></i>
+											<p>@sub.DisplayText</p>
+										</a>
+									</li>
+								}
+							</ul>
+						}
 					</li>
 				}
 
@@ -33,39 +80,6 @@
 					</a>
 				</li>
 
-				@*<li class="nav-item">
-			<a href="#" class="nav-link">
-				<i class="nav-icon fas fa-th"></i>
-				<p>
-					Menu 2
-					<span class="right badge badge-danger">New</span>
-				</p>
-			</a>
-		</li>
-
-		<li class="nav-item">
-			<a href="#" class="nav-link">
-				<i class="nav-icon fas fa-tachometer-alt"></i>
-				<p>
-					Menu nhiều cấp
-					<i class="right fas fa-angle-left"></i>
-				</p>
-			</a>
-			<ul class="nav nav-treeview">
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>Menu con 1</p>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>Menu con 1</p>
-					</a>
-				</li>
-			</ul>
-		</li>*@
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->

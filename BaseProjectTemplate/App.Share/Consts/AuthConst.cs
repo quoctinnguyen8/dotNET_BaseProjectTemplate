@@ -27,5 +27,11 @@ namespace App.Share.Consts
 			public const int UPDATE						= 1104;
 			public const int DELETE						= 1105;
 		}
+
+		public static class FileManager
+		{
+			public const int MANAGE_ALL_USER_FILES		= 1205;
+		}
+
 	}
 }

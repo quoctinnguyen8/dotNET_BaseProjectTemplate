@@ -15,6 +15,8 @@ namespace App.Data.DataSeeders
 		{
 			var now = new DateTime(year: 2021, month: 11, day: 10);
 			var groupName = "";
+
+			#region Data liên quan đến bảng Role
 			// Permission liên quan đến bảng AppRole
 			groupName = "Quản lý phân quyền";
 			builder.HasData(
@@ -64,7 +66,9 @@ namespace App.Data.DataSeeders
 					CreatedDate = now
 				}
 			);
+			#endregion
 
+			#region Data liên quản bảng User
 			// Permission liên quan đến bảng AppUser
 			groupName = "Quản lý người dùng";
 			builder.HasData(
@@ -141,6 +145,23 @@ namespace App.Data.DataSeeders
 					CreatedDate = now
 				}
 			);
+			#endregion
+
+			#region Data liên quan đến quản lý file
+			// Permission liên quan đến quản lý file
+			groupName = "Quản lý file";
+			builder.HasData(
+				new MstPermission
+				{
+					Id = AuthConst.FileManager.MANAGE_ALL_USER_FILES,
+					Code = "MANAGER",
+					Table = "FileManager",
+					GroupName = groupName,
+					Desc = "Quản lý file hệ thống",
+					CreatedDate = now
+				}
+			);
+			#endregion
 		}
 	}
 }

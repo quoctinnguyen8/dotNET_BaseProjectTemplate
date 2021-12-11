@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Share", "App.Share\App.Share.csproj", "{3130A539-940F-4B47-8B5B-C6D2BF345D29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Share", "App.Share\App.Share.csproj", "{3130A539-940F-4B47-8B5B-C6D2BF345D29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data", "App.Data\App.Data.csproj", "{2F960115-C057-4F2B-B51A-5FCE3601F894}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Data", "App.Data\App.Data.csproj", "{2F960115-C057-4F2B-B51A-5FCE3601F894}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web", "App.Web\App.Web.csproj", "{6D27648C-C4D3-42FF-9C6B-4751B6303BA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Web", "App.Web\App.Web.csproj", "{6D27648C-C4D3-42FF-9C6B-4751B6303BA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "elFinder.NetCore", "elFinder.NetCore\elFinder.NetCore.csproj", "{05C260DC-46BC-461E-8DEE-1698E1EA32B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6D27648C-C4D3-42FF-9C6B-4751B6303BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D27648C-C4D3-42FF-9C6B-4751B6303BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D27648C-C4D3-42FF-9C6B-4751B6303BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C260DC-46BC-461E-8DEE-1698E1EA32B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C260DC-46BC-461E-8DEE-1698E1EA32B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C260DC-46BC-461E-8DEE-1698E1EA32B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C260DC-46BC-461E-8DEE-1698E1EA32B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

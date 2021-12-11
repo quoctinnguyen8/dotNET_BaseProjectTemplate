@@ -16,6 +16,7 @@ namespace App.Web.WebConfig
 {
 	public class Startup
 	{
+		public static string WebRootPath { get; private set; }
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -60,6 +61,8 @@ namespace App.Web.WebConfig
 			{
 				endpoints.MapAppRouter();
 			});
+
+			WebRootPath = env.WebRootPath;
 		}
 	}
 }

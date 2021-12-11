@@ -11,6 +11,82 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-archive.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-arrow-left.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-arrow-right.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-caret-down.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-chevron-left.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-chevron-right.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-close.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-copy.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-crop.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-cut.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-download.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-edit.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-exclamation-circle.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-archive.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-audio.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-code.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-docs.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-image.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-pdf.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-text.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file-video.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-file.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-film.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-archive.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-attachments.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-backup.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-document.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-featured.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-open.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-orders.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-picture.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-users.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder-video.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-folder.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-help.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-home.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-layout-blocks.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-layout-list.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-level-up.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-paste.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-question-circle.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-refresh.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-resize-full.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-resize-small.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-search.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-server.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-sort-asc.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-sort-desc.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-sort.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-text-cursor.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-trash.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-upload.svg" />
+    <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-view.svg" />
+    <None Include="wwwroot\css\elfinder\themes\material\icons\material.svg" />
+    <None Include="wwwroot\css\elfinder\themes\material\icons\material.woff2" />
+    <None Include="wwwroot\css\elfinder\themes\material\images\icons-big.svg" />
+    <None Include="wwwroot\css\elfinder\themes\material\images\icons-small.svg" />
+    <None Include="wwwroot\css\elfinder\themes\material\images\loading.svg" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\contextmenu.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\dialog.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\file-icons.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\mainui.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\navbar-icons.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\navbar-restrict.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\navbar.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\statusbar.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\theme.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\toolbar-icons.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\toolbar.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\view-icons.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\view-list.less" />
+    <None Include="wwwroot\css\elfinder\themes\moono\css\view.less" />
+    <None Include="wwwroot\css\elfinder\themes\windows-10\css\README.md" />
+    <None Include="wwwroot\css\elfinder\themes\windows-10\images\README.md" />
+    <None Include="wwwroot\css\elfinder\themes\windows-10\js\README.md" />
+    <None Include="wwwroot\css\elfinder\themes\windows-10\LICENSE" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +106,7 @@
   <ItemGroup>
     <ProjectReference Include="..\App.Data\App.Data.csproj" />
     <ProjectReference Include="..\App.Share\App.Share.csproj" />
+    <ProjectReference Include="..\elFinder.NetCore\elFinder.NetCore.csproj" />
   </ItemGroup>
 
 </Project>

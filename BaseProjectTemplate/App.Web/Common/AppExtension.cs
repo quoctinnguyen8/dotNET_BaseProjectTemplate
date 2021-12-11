@@ -1,4 +1,5 @@
-﻿using App.Web.Common.Consts;
+﻿using App.Share.Extensions;
+using App.Web.Common.Consts;
 using App.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -36,6 +37,10 @@ namespace App.Web.Common
 		public static bool IsInPermission(this ClaimsPrincipal user, int actionPermission)
 		{
 			var userPermission = user.FindFirstValue(AppClaimTypes.Permissions);
+			if (userPermission.IsNullOrEmpty())
+			{
+				return false;
+			}
 			return userPermission.Contains(actionPermission.ToString());
 		}
 	}

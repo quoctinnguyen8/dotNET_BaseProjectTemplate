@@ -5,6 +5,14 @@
     {
       "library": "masonry@4.2.2",
       "destination": "wwwroot/lib/masonry/"
+    },
+    {
+      "library": "elfinder@2.1.60",
+      "destination": "wwwroot/lib/elfinder/"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/lib/jqueryui/"
     }
   ]
 }

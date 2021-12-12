@@ -38,7 +38,8 @@ namespace App.Data.DataSeeders
 					CreatedBy = -1,
 					UpdatedBy = -1,
 					UpdatedDate = now,
-					CreatedDate = now
+					CreatedDate = now,
+					AppRoleId = 1,				// Vai trò được tạo ở AppRoleSeeder
 				}
 			);
 		}

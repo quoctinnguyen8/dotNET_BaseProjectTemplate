@@ -40,9 +40,6 @@ namespace App.Data.Configurations
 				.HasMaxLength(DB.MstPermission.TABLE_LENGTH)
 				.IsUnicode()
 				.IsRequired();
-
-			// Tạo data ban đầu
-			builder.SeedData();
 		}
 	}
 }

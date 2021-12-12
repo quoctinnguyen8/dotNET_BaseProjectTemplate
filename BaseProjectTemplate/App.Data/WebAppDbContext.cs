@@ -1,4 +1,5 @@
 ﻿using App.Data.Configurations;
+using App.Data.DataSeeders;
 using App.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,6 +26,12 @@ namespace App.Data
 			modelBuilder.ApplyConfiguration(new AppRoleConfig());
 			modelBuilder.ApplyConfiguration(new AppRolePermissionConfig());
 			modelBuilder.ApplyConfiguration(new MstPermissionConfig());
+
+			// Tạo dữ liệu
+			modelBuilder.Entity<MstPermission>().SeedData();
+			modelBuilder.Entity<AppRole>().SeedData();
+			modelBuilder.Entity<AppUser>().SeedData();
+			modelBuilder.Entity<AppRolePermission>().SeedData();
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using App.Data.Entities;
+﻿using App.Data.DataSeeders;
+using App.Data.Entities;
 using App.Data.Entities.Base;
 using App.Share.Consts;
 using Microsoft.EntityFrameworkCore;

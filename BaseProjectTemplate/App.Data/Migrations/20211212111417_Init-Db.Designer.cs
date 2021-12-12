@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    [Migration("20211211094053_add-file-permission")]
-    partial class addfilepermission
+    [Migration("20211212111417_Init-Db")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,16 @@ namespace App.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Quản trị toàn bộ hệ thống",
+                            Name = "Quản trị hệ thống",
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("App.Data.Entities.AppRolePermission", b =>
@@ -99,6 +109,120 @@ namespace App.Data.Migrations
                     b.HasIndex("MstPermissionId");
 
                     b.ToTable("AppRolePermission");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1101,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1102,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1103,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1104,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1105,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1001,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1002,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1003,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1004,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1005,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1006,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1007,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1008,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AppRoleId = 1,
+                            CreatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MstPermissionId = 1205,
+                            UpdatedDate = new DateTime(2021, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("App.Data.Entities.AppUser", b =>
@@ -190,12 +314,13 @@ namespace App.Data.Migrations
                         {
                             Id = 1,
                             Address = "Thành phố Hồ Chí Minh",
+                            AppRoleId = 1,
                             CreatedBy = -1,
                             CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin_test@gmail.com",
                             FullName = "Obama",
-                            PasswordHash = new byte[] { 211, 148, 130, 28, 128, 254, 69, 255, 182, 213, 14, 62, 53, 4, 75, 63, 9, 138, 36, 85, 84, 171, 19, 144, 3, 208, 59, 60, 115, 25, 56, 228, 241, 73, 70, 104, 231, 234, 42, 229, 240, 189, 76, 19, 142, 59, 119, 116, 119, 30, 134, 110, 31, 216, 232, 24, 171, 71, 79, 236, 189, 77, 157, 220 },
-                            PasswordSalt = new byte[] { 132, 107, 41, 79, 154, 152, 250, 253, 40, 135, 213, 157, 202, 237, 57, 166, 39, 75, 58, 36, 55, 208, 209, 230, 208, 210, 29, 252, 176, 54, 157, 67, 106, 141, 30, 9, 202, 117, 58, 153, 212, 215, 127, 187, 77, 176, 26, 190, 167, 49, 99, 252, 158, 86, 69, 46, 34, 131, 183, 37, 252, 142, 148, 161, 172, 127, 181, 16, 108, 18, 254, 144, 36, 231, 183, 211, 171, 102, 14, 241, 102, 114, 141, 75, 122, 84, 197, 247, 94, 177, 102, 37, 238, 220, 159, 109, 50, 201, 21, 188, 128, 243, 144, 244, 77, 103, 128, 152, 68, 45, 216, 204, 173, 138, 59, 216, 119, 156, 179, 56, 126, 132, 150, 196, 6, 12, 184, 6 },
+                            PasswordHash = new byte[] { 135, 100, 165, 176, 186, 104, 189, 116, 83, 143, 96, 245, 254, 104, 246, 221, 112, 137, 147, 62, 106, 129, 210, 97, 106, 198, 154, 64, 12, 154, 54, 172, 236, 197, 119, 9, 197, 154, 251, 168, 75, 124, 211, 29, 150, 119, 254, 242, 245, 252, 197, 185, 31, 200, 170, 253, 201, 109, 171, 181, 136, 110, 161, 81 },
+                            PasswordSalt = new byte[] { 75, 245, 204, 7, 53, 8, 80, 180, 251, 33, 129, 252, 83, 223, 142, 165, 247, 1, 107, 112, 212, 61, 252, 154, 76, 80, 56, 210, 69, 134, 108, 76, 56, 216, 213, 243, 37, 14, 221, 0, 52, 167, 146, 169, 18, 4, 191, 191, 225, 108, 47, 3, 193, 68, 28, 173, 224, 68, 167, 204, 194, 234, 35, 105, 193, 14, 71, 50, 121, 59, 240, 190, 212, 250, 25, 205, 148, 161, 175, 123, 104, 98, 40, 219, 127, 178, 28, 122, 207, 160, 239, 36, 195, 53, 247, 184, 197, 111, 128, 172, 248, 241, 202, 145, 252, 86, 16, 224, 238, 242, 5, 177, 46, 250, 171, 192, 78, 80, 234, 207, 70, 73, 205, 210, 251, 238, 77, 46 },
                             PhoneNumber1 = "0928666158",
                             PhoneNumber2 = "0928666156",
                             UpdatedBy = -1,

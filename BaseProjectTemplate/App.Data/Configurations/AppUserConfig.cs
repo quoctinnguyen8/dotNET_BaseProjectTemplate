@@ -60,9 +60,6 @@ namespace App.Data.Configurations
 				.WithMany(m => m.AppUsers)
 				.HasForeignKey(m => m.AppRoleId);
 			//.OnDelete(DeleteBehavior.NoAction);
-
-			// Tạo data
-			builder.SeedData();
 		}
 	}
 }

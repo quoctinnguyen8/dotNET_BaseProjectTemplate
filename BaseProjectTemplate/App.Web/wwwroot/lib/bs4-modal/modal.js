@@ -258,6 +258,7 @@ window.alert = function (_mesg) {
  */
 var _confirmModal = new Modal("confirm", "Xác nhận");
 _confirmModal.setDefaultFooterButton("Đồng ý", 'Hủy');
+_confirmModal.hideModalAfterEndPrimaryEvent = true;
 _confirmModal.setOption(false, true);
 _confirmModal.modal.css({ 'z-index': 2000, 'transform': 'scale(0.95)' });
 window.confirm = function (_mesg, _onOK) {

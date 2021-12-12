@@ -1,6 +1,7 @@
 ﻿using App.Share.Consts;
 using App.Web.Common;
 using App.Web.Common.Consts;
+using AutoMapper;
 using elFinder.NetCore;
 using elFinder.NetCore.Drivers.FileSystem;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -12,8 +13,12 @@ using System.Threading.Tasks;
 
 namespace App.Web.Controllers
 {
-	public class FileManagerController : Controller
+	public class FileManagerController : AppControllerBase
 	{
+		public FileManagerController(IMapper _mapper) : base(_mapper)
+		{
+		}
+
 		[Route("file-manager")]
 		public IActionResult Index()
 		{
@@ -36,11 +41,12 @@ namespace App.Web.Controllers
 
 		private Connector GetConnector()
 		{
+			var isFileSystemManager = User.IsInPermission(AuthConst.FileManager.MANAGE_ALL_USER_FILES);
 			var driver = new FileSystemDriver();
 
 			string absoluteUrl = UriHelper.BuildAbsolute(Request.Scheme, Request.Host);
 			var uri = new Uri(absoluteUrl);
-			var userPath = $"{AppConst.SYSTEM_FILE_PATH}/{User.Identity.Name}";
+			var userPath = $"{AppConst.SYSTEM_FILE_PATH}/{CurrentUsername}";
 			var userFullPath = PathHelper.MapPath(userPath);
 			var thumbPath = $"{uri.Scheme}://{uri.Authority}/file-manager/thumb/";
 			var userRootDir = new RootVolume(userFullPath, $"{uri.Scheme}://{uri.Authority}/{userPath}/", thumbPath)
@@ -49,14 +55,14 @@ namespace App.Web.Controllers
 				IsReadOnly = false, // Can be readonly according to user's membership permission
 				IsLocked = false, // If locked, files and directories cannot be deleted, renamed or moved
 				Alias = "File của tôi", // Tên hiển thị ở giao diện
-				MaxUploadSizeInKb = AppConst.USER_MAX_SIZE_UPLOAD_IN_KB,
+				MaxUploadSizeInKb = isFileSystemManager ? AppConst.MANAGER_MAX_SIZE_UPLOAD_IN_KB : AppConst.USER_MAX_SIZE_UPLOAD_IN_KB,
 				// Upload file type constraints
 				UploadDeny = AppConst.DENY_FILES,
 			};
 			driver.AddRoot(userRootDir);
 
 			// Dành cho account có quyền tòan hệ thống
-			if (User.IsInPermission(AuthConst.FileManager.MANAGE_ALL_USER_FILES))
+			if (isFileSystemManager)
 			{
 				var rootPath = PathHelper.MapPath(AppConst.SYSTEM_FILE_PATH);
 				var rootDir = new RootVolume(rootPath, $"{uri.Scheme}://{uri.Authority}/{AppConst.SYSTEM_FILE_PATH}/", thumbPath)

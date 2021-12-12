@@ -14,6 +14,8 @@
 			<h5>Thông tin vai trò</h5>
 			<p class="small mb-1">Tạo lúc @Model.CreatedDate.ToDMYHM()</p>
 			<p class="small mb-2">Cập nhật lần cuối lúc @Model.UpdatedDate.ToDMYHM()</p>
+			<input asp-for="Id" type="hidden" />
+			<input asp-for="Name" type="hidden" />
 			<div class="form-group">
 				<label>Tên vai trò</label>
 				<input class="form-control" readonly value="@Model.Name" />
@@ -32,7 +34,7 @@
 		</div>
 
 		<div class="col-md-8 col-xl-9">
-			<h5>Tài khoản bị ảnh hưởng (@Model.AppUsers.Count)</h5>
+			<h5>Có @Model.AppUsers.Count tài khoản bị ảnh hưởng</h5>
 			<div class="row">
 				@for (int i = 0; i < Model.AppUsers.Count; i++)
 				{
@@ -44,7 +46,7 @@
 		</div>
 
 		<div class="col-12 text-center">
-			<button type="button" class="btn btn-danger px-4">
+			<button type="button" class="btn btn-danger px-4 js-delete-confirm" data-mode="submit">
 				<i class="fa fa-trash mr-2"></i> Xóa vai trò này
 			</button>
 		</div>

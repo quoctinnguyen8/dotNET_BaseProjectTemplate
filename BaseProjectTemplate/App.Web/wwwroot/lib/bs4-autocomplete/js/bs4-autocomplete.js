@@ -63,7 +63,7 @@ $.fn.extend({
 			selectEle.selectedIndex = -1;	// Xóa giá trị ban đầu của thẻ select
 			selectEle = $(selectEle);
 			selectEle.before(htmlInput);
-			selectEle.hide();   //  Ẩn thẻ select ban đầu
+			selectEle.addClass('select-none');   //  Ẩn thẻ select ban đầu
 
 			let container = selectEle.prev();
 			let inputTextEle = container.find(".dropdown-menu input[type=search]");

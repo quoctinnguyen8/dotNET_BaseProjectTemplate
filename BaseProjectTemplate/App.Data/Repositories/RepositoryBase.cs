@@ -21,6 +21,21 @@ namespace App.Data.Repositories
 			httpContext = _httpContext;
 		}
 
+		public virtual async Task BeginTransactionAsync()
+		{
+			await db.Database.BeginTransactionAsync();
+		}
+
+		public virtual async Task CommitTransactionAsync()
+		{
+			await db.Database.CommitTransactionAsync();
+		}
+
+		public virtual async Task RollbackTransactionAsync()
+		{
+			await db.Database.RollbackTransactionAsync();
+		}
+
 		public virtual async Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> expr) where TEntity : AppEntityBase
 		{
 			return await db.Set<TEntity>().AnyAsync(expr);
@@ -166,6 +181,17 @@ namespace App.Data.Repositories
 			await db.SaveChangesAsync();
 		}
 
+		public virtual async Task UpdateAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : AppEntityBase
+		{
+			var len = entities.Count();
+			for (int i = 0; i < len; i++)
+			{
+				this.BeforeUpdate(entities.ElementAt(i));
+			}
+			db.UpdateRange(entities);
+			await db.SaveChangesAsync();
+		}
+
 		public virtual async Task DeleteAsync(AppEntityBase entity)
 		{
 			var now = DateTime.Now;
@@ -176,6 +202,18 @@ namespace App.Data.Repositories
 			}
 			db.Update(entity);
 			await db.SaveChangesAsync();
+		}
+
+		public virtual async Task DeleteAsync<TEntity>(int id) where TEntity : AppEntityBase
+		{
+			var tableName = GetTableName<TEntity>();
+			int? updateUserId = null;
+			if (httpContext != null)
+			{
+				updateUserId = CurrentUserId();
+			}
+			var query = $"UPDATE {tableName} SET DeletedDate = GETDATE(), UpdatedBy = {updateUserId} WHERE Id = {id}";
+			await db.Database.ExecuteSqlRawAsync(query);
 		}
 
 		public virtual async Task HardDeleteAsync<TEntity>(int id) where TEntity : AppEntityBase

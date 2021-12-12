@@ -8,11 +8,22 @@
 
 $(document).on("click", ".js-delete-confirm", function (ev) {
 	ev.preventDefault();
-	let msg = $(this).data('msg');
+	let btnDelete = $(this);
+	let msg = btnDelete.data('msg');
+	let mode = btnDelete.data('mode');
 	if (!msg) {
-		msg = 'Xác nhận xóa';
+		msg = 'Xác nhận xóa?';
 	}
+
 	confirm(msg, () => {
-		location.href = $(this).attr("href");
+		if (mode == "submit") {
+			let form = btnDelete.closest("form");
+			if (form.valid()) {
+				form.submit();
+			}
+		}
+		else {
+			location.href = $(this).attr("href");
+		}
 	});
 });

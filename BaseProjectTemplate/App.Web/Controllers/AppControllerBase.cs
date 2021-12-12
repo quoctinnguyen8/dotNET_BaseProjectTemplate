@@ -33,7 +33,17 @@ namespace App.Web.Controllers
 
 		protected RedirectToActionResult HomePage() => RedirectToAction("Index", "Home");
 
-		protected void SetErrorMesg(string mesg) => TempData["Err"] = mesg;
+		protected void SetErrorMesg(string mesg, bool ModelStateIsInvalid = false) {
+			TempData["Err"] = mesg;
+			if (ModelStateIsInvalid)
+			{
+				// hiển thị tin nhắn lỗi ở console
+				var invalidMesg = string.Join("\n", ModelState.Values
+												.SelectMany(v => v.Errors)
+												.Select(e => e.ErrorMessage));
+				Console.WriteLine($"\n==> Model state is invalid: {invalidMesg}");
+			}
+		}
 
 		protected void SetSuccessMesg(string mesg) => TempData["Success"] = mesg;
 

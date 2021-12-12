@@ -150,7 +150,7 @@ namespace App.Web.Controllers
 			SetSuccessMesg($"Cập nhật vai trò [{role.Name}] thành công");
 			return RedirectToAction(nameof(Index));
 		}
-	
+
 		public async Task<IActionResult> Delete(int? id)
 		{
 			if (!id.HasValue)
@@ -167,7 +167,65 @@ namespace App.Web.Controllers
 				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
+			// Xóa không cần xác nhận nếu không có dữ liệu user liên quan
+			if (data.AppUsers == null || data.AppUsers.Count == 0)
+			{
+				await repository.DeleteAsync<AppRole>(data.Id);
+				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
+				return RedirectToAction(nameof(Index));
+			}
+
+			var userDeletedCount = data.AppUsers.Where(u => u.DeletedDate != null).Count();
+			if (userDeletedCount == data.AppUsers.Count)
+			{
+				await repository.DeleteAsync<AppRole>(data.Id);
+				var users = await repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
+				// Cập nhật vai trò mới
+				users.ForEach(u => u.AppRoleId = null);
+				await repository.UpdateAsync(users);
+				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
+				return RedirectToAction(nameof(Index));
+			}
+			// Chỉ hiển thị user chưa bị xóa
+			data.AppUsers = data.AppUsers.Where(u => u.DeletedDate == null).ToList();
 			return View(data);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(RoleDeleteVM data)
+		{
+			if (!ModelState.IsValid)
+			{
+				SetErrorMesg(MODEL_STATE_INVALID_MESG, true);
+				return RedirectToAction(nameof(Index));
+			}
+
+			try
+			{
+				var users = await repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
+				// Cập nhật vai trò mới
+				users.ForEach(u => u.AppRoleId = data.NewId);
+				
+				await repository.BeginTransactionAsync();
+
+				// Cập nhật role mới cho users
+				await repository.UpdateAsync(users);
+				// Xóa role cũ
+				await repository.DeleteAsync<AppUser>(data.Id);
+				await repository.CommitTransactionAsync();
+
+				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
+				return RedirectToAction(nameof(Index));
+			}
+			catch (Exception ex)
+			{
+				// Rollback
+				await repository.RollbackTransactionAsync();
+
+				SetErrorMesg(EXCEPTION_ERR_MESG);
+				LogExceptionToConsole(ex);
+				return RedirectToAction(nameof(Delete), new { id = data.Id });
+			}
 		}
 	}
 }

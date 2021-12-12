@@ -1,5 +1,6 @@
 ﻿using App.Data;
 using App.Data.Repositories;
+using App.Web.Common;
 using App.Web.Common.Consts;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;

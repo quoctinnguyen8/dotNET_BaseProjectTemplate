@@ -1,4 +1,5 @@
 ﻿using App.Data.Entities;
+using App.Web.ViewModels.Account;
 using App.Web.ViewModels.Role;
 using App.Web.ViewModels.User;
 using AutoMapper;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace App.Web.WebConfig
+namespace App.Web.Common
 {
 	public class AutoMapperProfile : Profile
 	{
@@ -24,15 +25,30 @@ namespace App.Web.WebConfig
 		}
 
 		// Cấu hình mapping cho UserController, action Index
-		public static MapperConfiguration UserIndexConf = new MapperConfiguration(mapper =>
+		public static MapperConfiguration UserIndexConf = new(mapper =>
 		{
 			// Map dữ liệu từ AppUser sang UserListItemVM, map thuộc tính RoleName
 			mapper.CreateMap<AppUser, UserListItemVM>()
 				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole.Name));
 		});
 
+		// Cấu hình mapping cho AccountController, action Login
+		public static MapperConfiguration LoginConf = new(mapper =>
+		{
+			// Map dữ liệu từ AppUser sang UserListItemVM, map thuộc tính RoleName
+			mapper.CreateMap<AppUser, UserDataForApp>()
+				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole.Name))
+				.ForMember(uItem => uItem.Permission, opts => opts.MapFrom
+				(
+					uEntity => string.Join(',', uEntity.AppRole
+														.AppRolePermissions
+														.Select(p => p.MstPermissionId))
+				)
+			);
+		});
+
 		// Cấu hình mapping cho RoleController, action Delete
-		public static MapperConfiguration RoleDeleteConf = new MapperConfiguration(mapper =>
+		public static MapperConfiguration RoleDeleteConf = new (mapper =>
 		{
 			// Map dữ liệu thuộc tính con
 			mapper.CreateMap<AppUser, RoleDeleteVM_User>();

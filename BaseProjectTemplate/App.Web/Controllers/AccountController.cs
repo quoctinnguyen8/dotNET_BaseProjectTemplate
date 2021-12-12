@@ -5,8 +5,10 @@ using App.Web.Common;
 using App.Web.Common.Consts;
 using App.Web.ViewModels.Account;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,21 +32,9 @@ namespace App.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginVM model)
 		{
-			var user = await userRepository.GetOneAsync<AppUser, UserDataForApp>(
-							where: x => x.Username == model.Username.ToLower(),
-							selector: x => new UserDataForApp {
-								Username = x.Username,
-								Avatar = x.Avatar,
-								BlockedBy = x.BlockedBy,
-								BlockedTo = x.BlockedTo,
-								Email = x.Email,
-								FullName = x.FullName,
-								PasswordHash = x.PasswordHash,
-								PasswordSalt = x.PasswordSalt,
-								PhoneNumber1 = x.PhoneNumber1,
-								RoleName = x.AppRole == null ? "" : x.AppRole.Name,
-								Permission = string.Join(',', x.AppRole.AppRolePermissions.Select(p => p.MstPermissionId))
-							});
+			var user = await userRepository.Get<AppUser>(where: x => x.Username == model.Username.ToLower())
+											.ProjectTo<UserDataForApp>(AutoMapperProfile.LoginConf)
+											.SingleOrDefaultAsync();
 			if (user == null)
 			{
 				TempData["Mesg"] = "Tài khoản không tồn tại";

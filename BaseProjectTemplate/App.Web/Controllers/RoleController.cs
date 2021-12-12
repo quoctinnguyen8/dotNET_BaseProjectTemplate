@@ -13,6 +13,7 @@ using App.Share.Extensions;
 using AutoMapper.QueryableExtensions;
 using App.Web.WebConfig;
 using Microsoft.EntityFrameworkCore;
+using App.Share.Consts;
 
 namespace App.Web.Controllers
 {
@@ -23,6 +24,8 @@ namespace App.Web.Controllers
 		{
 			this.repository = _repository;
 		}
+
+		[AppAuthorize(AuthConst.AppRole.VIEW_LIST)]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			var data = (await repository
@@ -31,9 +34,12 @@ namespace App.Web.Controllers
 				.GenRowIndex();
 			return View(data);
 		}
+
+		[AppAuthorize(AuthConst.AppRole.CREATE)]
 		public IActionResult Create() => View();
 
 		[HttpPost]
+		[AppAuthorize(AuthConst.AppRole.CREATE)]
 		public async Task<IActionResult> Create(RoleAddVM model)
 		{
 			if (model.PermissionIds == null)
@@ -70,6 +76,7 @@ namespace App.Web.Controllers
 			}
 		}
 
+		[AppAuthorize(AuthConst.AppRole.UPDATE)]
 		public async Task<IActionResult> Edit(int? id)
 		{
 			if (!id.HasValue)
@@ -93,6 +100,7 @@ namespace App.Web.Controllers
 		}
 
 		[HttpPost]
+		[AppAuthorize(AuthConst.AppRole.UPDATE)]
 		public async Task<IActionResult> Edit(RoleEditVM model)
 		{
 			if (!ModelState.IsValid)
@@ -151,6 +159,7 @@ namespace App.Web.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
+		[AppAuthorize(AuthConst.AppRole.DELETE)]
 		public async Task<IActionResult> Delete(int? id)
 		{
 			if (!id.HasValue)
@@ -192,6 +201,7 @@ namespace App.Web.Controllers
 		}
 
 		[HttpPost]
+		[AppAuthorize(AuthConst.AppRole.DELETE)]
 		public async Task<IActionResult> Delete(RoleDeleteVM data)
 		{
 			if (!ModelState.IsValid)

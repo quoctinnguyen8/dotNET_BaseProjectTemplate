@@ -19,7 +19,7 @@ namespace App.Web.WebConfig
 		{
 			services.AddDbContext<WebAppDbContext>(option =>
 			{
-				option.UseSqlServer(Configuration.GetConnectionString("Default"));
+				option.UseSqlServer(Configuration.GetConnectionString("Database"));
 			});
 
 			// Đăng ký repositories

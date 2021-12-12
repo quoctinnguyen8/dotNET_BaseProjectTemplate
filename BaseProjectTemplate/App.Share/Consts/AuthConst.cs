@@ -7,6 +7,7 @@ namespace App.Share.Consts
 {
 	public static class AuthConst
 	{
+		public const int NO_PERMISSION					= -1;
 		public static class AppUser
 		{
 			public const int VIEW_LIST					= 1001;

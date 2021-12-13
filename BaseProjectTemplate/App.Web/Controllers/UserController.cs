@@ -148,6 +148,7 @@ namespace App.Web.Controllers
 
 
 		[HttpPost]
+		[AppAuthorize(AuthConst.AppUser.BLOCK)]
 		public async Task<IActionResult> BlockUser(UserBlockItemVM model)
 		{
 			var user = await repository.GetOneAsync<AppUser>(model.IdUserBlock);

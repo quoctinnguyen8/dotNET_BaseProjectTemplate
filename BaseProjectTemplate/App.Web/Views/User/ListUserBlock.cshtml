@@ -1,0 +1,75 @@
+﻿@model IEnumerable<App.Web.ViewModels.User.UserListBlockVM>
+
+@{
+	ViewData["Title"] = "Danh sách tài khoản bị khóa";
+}
+
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>
+				#
+			</th>
+			<th>
+				Tên tài khoản
+			</th>
+			<th>
+				Họ và tên
+			</th>
+			<th>
+				Số điện thoại
+			</th>
+			<th>
+				Email
+			</th>
+			<th>
+				Ngày tạo
+			</th>
+			<th>
+				Quyền trên trang
+			</th>
+			<th>
+				Ngày hết hạn khóa
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>
+				@item.Id
+			</td>
+			<td>
+				@item.Username
+			</td>
+			<td>
+				@item.FullName
+			</td>
+			<td>
+				@item.PhoneNumber1
+			</td>
+			<td>
+				@item.Email
+			</td>
+			<td>
+				@item.CreatedDate
+			</td>
+			<td>
+				@item.RoleName
+			</td>
+			<td>
+				@item.BlockedTo
+			</td>
+			<td>
+				<a class="btn btn-outline-secondary btn-sm"><i class="fa fa-unlock-alt"></i></a>
+				<a class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-trash"></i></a>
+			</td>
+
+		</tr>
+		}
+	</tbody>
+</table>
+<partial name="_Pager" />

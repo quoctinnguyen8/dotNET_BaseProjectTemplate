@@ -31,6 +31,12 @@ namespace App.Web.Common
 			mapper.CreateMap<AppUser, UserListItemVM>()
 				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole.Name));
 		});
+		public static MapperConfiguration UserBlock = new(mapper =>
+		{
+			// Map dữ liệu từ AppUser sang ListUserBlockVM, map thuộc tính RoleName
+			mapper.CreateMap<AppUser, UserListBlockVM>()
+				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole.Name));
+		});
 
 		// Cấu hình mapping cho AccountController, action Login
 		public static MapperConfiguration LoginConf = new(mapper =>

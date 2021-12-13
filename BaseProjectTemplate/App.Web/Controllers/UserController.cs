@@ -37,6 +37,19 @@ namespace App.Web.Controllers
 				.GenRowIndex();
 			return View(data);
 		}
+		public async Task<IActionResult> ListUserBlock(int page = 1, int size = DEFAULT_PAGE_SIZE)
+		{
+			var DateNow = DateTime.Now;
+			var data = (await repository
+
+					.GetAll<AppUser>(u => u.Username != this.CurrentUsername)
+					.Where(x=>x.BlockedTo>DateNow)
+					.ProjectTo<UserListBlockVM>(AutoMapperProfile.UserBlock)
+					.ToPagedListAsync(page, size))
+					.GenRowIndex();
+									
+			return View(data);
+		}
 
 		[AppAuthorize(AuthConst.AppUser.CREATE)]
 		public IActionResult Create() => View();

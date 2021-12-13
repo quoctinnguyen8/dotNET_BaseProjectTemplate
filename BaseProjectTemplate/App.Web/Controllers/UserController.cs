@@ -162,10 +162,8 @@ namespace App.Web.Controllers
 			var duration = new TimeSpan(model.Day, model.Hour, model.Minute, 0);
 			var newDayBlockTo = today.Add(duration);
 			newDayBlockTo = newDayBlockTo.AddMonths(sumMonthBlock);
-
 			user.BlockedTo = newDayBlockTo;
 			user.BlockedBy = CurrentUserId;
-
 			await repository.UpdateAsync(user);
 			SetSuccessMesg($"Tài khoản [{user.Username}] được khóa thành công");
 			return Ok(true);

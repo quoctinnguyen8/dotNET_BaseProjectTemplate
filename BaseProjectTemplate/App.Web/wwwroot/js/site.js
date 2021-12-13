@@ -27,3 +27,37 @@ $(document).on("click", ".js-delete-confirm", function (ev) {
 		}
 	});
 });
+
+$(document).on("click", ".js-GetIdUserLock", function (ev) {
+	ev.preventDefault();
+	var id = $(ev.currentTarget).attr("data-id");
+	var form = $("#formBlockUser");
+
+	$(".js-lock-user").on("click", (ev) => {
+		ev.preventDefault();
+		var model = {
+			Minute: form.find("#Minute").val(),
+			Hour: form.find("#Hour").val(),
+			Day: form.find("#Day").val(),
+			Month: form.find("#Month").val(),
+			Year: form.find("#Year").val(),
+			IdUserBlock: id
+		}
+		$.ajax({
+			type: "POST",
+			url: "/User/BlockUser",
+			data: model,
+			dataType: "json",
+			success: function (res) {
+				if (res == true) {
+					location.href = "/User";
+				}
+				else {
+					SetErrorMesg("Tài khoản không tồn tại hoặc đã được khóa trước đó");
+					location.href = "/User"
+				}
+			}
+
+		});
+	})
+});

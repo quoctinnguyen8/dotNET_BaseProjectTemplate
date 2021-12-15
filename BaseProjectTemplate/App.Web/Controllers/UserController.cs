@@ -155,7 +155,7 @@ namespace App.Web.Controllers
 			if (user == null)
 			{
 				SetErrorMesg("Tài khoản không tồn tại hoặc đã được khóa trước đó");
-				return Ok(false);
+				return RedirectToAction(nameof(Index));
 			}
 
 			var today = DateTime.Now;
@@ -165,10 +165,10 @@ namespace App.Web.Controllers
 			newDayBlockTo = newDayBlockTo.AddYears(model.Year);
 			
 			user.BlockedTo = newDayBlockTo;
-			
+			user.BlockedBy = CurrentUserId; 
 			await repository.UpdateAsync(user);
 			SetSuccessMesg($"Tài khoản [{user.Username}] được khóa thành công");
-			return Ok(true);
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

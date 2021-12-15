@@ -7,7 +7,6 @@ namespace App.Web.ViewModels.User
 {
 	public class UserBlockItemVM
 	{
-		public int id { get; set; }
 		public int Minute { get; set; }
 		public int Hour { get; set; }
 		public int Day { get; set; }

@@ -16,7 +16,7 @@ namespace App.Web.ViewModels.Account
 		public string Email { get; set; }
 		public string Avatar { get; set; }
 		public DateTime? BlockedTo { get; set; }
-		public DateTime? BlockedBy { get; set; }
+		public int? BlockedBy { get; set; }
 		public string RoleName { get; set; }
 		public string Permission { get; set; }
 	}

@@ -55,10 +55,10 @@
 					}
 					@if (User.IsInPermission(AuthConst.AppUser.BLOCK))
 					{
-						<a href="#" data-id="@item.Id" class="btn btn-sm btn-outline-secondary js-GetIdUserLock" data-toggle="modal" data-target="#BlockedTo">
+						<a href="#" data-id="@item.Id" class="btn btn-sm btn-outline-secondary js-GetIdUserLock" data-toggle="modal" data-target="#modalLock">
 							<i class="fa fa-fw fa-user-lock "></i>
 						</a>
-					}
+					}	
 				</td>
 			</tr>
 			}

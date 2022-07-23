@@ -8,14 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace App.Web.ViewComponents
+namespace App.Web.Components.Permission
 {
 	public class PermissionViewComponent : ViewComponent
 	{
 		readonly RepositoryBase repository;
 		public PermissionViewComponent(RepositoryBase _repository)
 		{
-			this.repository = _repository;
+			repository = _repository;
 		}
 		public async Task<IViewComponentResult> InvokeAsync()
 		{

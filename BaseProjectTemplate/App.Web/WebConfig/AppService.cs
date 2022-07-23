@@ -2,6 +2,7 @@
 using App.Data.Repositories;
 using App.Web.Common;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +40,13 @@ namespace App.Web.WebConfig
 			});
 			IMapper mapper = mapperConfig.CreateMapper();
 			services.AddSingleton(mapper);
+
+			// Cấu hình thư mục view cho ViewComponent
+			services.Configure<RazorViewEngineOptions>(config =>
+			{
+				// path: /Components/{component-name}/Default.cshtml
+				config.ViewLocationFormats.Add("/{0}.cshtml");
+			});
 		}
 	}
 }

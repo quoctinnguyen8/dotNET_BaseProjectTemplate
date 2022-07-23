@@ -8,19 +8,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace App.Web.ViewComponents
+namespace App.Web.Components.ListRole
 {
 	public class ListRoleViewComponent : ViewComponent
 	{
 		readonly RepositoryBase repository;
 		public ListRoleViewComponent(RepositoryBase _db)
 		{
-			this.repository = _db;
-		}	
+			repository = _db;
+		}
 		public async Task<IViewComponentResult> InvokeAsync(int? seletetedId, IEnumerable<int> excludeIds)
 		{
 			var data = await repository
-					.GetAll<AppRole>(where: r => excludeIds == null || (excludeIds.Any() && !excludeIds.Contains(r.Id)))
+					.GetAll<AppRole>(where: r => excludeIds == null || excludeIds.Any() && !excludeIds.Contains(r.Id))
 					.ToListAsync();
 			ViewBag.SelectedId = seletetedId;
 			return View(data);

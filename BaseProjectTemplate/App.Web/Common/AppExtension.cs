@@ -1,6 +1,6 @@
 ﻿using App.Share.Consts;
 using App.Share.Extensions;
-using App.Web.Common.Consts;
+using App.Web.WebConfig;
 using App.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;

@@ -13,7 +13,7 @@ namespace App.Web.WebConfig
 		{
 			endpoints.MapControllerRoute(
 					name: "login",
-					pattern: "login",
+					pattern: "/login",
 					defaults: new
 					{
 						controller = "Account",
@@ -23,7 +23,7 @@ namespace App.Web.WebConfig
 			// Đường dẫn cho trang lỗi
 			endpoints.MapControllerRoute(
 					name: "error",
-					pattern: "error/{statusCode}",
+					pattern: "/error/{statusCode}",
 					defaults: new
 					{
 						controller = "Home",
@@ -33,7 +33,7 @@ namespace App.Web.WebConfig
 			// Mặc định
 			endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "{controller=Home}/{action=Index}/{id?}");
+					pattern: "/{controller=Home}/{action=Index}/{id?}");
 		}
 	}
 }

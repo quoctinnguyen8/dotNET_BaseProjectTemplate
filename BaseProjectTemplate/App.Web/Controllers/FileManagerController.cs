@@ -1,6 +1,6 @@
 ﻿using App.Share.Consts;
 using App.Web.Common;
-using App.Web.Common.Consts;
+using App.Web.WebConfig;
 using AutoMapper;
 using elFinder.NetCore;
 using elFinder.NetCore.Drivers.FileSystem;
@@ -20,12 +20,14 @@ namespace App.Web.Controllers
 		}
 
 		[Route("file-manager")]
+		[AppAuthorize()]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
 		[Route("file-manager/connector")]
+		[AppAuthorize()]
 		public async Task<IActionResult> Connector()
 		{
 			var connector = GetConnector();

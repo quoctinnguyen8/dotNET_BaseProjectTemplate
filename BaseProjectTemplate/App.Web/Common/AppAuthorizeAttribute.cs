@@ -1,4 +1,5 @@
-﻿using App.Web.Common.Consts;
+﻿using App.Share.Consts;
+using App.Web.WebConfig;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -17,24 +18,22 @@ namespace App.Web.Common
 	public class AppAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
 	{
 		private int actionPermission;
-		public AppAuthorizeAttribute(int permission)
+		public AppAuthorizeAttribute(int permission = AuthConst.NO_PERMISSION)
 		{
 			actionPermission = permission;
 		}
 		public void OnAuthorization(AuthorizationFilterContext context)
 		{
-			var isAuthorized = false;
-			if (!AppConst.ENABLE_AUTH)
-			{
-				return;
-			}
 			var user = context.HttpContext.User;
 			var userPermission = user.FindFirstValue(AppClaimTypes.Permissions);
-			isAuthorized = userPermission.Contains(this.actionPermission.ToString());
 
-			if (!isAuthorized)
+			if (actionPermission != AuthConst.NO_PERMISSION)
 			{
-				context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
+				var isAuthorized = userPermission.Contains(this.actionPermission.ToString());
+				if (!isAuthorized)
+				{
+					context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
+				}
 			}
 		}
 	}

@@ -27,6 +27,7 @@ namespace App.Web.Controllers
 			this.repository = _repository;
 		}
 
+		[AppAuthorize()]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			// Chú ý dấu ngoặc khi dùng await cùng với GenRowIndex
@@ -93,7 +94,7 @@ namespace App.Web.Controllers
 		public async Task<IActionResult> Edit(UserAddOrEditVM model)
 		{
 			var user = await repository.GetOneAsync<AppUser>(model.Id);
-			// Không check các trường dưới dây khi cập nhật
+			// Không validate các trường dưới dây khi cập nhật
 			ModelState.Remove("Password");
 			ModelState.Remove("ConfirmPwd");
 

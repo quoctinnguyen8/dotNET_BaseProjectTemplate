@@ -1,6 +1,7 @@
 ﻿using App.Data;
 using App.Data.Repositories;
 using App.Web.Common;
+using App.Web.Common.Mailer;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,11 @@ namespace App.Web.WebConfig
 				// path: /Components/{component-name}/Default.cshtml
 				config.ViewLocationFormats.Add("/{0}.cshtml");
 			});
+
+			// Khởi tạo thông tin mail
+			AppMailConfiguration mailConfig = new();
+			mailConfig.LoadFromConfig(Configuration);
+			services.AddSingleton(mailConfig);
 		}
 	}
 }

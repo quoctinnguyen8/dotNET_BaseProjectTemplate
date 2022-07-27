@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
 using System;
+using System.Collections.Generic;
 
 namespace App.Web.Common.Mailer
 {
@@ -54,6 +55,52 @@ namespace App.Web.Common.Mailer
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
+				return false;
+			}
+		}
+
+		public static bool SendEmailToAllUser(AppMailSender sender, List<AppMailReciver> listGmail, AppMailConfiguration mailConf)
+		{
+			if (sender == null || listGmail == null || mailConf == null)
+			{
+				throw new Exception("Không thể gửi mail với dữ liệu rỗng");
+			}
+			if (listGmail.Count == 0)
+			{
+				return false;
+			}
+
+			try
+			{
+				MimeMessage message = new MimeMessage();
+
+				MailboxAddress from = new MailboxAddress(sender.Name, mailConf.Email);
+				message.From.Add(from);
+
+				message.Subject = sender.Subject;
+
+				BodyBuilder bodyBuilder = new BodyBuilder();
+				bodyBuilder.TextBody = sender.Content + "\n------\n" + mailConf.Signature;
+
+				message.Body = bodyBuilder.ToMessageBody();
+				foreach (var item in listGmail)
+				{
+					MailboxAddress to = new MailboxAddress(item.Name, item.Email);
+					message.To.Add(to);
+
+					SmtpClient client = new SmtpClient();
+					client.Connect(mailConf.SmtpServer, mailConf.Port, true);
+					client.Authenticate(mailConf.Email, mailConf.Password);
+
+					client.Send(message);
+					client.Disconnect(true);
+					client.Dispose();
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
 				return false;
 			}
 		}

@@ -11,11 +11,11 @@ namespace App.Web.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		private readonly ILogger<HomeController> logger;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> _logger)
 		{
-			_logger = logger;
+			logger = _logger;
 		}
 
 		public IActionResult Index()

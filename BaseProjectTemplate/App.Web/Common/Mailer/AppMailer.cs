@@ -2,6 +2,9 @@
 using MimeKit;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace App.Web.Common.Mailer
 {
@@ -15,7 +18,7 @@ namespace App.Web.Common.Mailer
 			mailConfig = _config;
 		}
 
-		public bool Send()
+		private bool PrivateSend()
 		{
 			if (this.Sender == null || this.Reciver == null || this.mailConfig == null)
 			{
@@ -59,50 +62,50 @@ namespace App.Web.Common.Mailer
 			}
 		}
 
-		public static bool SendEmailToAllUser(AppMailSender sender, List<AppMailReciver> listGmail, AppMailConfiguration mailConf)
+		public void Send()
 		{
-			if (sender == null || listGmail == null || mailConf == null)
+			this.PrivateSend();
+		}
+
+		// Gửi mail dưới nền, không cần chờ xử lý
+		public void SendInBackground()
+		{
+			Thread thMail = new Thread(() =>
+			{
+				this.PrivateSend();
+			});
+			thMail.Start();
+		}
+
+		public static void SendToList(AppMailSender sender, IEnumerable<AppMailReciver> recivers, AppMailConfiguration mailConfig)
+		{
+			if (sender == null || recivers == null || mailConfig == null || recivers.Count() == 0)
 			{
 				throw new Exception("Không thể gửi mail với dữ liệu rỗng");
-			}
-			if (listGmail.Count == 0)
-			{
-				return false;
 			}
 
 			try
 			{
-				MimeMessage message = new MimeMessage();
-
-				MailboxAddress from = new MailboxAddress(sender.Name, mailConf.Email);
-				message.From.Add(from);
-
-				message.Subject = sender.Subject;
-
-				BodyBuilder bodyBuilder = new BodyBuilder();
-				bodyBuilder.TextBody = sender.Content + "\n------\n" + mailConf.Signature;
-
-				message.Body = bodyBuilder.ToMessageBody();
-				foreach (var item in listGmail)
+				Parallel.ForEach(recivers, (reciver) =>
 				{
-					MailboxAddress to = new MailboxAddress(item.Name, item.Email);
-					message.To.Add(to);
-
-					SmtpClient client = new SmtpClient();
-					client.Connect(mailConf.SmtpServer, mailConf.Port, true);
-					client.Authenticate(mailConf.Email, mailConf.Password);
-
-					client.Send(message);
-					client.Disconnect(true);
-					client.Dispose();
-				}
-				return true;
+					AppMailer mailer = new AppMailer(mailConfig);
+					mailer.Sender = sender;
+					mailer.Reciver = reciver;
+					mailer.Send();
+				});
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex);
-				return false;
 			}
+		}
+		public static void SendToListInBackground(AppMailSender sender, IEnumerable<AppMailReciver> recivers, AppMailConfiguration mailConfig)
+		{
+			Thread thMail = new Thread(() =>
+			{
+				SendToList(sender, recivers, mailConfig);
+			});
+			thMail.Start();
 		}
 	}
 }

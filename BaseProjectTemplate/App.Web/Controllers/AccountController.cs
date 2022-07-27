@@ -2,7 +2,6 @@
 using App.Data.Repositories;
 using App.Share.Extensions;
 using App.Web.Common;
-using App.Web.Common.Helpers;
 using App.Web.ViewModels.Account;
 using App.Web.WebConfig;
 using AutoMapper;

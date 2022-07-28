@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿
+$(function () {
 	// tinnq
 	// Tự động ẩn cảnh báo sau 4 giây
 	$(".alert.js-alert").delay(4000).slideUp(300, function () {
@@ -27,3 +28,14 @@ $(document).on("click", ".js-delete-confirm", function (ev) {
 		}
 	});
 });
+
+// Trọng Nguyên
+// Gán giá trị cho id của ô input IdUserLock khi khóa người dùng 
+$(document).on("click", ".js-GetIdUserLock", (ev) => {
+	ev.preventDefault();
+	var id = $(ev.currentTarget).attr("data-id");
+	$("#formBlockUser").find("#IdUserBlock").val(id);
+});
+
+
+

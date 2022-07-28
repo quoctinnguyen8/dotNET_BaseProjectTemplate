@@ -146,5 +146,30 @@ namespace App.Web.Controllers
 			SetSuccessMesg($"Tài khoản [{user.Username}] được xóa thành công");
 			return RedirectToAction(nameof(Index));
 		}
+
+
+		[HttpPost]
+		[AppAuthorize(AuthConst.AppUser.BLOCK)]
+		public async Task<IActionResult> BlockUser(UserBlockItemVM model)
+		{
+			var user = await repository.GetOneAsync<AppUser>(model.IdUserBlock);
+			if (user == null)
+			{
+				SetErrorMesg("Tài khoản không tồn tại hoặc đã được khóa trước đó");
+				return RedirectToAction(nameof(Index));
+			}
+
+			var today = DateTime.Now;
+			var duration = new TimeSpan(model.Day, model.Hour, model.Minute, 0);
+			var newDayBlockTo = today.Add(duration);
+			newDayBlockTo = newDayBlockTo.AddMonths(model.Month);
+			newDayBlockTo = newDayBlockTo.AddYears(model.Year);
+			
+			user.BlockedTo = newDayBlockTo;
+			user.BlockedBy = CurrentUserId; 
+			await repository.UpdateAsync(user);
+			SetSuccessMesg($"Tài khoản [{user.Username}] được khóa thành công");
+			return RedirectToAction(nameof(Index));
+		}
 	}
 }

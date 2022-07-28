@@ -1,0 +1,48 @@
+﻿@model App.Web.ViewModels.User.UserBlockItemVM
+<!-- Modal -->
+<div class="modal fade" id="modalLock" tabindex="-1" role="dialog" aria-labelledby="modalLocktitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<form method="post" id="formBlockUser">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalLocktitle">Khóa người dùng tới khi</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="d-flex">
+						<div class="form-group">
+							<input asp-for="IdUserBlock" type="hidden" class="form-control w-75" placeholder="Giờ" />
+							<span asp-validation-for="IdUserBlock" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<input asp-for="Hour" type="text" class="form-control w-75" placeholder="Giờ" />
+							<span asp-validation-for="Hour" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<input asp-for="Minute" type="text" class="form-control w-75" placeholder="Phút" />
+							<span asp-validation-for="Minute" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<input asp-for="Day" type="text" class="form-control w-75" placeholder="Ngày" />
+							<span asp-validation-for="Day" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<input asp-for="Month" type="text" class="form-control w-75" placeholder="Tháng" />
+							<span asp-validation-for="Month" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<input asp-for="Year" type="text" class="form-control w-75" placeholder="Năm" />
+							<span asp-validation-for="Year" class="text-danger"></span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" asp-action="BlockUser" asp-controller="User" class="btn btn-primary">Đồng ý</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>

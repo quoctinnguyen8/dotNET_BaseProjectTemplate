@@ -241,8 +241,8 @@ namespace App.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<DateTime?>("BlockedBy")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("BlockedBy")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("BlockedTo")
                         .HasColumnType("datetime2");

@@ -1,7 +1,7 @@
 ﻿using App.Data.Entities;
 using App.Data.Repositories;
 using App.Share.Extensions;
-using App.Web.Common;
+using App.Web.Common.Helpers;
 using App.Web.ViewModels.Account;
 using App.Web.WebConfig;
 using AutoMapper;
@@ -20,9 +20,9 @@ namespace App.Web.Controllers
 {
 	public class AccountController : AppControllerBase
 	{
-		readonly RepositoryBase userRepository;
+		readonly GenericRepository userRepository;
 
-		public AccountController(RepositoryBase _userRepository, IMapper _mapper) : base(_mapper)
+		public AccountController(GenericRepository _userRepository, IMapper _mapper) : base(_mapper)
 		{
 			userRepository = _userRepository;
 		}

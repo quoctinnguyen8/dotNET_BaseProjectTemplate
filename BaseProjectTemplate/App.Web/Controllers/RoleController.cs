@@ -19,8 +19,8 @@ namespace App.Web.Controllers
 {
 	public class RoleController : AppControllerBase
 	{
-		readonly RepositoryBase repository;
-		public RoleController(RepositoryBase _repository, IMapper _mapper) : base(_mapper)
+		readonly GenericRepository repository;
+		public RoleController(GenericRepository _repository, IMapper _mapper) : base(_mapper)
 		{
 			this.repository = _repository;
 		}

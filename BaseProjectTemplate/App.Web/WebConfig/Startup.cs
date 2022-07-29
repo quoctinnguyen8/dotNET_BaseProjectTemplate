@@ -18,9 +18,13 @@ namespace App.Web.WebConfig
 	public class Startup
 	{
 		public static string WebRootPath { get; private set; }
-		public Startup(IConfiguration configuration)
+
+		public static string Log4NetConfigFile { get; private set; }
+
+		public Startup(IConfiguration configuration, IWebHostEnvironment env)
 		{
 			Configuration = configuration;
+			Log4NetConfigFile = env.IsDevelopment() ? "log4net.development.config"  : "log4net.config";
 		}
 
 		public IConfiguration Configuration { get; }
@@ -39,11 +43,9 @@ namespace App.Web.WebConfig
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				loggerFactory.AddLog4Net("log4net.development.config");
 			}
 			else
 			{
-				loggerFactory.AddLog4Net("log4net.config");
 				app.UseExceptionHandler("/Home/Error");
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();

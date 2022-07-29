@@ -12,8 +12,8 @@ namespace App.Web.Components.ListRole
 {
 	public class ListRoleViewComponent : ViewComponent
 	{
-		readonly RepositoryBase repository;
-		public ListRoleViewComponent(RepositoryBase _db)
+		readonly GenericRepository repository;
+		public ListRoleViewComponent(GenericRepository _db)
 		{
 			repository = _db;
 		}

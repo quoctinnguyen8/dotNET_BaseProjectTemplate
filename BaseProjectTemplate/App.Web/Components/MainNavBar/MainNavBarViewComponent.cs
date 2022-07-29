@@ -13,8 +13,8 @@ namespace App.Web.Components.MainNavBar
 {
 	public class MainNavBarViewComponent : ViewComponent
 	{
-		readonly RepositoryBase repository;
-		public MainNavBarViewComponent(RepositoryBase _repository)
+		readonly GenericRepository repository;
+		public MainNavBarViewComponent(GenericRepository _repository)
 		{
 			repository = _repository;
 		}

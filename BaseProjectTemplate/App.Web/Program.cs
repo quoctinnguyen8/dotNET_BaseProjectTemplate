@@ -22,6 +22,9 @@ namespace App.Web
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
+				}).ConfigureLogging(cf =>
+				{
+					cf.AddLog4Net(Startup.Log4NetConfigFile);
 				});
 	}
 }

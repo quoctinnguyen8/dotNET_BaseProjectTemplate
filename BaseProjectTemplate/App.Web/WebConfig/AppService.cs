@@ -24,7 +24,7 @@ namespace App.Web.WebConfig
 			});
 
 			// Đăng ký repositories
-			services.AddScoped<RepositoryBase>();
+			services.AddScoped<GenericRepository>();
 
 			// Cấu hình đăng nhập
 			services.AddAuthentication(AppConst.COOKIES_AUTH).AddCookie(options =>

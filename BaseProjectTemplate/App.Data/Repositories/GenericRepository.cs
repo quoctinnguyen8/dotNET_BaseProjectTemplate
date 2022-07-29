@@ -1,6 +1,7 @@
 ﻿using App.Data.Entities.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,14 +12,16 @@ using System.Threading.Tasks;
 
 namespace App.Data.Repositories
 {
-	public class RepositoryBase
+	public class GenericRepository
 	{
 		protected readonly WebAppDbContext db;
 		protected readonly IHttpContextAccessor httpContext;
-		public RepositoryBase(WebAppDbContext _db, IHttpContextAccessor _httpContext)
+		protected readonly ILogger<GenericRepository> logger;
+		public GenericRepository(WebAppDbContext _db, IHttpContextAccessor _httpContext, ILogger<GenericRepository> _logger)
 		{
 			db = _db;
 			httpContext = _httpContext;
+			logger = _logger;
 		}
 
 		public virtual async Task BeginTransactionAsync()
@@ -56,7 +59,7 @@ namespace App.Data.Repositories
 						.AsNoTracking()
 						.Where(m => m.DeletedDate == null && m.Id == id)
 						.Select(selector);
-			LogToConsole(query);
+			LogQuery(query);
 			return await query.SingleOrDefaultAsync();
 		}
 
@@ -84,7 +87,7 @@ namespace App.Data.Repositories
 						.Where(m => m.DeletedDate == null)
 						.Where(where)
 						.Select(selector);
-			LogToConsole(query);
+			LogQuery(query);
 			return await query.SingleOrDefaultAsync();
 		}
 		#endregion
@@ -220,7 +223,7 @@ namespace App.Data.Repositories
 		{
 			var tableName = GetTableName<TEntity>();
 			var deleteQuery = $"DELETE {tableName} WHERE Id = {id}";
-			LogToConsole(deleteQuery);
+			LogQuery(deleteQuery);
 			await db.Database.ExecuteSqlRawAsync(deleteQuery);
 		}
 
@@ -232,7 +235,7 @@ namespace App.Data.Repositories
 			}
 			var tableName = GetTableName<TEntity>();
 			var deleteQuery = $"DELETE {tableName} WHERE Id IN ({string.Join(',', ids)})";
-			LogToConsole(deleteQuery);
+			LogQuery(deleteQuery);
 			await db.Database.ExecuteSqlRawAsync(deleteQuery);
 		}
 
@@ -285,12 +288,14 @@ namespace App.Data.Repositories
 			return null;
 		}
 
-		protected void LogToConsole(IQueryable query)
+		protected void LogQuery(IQueryable query)
 		{
-			Console.WriteLine($"{DateTime.Now:dd/MM/yyyy HH:mm:ss}\n{query.ToQueryString()}");
+			var queryString = query.ToQueryString();
+			LogQuery(queryString);
 		}
-		protected void LogToConsole(string query)
+		protected void LogQuery(string query)
 		{
+			logger.LogDebug(query);
 			Console.WriteLine($"{DateTime.Now:dd/MM/yyyy HH:mm:ss}\n{query}");
 		}
 		#endregion

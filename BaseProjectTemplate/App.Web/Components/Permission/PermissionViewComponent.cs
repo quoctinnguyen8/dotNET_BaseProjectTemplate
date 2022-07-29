@@ -12,8 +12,8 @@ namespace App.Web.Components.Permission
 {
 	public class PermissionViewComponent : ViewComponent
 	{
-		readonly RepositoryBase repository;
-		public PermissionViewComponent(RepositoryBase _repository)
+		readonly GenericRepository repository;
+		public PermissionViewComponent(GenericRepository _repository)
 		{
 			repository = _repository;
 		}

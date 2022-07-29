@@ -20,9 +20,9 @@ namespace App.Web.Controllers
 {
 	public class UserController : AppControllerBase
 	{
-		readonly RepositoryBase repository;
+		readonly GenericRepository repository;
 
-		public UserController(RepositoryBase _repository, IMapper _mapper) : base(_mapper)
+		public UserController(GenericRepository _repository, IMapper _mapper) : base(_mapper)
 		{
 			this.repository = _repository;
 		}

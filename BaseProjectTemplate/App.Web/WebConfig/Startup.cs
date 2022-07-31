@@ -1,5 +1,6 @@
 using App.Data;
 using App.Data.Repositories;
+using App.Web.WebConfig.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -62,6 +63,7 @@ namespace App.Web.WebConfig
 			app.UseAuthentication();
 			app.UseAuthorization();
 
+			app.UseMiddleware<AppLoggingMiddleware>();
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapAppRouter();

@@ -21,14 +21,14 @@ namespace App.Web.Controllers
 		protected const string MODEL_STATE_INVALID_MESG = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại";
 		protected const string PAGE_NOT_FOUND_MESG = "Không tìm thấy trang";
 
-		protected readonly IMapper mapper;
+		protected readonly IMapper _mapper;
 		protected int CurrentUserId { get => Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)); }
 		protected string CurrentUsername { get => HttpContext.User.Identity.Name; }
 		protected string Referer { get => Request.Headers["Referer"].ToString(); }
 
-		public AppControllerBase(IMapper _mapper)
+		public AppControllerBase(IMapper mapper)
 		{
-			mapper = _mapper;
+			_mapper = mapper;
 		}
 
 		protected RedirectToActionResult HomePage() => RedirectToAction("Index", "Home");

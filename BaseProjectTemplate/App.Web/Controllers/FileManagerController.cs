@@ -16,7 +16,7 @@ namespace App.Web.Controllers
 {
 	public class FileManagerController : AppControllerBase
 	{
-		public FileManagerController(IMapper _mapper) : base(_mapper)
+		public FileManagerController(IMapper mapper) : base(mapper)
 		{
 		}
 

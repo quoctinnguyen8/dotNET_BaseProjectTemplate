@@ -20,18 +20,18 @@ namespace App.Web.Controllers
 {
 	public class UserController : AppControllerBase
 	{
-		readonly GenericRepository repository;
+		readonly GenericRepository _repository;
 
-		public UserController(GenericRepository _repository, IMapper _mapper) : base(_mapper)
+		public UserController(GenericRepository repository, IMapper mapper) : base(mapper)
 		{
-			this.repository = _repository;
+			_repository = repository;
 		}
 
 		[AppAuthorize()]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			// Chú ý dấu ngoặc khi dùng await cùng với GenRowIndex
-			var data = (await repository
+			var data = (await _repository
 				.GetAll<AppUser>(u => u.Username != this.CurrentUsername)
 				.ProjectTo<UserListItemVM>(AutoMapperProfile.UserIndexConf)
 				.ToPagedListAsync(page, size))
@@ -53,7 +53,7 @@ namespace App.Web.Controllers
 				return View(model);
 			}
 
-			if (await repository.AnyAsync<AppUser>(u => u.Username == model.Username))
+			if (await _repository.AnyAsync<AppUser>(u => u.Username == model.Username))
 			{
 				SetErrorMesg("Tên đăng nhập này đã tồn tại");
 				return View(model);
@@ -64,8 +64,8 @@ namespace App.Web.Controllers
 				var hashResult = HashHMACSHA512(model.Password);
 				model.PasswordHash = hashResult.Value;
 				model.PasswordSalt = hashResult.Key;
-				var user = mapper.Map<AppUser>(model);
-				await repository.AddAsync(user);
+				var user = _mapper.Map<AppUser>(model);
+				await _repository.AddAsync(user);
 				SetSuccessMesg($"Thêm tài khoản [{user.Username}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
@@ -79,13 +79,13 @@ namespace App.Web.Controllers
 		[AppAuthorize(AuthConst.AppUser.UPDATE)]
 		public async Task<IActionResult> Edit(int id)
 		{
-			var user = await repository.GetOneAsync<AppUser>(id);
+			var user = await _repository.GetOneAsync<AppUser>(id);
 			if (user == null)
 			{
 				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
-			var userEditVM = mapper.Map<UserAddOrEditVM>(user);
+			var userEditVM = _mapper.Map<UserAddOrEditVM>(user);
 			return View(userEditVM);
 		}
 
@@ -93,7 +93,7 @@ namespace App.Web.Controllers
 		[AppAuthorize(AuthConst.AppUser.UPDATE)]
 		public async Task<IActionResult> Edit(UserAddOrEditVM model)
 		{
-			var user = await repository.GetOneAsync<AppUser>(model.Id);
+			var user = await _repository.GetOneAsync<AppUser>(model.Id);
 			// Không validate các trường dưới dây khi cập nhật
 			ModelState.Remove("Password");
 			ModelState.Remove("ConfirmPwd");
@@ -122,7 +122,7 @@ namespace App.Web.Controllers
 				user.FullName = model.FullName;
 				user.PhoneNumber1 = model.PhoneNumber1;
 				user.PhoneNumber2 = model.PhoneNumber2;
-				await repository.UpdateAsync(user);
+				await _repository.UpdateAsync(user);
 				SetSuccessMesg($"Cập nhật tài khoản [{user.Username}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
@@ -136,13 +136,13 @@ namespace App.Web.Controllers
 		[AppAuthorize(AuthConst.AppUser.DELETE)]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var user = await repository.GetOneAsync<AppUser>(id);
+			var user = await _repository.GetOneAsync<AppUser>(id);
 			if (user == null)
 			{
 				SetErrorMesg("Tài khoản không tồn tại hoặc đã được xóa trước đó");
 				return RedirectToAction(nameof(Index));
 			}
-			await repository.DeleteAsync(user);
+			await _repository.DeleteAsync(user);
 			SetSuccessMesg($"Tài khoản [{user.Username}] được xóa thành công");
 			return RedirectToAction(nameof(Index));
 		}

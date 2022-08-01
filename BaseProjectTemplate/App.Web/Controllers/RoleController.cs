@@ -19,17 +19,17 @@ namespace App.Web.Controllers
 {
 	public class RoleController : AppControllerBase
 	{
-		readonly GenericRepository repository;
-		public RoleController(GenericRepository _repository, IMapper _mapper) : base(_mapper)
+		readonly GenericRepository _repository;
+		public RoleController(GenericRepository repository, IMapper mapper) : base(mapper)
 		{
-			this.repository = _repository;
+			_repository = repository;
 		}
 
 		[AppAuthorize(AuthConst.AppRole.VIEW_LIST)]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
-			var data = (await repository
-				.GetAll<AppRole, RoleListItemVM>(selector: r => mapper.Map<RoleListItemVM>(r))
+			var data = (await _repository
+				.GetAll<AppRole, RoleListItemVM>(selector: r => _mapper.Map<RoleListItemVM>(r))
 				.ToPagedListAsync(page, size))
 				.GenRowIndex();
 			return View(data);
@@ -56,7 +56,7 @@ namespace App.Web.Controllers
 			};
 			try
 			{
-				await repository.AddAsync(role);
+				await _repository.AddAsync(role);
 				foreach (var item in arrIdPermission)
 				{
 					var idPer = Convert.ToInt32(item);
@@ -65,7 +65,7 @@ namespace App.Web.Controllers
 						MstPermissionId = idPer
 					});
 				}
-				await repository.AddAsync(role.AppRolePermissions);
+				await _repository.AddAsync(role.AppRolePermissions);
 				SetSuccessMesg($"Thêm vai trò [{role.Name}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
@@ -84,7 +84,7 @@ namespace App.Web.Controllers
 				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
-			var data = await repository.GetOneAsync<AppRole, RoleEditVM>(id.Value, r => new RoleEditVM
+			var data = await _repository.GetOneAsync<AppRole, RoleEditVM>(id.Value, r => new RoleEditVM
 			{
 				Id = r.Id,
 				Name = r.Name,
@@ -108,8 +108,8 @@ namespace App.Web.Controllers
 				SetErrorMesg(MODEL_STATE_INVALID_MESG);
 				return RedirectToAction(nameof(Index));
 			}
-			var role = await repository.GetOneAsync<AppRole>(model.Id);
-			var curPermisssionIds = repository
+			var role = await _repository.GetOneAsync<AppRole>(model.Id);
+			var curPermisssionIds = _repository
 								.GetAll<AppRolePermission>(where: s => s.AppRoleId == role.Id)
 								.ToList();
 			if (role == null)
@@ -136,7 +136,7 @@ namespace App.Web.Controllers
 
 			if (deletedPermissionIds != null && deletedPermissionIds.Any())
 			{
-				await repository.HardDeleteAsync<AppRolePermission>(rolePermissionIds);
+				await _repository.HardDeleteAsync<AppRolePermission>(rolePermissionIds);
 			}
 
 			if (addedPermissionIds != null && addedPermissionIds.Any())
@@ -150,11 +150,11 @@ namespace App.Web.Controllers
 						MstPermissionId = item
 					});
 				}
-				await repository.AddAsync(addedRolePermisson);
+				await _repository.AddAsync(addedRolePermisson);
 			}
 			role.Name = model.Name;
 			role.Desc = model.Desc;
-			await repository.UpdateAsync(role);
+			await _repository.UpdateAsync(role);
 			SetSuccessMesg($"Cập nhật vai trò [{role.Name}] thành công");
 			return RedirectToAction(nameof(Index));
 		}
@@ -168,7 +168,7 @@ namespace App.Web.Controllers
 				return RedirectToAction(nameof(Index));
 			}
 
-			var data = await repository.Get<AppRole>(where: r => r.Id == id.Value)
+			var data = await _repository.Get<AppRole>(where: r => r.Id == id.Value)
 						.ProjectTo<RoleDeleteVM>(AutoMapperProfile.RoleDeleteConf)
 						.SingleOrDefaultAsync();
 			if (data == null)
@@ -179,7 +179,7 @@ namespace App.Web.Controllers
 			// Xóa không cần xác nhận nếu không có dữ liệu user liên quan
 			if (data.AppUsers == null || data.AppUsers.Count == 0)
 			{
-				await repository.DeleteAsync<AppRole>(data.Id);
+				await _repository.DeleteAsync<AppRole>(data.Id);
 				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
@@ -187,11 +187,11 @@ namespace App.Web.Controllers
 			var userDeletedCount = data.AppUsers.Where(u => u.DeletedDate != null).Count();
 			if (userDeletedCount == data.AppUsers.Count)
 			{
-				await repository.DeleteAsync<AppRole>(data.Id);
-				var users = await repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
+				await _repository.DeleteAsync<AppRole>(data.Id);
+				var users = await _repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
 				// Cập nhật vai trò mới
 				users.ForEach(u => u.AppRoleId = null);
-				await repository.UpdateAsync(users);
+				await _repository.UpdateAsync(users);
 				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
 				return RedirectToAction(nameof(Index));
 			}
@@ -212,17 +212,17 @@ namespace App.Web.Controllers
 
 			try
 			{
-				var users = await repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
+				var users = await _repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
 				// Cập nhật vai trò mới
 				users.ForEach(u => u.AppRoleId = data.NewId);
 				
-				await repository.BeginTransactionAsync();
+				await _repository.BeginTransactionAsync();
 
 				// Cập nhật role mới cho users
-				await repository.UpdateAsync(users);
+				await _repository.UpdateAsync(users);
 				// Xóa role cũ
-				await repository.DeleteAsync<AppUser>(data.Id);
-				await repository.CommitTransactionAsync();
+				await _repository.DeleteAsync<AppUser>(data.Id);
+				await _repository.CommitTransactionAsync();
 
 				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
 				return RedirectToAction(nameof(Index));
@@ -230,7 +230,7 @@ namespace App.Web.Controllers
 			catch (Exception ex)
 			{
 				// Rollback
-				await repository.RollbackTransactionAsync();
+				await _repository.RollbackTransactionAsync();
 
 				SetErrorMesg(EXCEPTION_ERR_MESG);
 				LogExceptionToConsole(ex);

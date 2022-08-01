@@ -20,11 +20,11 @@ namespace App.Web.Controllers
 {
 	public class AccountController : AppControllerBase
 	{
-		readonly GenericRepository userRepository;
+		readonly GenericRepository _repository;
 
-		public AccountController(GenericRepository _userRepository, IMapper _mapper) : base(_mapper)
+		public AccountController(GenericRepository repository, IMapper mapper) : base(mapper)
 		{
-			userRepository = _userRepository;
+			_repository = repository;
 		}
 
 		public IActionResult Login() => User.Identity.IsAuthenticated ? HomePage() : View();
@@ -32,7 +32,7 @@ namespace App.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginVM model)
 		{
-			var user = await userRepository.Get<AppUser>(where: x => x.Username == model.Username.ToLower())
+			var user = await _repository.Get<AppUser>(where: x => x.Username == model.Username.ToLower())
 											.ProjectTo<UserDataForApp>(AutoMapperProfile.LoginConf)
 											.SingleOrDefaultAsync();
 			if (user == null)
@@ -91,7 +91,7 @@ namespace App.Web.Controllers
 
 		public async Task<IActionResult> ChangePassword(ChangePassword model)
 		{
-			var user = await userRepository.GetOneAsync<AppUser>(this.CurrentUserId);
+			var user = await _repository.GetOneAsync<AppUser>(this.CurrentUserId);
 			var encryptPassword = this.HashHMACSHA512WithKey(model.Pwd, user.PasswordSalt);
 			if (!encryptPassword.SequenceEqual(user.PasswordHash))
 			{
@@ -102,7 +102,7 @@ namespace App.Web.Controllers
 			var hashResult = this.HashHMACSHA512(model.NewPwd);
 			user.PasswordHash = hashResult.Value;
 			user.PasswordSalt = hashResult.Key;
-			await userRepository.UpdateAsync<AppUser>(user);
+			await _repository.UpdateAsync<AppUser>(user);
 
 			if (model.LogoutAfterChangePwd)
 			{

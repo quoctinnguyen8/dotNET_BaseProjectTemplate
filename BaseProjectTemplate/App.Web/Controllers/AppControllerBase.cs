@@ -2,6 +2,7 @@
 using App.Web.ViewModels;
 using App.Web.ViewModels.User;
 using AutoMapper;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,33 +27,38 @@ namespace App.Web.Controllers
 		protected string CurrentUsername { get => HttpContext.User.Identity.Name; }
 		protected string Referer { get => Request.Headers["Referer"].ToString(); }
 
+		private readonly ILog _logger;
+
 		public AppControllerBase(IMapper mapper)
 		{
 			_mapper = mapper;
+			_logger = LogManager.GetLogger(typeof(AppControllerBase));
 		}
 
 		protected RedirectToActionResult HomePage() => RedirectToAction("Index", "Home");
 
-		protected void SetErrorMesg(string mesg, bool ModelStateIsInvalid = false) {
+		/// <summary>
+		/// Gán thông báo lỗi để hiển thị lên view
+		/// </summary>
+		/// <param name="mesg">Thông báo lỗi</param>
+		/// <param name="modelStateIsInvalid">Đặt là true khi lỗi validate dữ liệu</param>
+		protected void SetErrorMesg(string mesg, bool modelStateIsInvalid = false) {
 			TempData["Err"] = mesg;
-			if (ModelStateIsInvalid)
+			if (modelStateIsInvalid)
 			{
-				// hiển thị tin nhắn lỗi ở console
+				// hiển thị tin nhắn lỗi ở file log
 				var invalidMesg = string.Join("\n", ModelState.Values
 												.SelectMany(v => v.Errors)
 												.Select(e => e.ErrorMessage));
-				Console.WriteLine($"\n==> Model state is invalid: {invalidMesg}");
+				_logger.Error($"Model state is invalid: {invalidMesg}");
 			}
 		}
 
 		protected void SetSuccessMesg(string mesg) => TempData["Success"] = mesg;
 
-		protected void LogExceptionToConsole(Exception ex)
+		protected void LogException(Exception ex)
 		{
-			Console.WriteLine("\n--- EXCEPTION ---");
-			Console.WriteLine(ex.Message);
-			Console.WriteLine(ex.InnerException);
-			Console.WriteLine(ex.StackTrace);
+			_logger.Error(ex);
 			SetErrorMesg(EXCEPTION_ERR_MESG);
 		}
 

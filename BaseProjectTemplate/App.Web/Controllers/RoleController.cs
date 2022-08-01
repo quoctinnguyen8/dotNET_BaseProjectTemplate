@@ -71,7 +71,7 @@ namespace App.Web.Controllers
 			}
 			catch (Exception ex)
 			{
-				LogExceptionToConsole(ex);
+				LogException(ex);
 				return View();
 			}
 		}
@@ -105,7 +105,7 @@ namespace App.Web.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				SetErrorMesg(MODEL_STATE_INVALID_MESG);
+				SetErrorMesg(MODEL_STATE_INVALID_MESG, true);
 				return RedirectToAction(nameof(Index));
 			}
 			var role = await _repository.GetOneAsync<AppRole>(model.Id);
@@ -233,7 +233,7 @@ namespace App.Web.Controllers
 				await _repository.RollbackTransactionAsync();
 
 				SetErrorMesg(EXCEPTION_ERR_MESG);
-				LogExceptionToConsole(ex);
+				LogException(ex);
 				return RedirectToAction(nameof(Delete), new { id = data.Id });
 			}
 		}

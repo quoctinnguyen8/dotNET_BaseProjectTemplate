@@ -49,7 +49,7 @@ namespace App.Web.Controllers
 			model.Username = model.Username.ToLower();
 			if (!ModelState.IsValid)
 			{
-				SetErrorMesg(MODEL_STATE_INVALID_MESG);
+				SetErrorMesg(MODEL_STATE_INVALID_MESG, true);
 				return View(model);
 			}
 
@@ -71,7 +71,7 @@ namespace App.Web.Controllers
 			}
 			catch (Exception ex)
 			{
-				LogExceptionToConsole(ex);
+				LogException(ex);
 				return View(model);
 			}
 		}
@@ -100,7 +100,7 @@ namespace App.Web.Controllers
 
 			if (!ModelState.IsValid)
 			{
-				SetErrorMesg(MODEL_STATE_INVALID_MESG);
+				SetErrorMesg(MODEL_STATE_INVALID_MESG, true);
 				return View(model);
 			}
 			if (user == null)
@@ -128,7 +128,7 @@ namespace App.Web.Controllers
 			}
 			catch (Exception ex)
 			{
-				LogExceptionToConsole(ex);
+				LogException(ex);
 				return View(model);
 			}
 		}

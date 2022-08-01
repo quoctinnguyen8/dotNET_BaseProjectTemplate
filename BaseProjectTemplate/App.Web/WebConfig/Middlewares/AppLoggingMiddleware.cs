@@ -31,7 +31,6 @@ namespace App.Web.WebConfig.Middlewares
 			}
 			catch (System.Exception ex)
 			{
-				_logger.LogError($"{user}; {context.Request.Method} {context.Request.Path.Value} => {ex.Message}\n{ex.StackTrace}");
 				throw;
 			}
 			finally

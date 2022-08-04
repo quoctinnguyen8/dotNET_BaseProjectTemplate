@@ -32,9 +32,11 @@ namespace App.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginVM model)
 		{
-			var user = await _repository.Get<AppUser>(where: x => x.Username == model.Username.ToLower())
-											.ProjectTo<UserDataForApp>(AutoMapperProfile.LoginConf)
-											.SingleOrDefaultAsync();
+			var user = await _repository.GetOneAsync<AppUser, UserDataForApp>
+							(
+								where: x => x.Username == model.Username.ToLower(),
+								AutoMapperProfile.LoginConf
+							);
 			if (user == null)
 			{
 				TempData["Mesg"] = "Tài khoản không tồn tại";
@@ -91,7 +93,7 @@ namespace App.Web.Controllers
 
 		public async Task<IActionResult> ChangePassword(ChangePassword model)
 		{
-			var user = await _repository.GetOneAsync<AppUser>(this.CurrentUserId);
+			var user = await _repository.FindAsync<AppUser>(this.CurrentUserId);
 			var encryptPassword = this.HashHMACSHA512WithKey(model.Pwd, user.PasswordSalt);
 			if (!encryptPassword.SequenceEqual(user.PasswordHash))
 			{

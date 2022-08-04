@@ -108,7 +108,7 @@ namespace App.Web.Controllers
 				SetErrorMesg(MODEL_STATE_INVALID_MESG, true);
 				return RedirectToAction(nameof(Index));
 			}
-			var role = await _repository.GetOneAsync<AppRole>(model.Id);
+			var role = await _repository.FindAsync<AppRole>(model.Id);
 			var curPermisssionIds = _repository
 								.GetAll<AppRolePermission>(where: s => s.AppRoleId == role.Id)
 								.ToList();
@@ -168,9 +168,8 @@ namespace App.Web.Controllers
 				return RedirectToAction(nameof(Index));
 			}
 
-			var data = await _repository.Get<AppRole>(where: r => r.Id == id.Value)
-						.ProjectTo<RoleDeleteVM>(AutoMapperProfile.RoleDeleteConf)
-						.SingleOrDefaultAsync();
+			var data = await _repository.FindAsync<AppRole, RoleDeleteVM>(id.Value,AutoMapperProfile.RoleDeleteConf);
+
 			if (data == null)
 			{
 				SetErrorMesg(PAGE_NOT_FOUND_MESG);

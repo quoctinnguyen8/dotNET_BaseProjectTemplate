@@ -45,27 +45,6 @@ namespace App.Data.Repositories
 			return await _db.Set<TEntity>().AnyAsync(expr);
 		}
 
-		public virtual async Task AddAsync<TEntity>(TEntity entity, bool isDeleted = false) where TEntity : AppEntityBase
-		{
-			this.BeforeAdd(entity, isDeleted);
-			await _db.Set<TEntity>().AddAsync(entity);
-			await _db.SaveChangesAsync();
-		}
-
-		/// <summary>
-		/// Nếu dữ liệu cần thêm > 1000 record mỗi lần thì không nên dùng hàm này
-		/// </summary>
-		public virtual async Task AddAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : AppEntityBase
-		{
-			var len = entities.Count();
-			for (int i = 0; i < len; i++)
-			{
-				this.BeforeAdd(entities.ElementAt(i));
-			}
-			await _db.AddRangeAsync(entities);
-			await _db.SaveChangesAsync();
-		}
-
 		public virtual async Task UpdateAsync<TEntity>(TEntity entity) where TEntity : AppEntityBase
 		{
 			this.BeforeUpdate(entity);

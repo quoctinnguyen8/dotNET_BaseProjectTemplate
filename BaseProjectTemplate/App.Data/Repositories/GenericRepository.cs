@@ -45,24 +45,6 @@ namespace App.Data.Repositories
 			return await _db.Set<TEntity>().AnyAsync(expr);
 		}
 
-		public virtual async Task UpdateAsync<TEntity>(TEntity entity) where TEntity : AppEntityBase
-		{
-			this.BeforeUpdate(entity);
-			_db.Update(entity);
-			await _db.SaveChangesAsync();
-		}
-
-		public virtual async Task UpdateAsync<TEntity>(IEnumerable<TEntity> entities) where TEntity : AppEntityBase
-		{
-			var len = entities.Count();
-			for (int i = 0; i < len; i++)
-			{
-				this.BeforeUpdate(entities.ElementAt(i));
-			}
-			_db.UpdateRange(entities);
-			await _db.SaveChangesAsync();
-		}
-
 		public virtual async Task DeleteAsync(AppEntityBase entity)
 		{
 			var now = DateTime.Now;

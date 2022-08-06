@@ -29,7 +29,7 @@ namespace App.Web.Controllers
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			var data = (await _repository
-				.GetAll<AppRole, RoleListItemVM>(selector: r => _mapper.Map<RoleListItemVM>(r))
+				.GetAll<AppRole, RoleListItemVM>(AutoMapperProfile.RoleIndexConf)
 				.ToPagedListAsync(page, size))
 				.GenRowIndex();
 			return View(data);

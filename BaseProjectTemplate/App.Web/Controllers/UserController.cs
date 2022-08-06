@@ -79,7 +79,7 @@ namespace App.Web.Controllers
 		[AppAuthorize(AuthConst.AppUser.UPDATE)]
 		public async Task<IActionResult> Edit(int id)
 		{
-			var user = await _repository.GetOneAsync<AppUser>(id);
+			var user = await _repository.FindAsync<AppUser>(id);
 			if (user == null)
 			{
 				SetErrorMesg(PAGE_NOT_FOUND_MESG);
@@ -93,7 +93,7 @@ namespace App.Web.Controllers
 		[AppAuthorize(AuthConst.AppUser.UPDATE)]
 		public async Task<IActionResult> Edit(UserAddOrEditVM model)
 		{
-			var user = await _repository.GetOneAsync<AppUser>(model.Id);
+			var user = await _repository.FindAsync<AppUser>(model.Id);
 			// Không validate các trường dưới dây khi cập nhật
 			ModelState.Remove("Password");
 			ModelState.Remove("ConfirmPwd");
@@ -136,7 +136,7 @@ namespace App.Web.Controllers
 		[AppAuthorize(AuthConst.AppUser.DELETE)]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var user = await _repository.GetOneAsync<AppUser>(id);
+			var user = await _repository.FindAsync<AppUser>(id);
 			if (user == null)
 			{
 				SetErrorMesg("Tài khoản không tồn tại hoặc đã được xóa trước đó");

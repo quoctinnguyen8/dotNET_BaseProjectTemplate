@@ -19,10 +19,13 @@ namespace App.Web.WebConfig
 
 			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
 			CreateMap<AppUser, UserAddOrEditVM>();
-
-			// Map dữ liệu từ kiểu AppRole sang RoleListItemVM
-			CreateMap<AppRole, RoleListItemVM>();
 		}
+
+		public static MapperConfiguration RoleIndexConf = new (mapper =>
+		{
+			// Map dữ liệu từ kiểu AppRole sang RoleListItemVM
+			mapper.CreateMap<AppRole, RoleListItemVM>();
+		});
 
 		// Cấu hình mapping cho UserController, action Index
 		public static MapperConfiguration UserIndexConf = new(mapper =>

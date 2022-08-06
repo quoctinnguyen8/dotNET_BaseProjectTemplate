@@ -111,22 +111,5 @@ namespace App.Data.Repositories
 						.ThenByDescending(m => m.Id)
 						.Select(selector);
 		}
-
-		protected virtual Expression<Func<TEntity, bool>> GetDefaultWhereExpr<TEntity>(bool selectFromTrash)
-			where TEntity : AppEntityBase
-		{
-			Expression<Func<TEntity, bool>> defaultWhere;
-			defaultWhere = selectFromTrash ? m => m.DeletedDate != null : m => m.DeletedDate == null;
-			return defaultWhere;
-		}
-
-		protected virtual Expression<Func<TEntity, bool>> GetDefaultWhereExprMst<TEntity>(bool selectFromTrash)
-			where TEntity : MstEntityBase
-		{
-			Expression<Func<TEntity, bool>> defaultWhere;
-			defaultWhere = selectFromTrash ? m => m.DeletedDate != null : m => m.DeletedDate == null;
-			return defaultWhere;
-		}
-
 	}
 }

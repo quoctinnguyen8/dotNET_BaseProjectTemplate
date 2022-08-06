@@ -76,5 +76,21 @@ namespace App.Data.Repositories
 			_logger.LogDebug(query);
 			Console.WriteLine($"{DateTime.Now:dd/MM/yyyy HH:mm:ss}\n{query}");
 		}
+
+		protected virtual Expression<Func<TEntity, bool>> GetDefaultWhereExpr<TEntity>(bool selectFromTrash)
+			where TEntity : AppEntityBase
+		{
+			Expression<Func<TEntity, bool>> defaultWhere;
+			defaultWhere = selectFromTrash ? m => m.DeletedDate != null : m => m.DeletedDate == null;
+			return defaultWhere;
+		}
+
+		protected virtual Expression<Func<TEntity, bool>> GetDefaultWhereExprMst<TEntity>(bool selectFromTrash)
+			where TEntity : MstEntityBase
+		{
+			Expression<Func<TEntity, bool>> defaultWhere;
+			defaultWhere = selectFromTrash ? m => m.DeletedDate != null : m => m.DeletedDate == null;
+			return defaultWhere;
+		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace App.Web.Controllers
+namespace App.Web.Areas.Admin.Controllers
 {
 	public class HomeController : Controller
 	{

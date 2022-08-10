@@ -1,0 +1,28 @@
+﻿<div class="modal fade" id="mExport" tabindex="-1" role="dialog" aria-labelledby="mExport-label" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="mExportTitle">Chọn thời gian</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!--Modal content-->
+				<form asp-action="Export" method="post">
+					<div class="form-group">
+						<label for="from">Từ ngày</label>
+						<input type="date" required name="FromDate" class="form-control" id="from" placeholder="Chọn ngày">
+					</div>
+					<div class="form-group">
+						<label for="from">Đến ngày</label>
+						<input type="date" required name="ToDate" class="form-control" id="from" placeholder="Chọn ngày">
+					</div>
+					<div class="form-group">
+						<button class="btn btn-success"><i class="fas fa-file-download"></i>&ensp;Xuất Excel</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

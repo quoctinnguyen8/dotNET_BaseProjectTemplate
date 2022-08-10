@@ -47,6 +47,7 @@ namespace App.Web.WebConfig
 			{
 				// path: /Components/{component-name}/Default.cshtml
 				config.ViewLocationFormats.Add("/{0}.cshtml");
+				config.ViewLocationFormats.Add("Admin/{0}.cshtml");
 			});
 
 			// Khởi tạo thông tin mail

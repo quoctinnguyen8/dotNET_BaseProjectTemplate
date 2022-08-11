@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.Web.Areas.Admin.Controllers
 {
+	[Area("Admin")]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;

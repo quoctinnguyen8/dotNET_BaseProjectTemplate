@@ -46,9 +46,9 @@ namespace App.Web.WebConfig
 			services.Configure<RazorViewEngineOptions>(config =>
 			{
 				// path: /Components/{component-name}/Default.cshtml
-				config.ViewLocationFormats.Add("/{0}.cshtml");
-				config.ViewLocationFormats.Add("Admin/{0}.cshtml");
-			});
+                config.ViewLocationFormats.Add("/{0}.cshtml");
+				config.AreaViewLocationFormats.Add("Areas/Admin/{0}.cshtml");
+            });
 
 			// Khởi tạo thông tin mail
 			AppMailConfiguration mailConfig = new();

@@ -15,6 +15,7 @@ using X.PagedList;
 
 namespace App.Web.Areas.Admin.Controllers
 {
+	[Area("Admin")]
 	public class AppControllerBase : Controller
 	{
 		protected const int DEFAULT_PAGE_SIZE = 15;

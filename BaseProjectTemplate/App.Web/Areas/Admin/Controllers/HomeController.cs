@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Web.WebConfig;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 namespace App.Web.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize(AuthenticationSchemes = AppConst.COOKIES_AUTH)]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;

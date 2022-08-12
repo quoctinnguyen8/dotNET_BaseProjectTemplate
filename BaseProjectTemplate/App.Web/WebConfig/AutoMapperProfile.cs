@@ -19,6 +19,9 @@ namespace App.Web.WebConfig
 
 			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
 			CreateMap<AppUser, UserAddOrEditVM>();
+			CreateMap<AppUser, UpdateUserViewModel>().ReverseMap();
+			CreateMap<AppUser, UserDataForApp>().ReverseMap();
+			CreateMap<AppUser, AcceptUpdateViewModel>().ReverseMap();
 		}
 
 		public static MapperConfiguration RoleIndexConf = new (mapper =>
@@ -40,6 +43,20 @@ namespace App.Web.WebConfig
 		{
 			// Map dữ liệu từ AppUser sang UserListItemVM, map thuộc tính RoleName
 			mapper.CreateMap<AppUser, UserDataForApp>()
+				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole == null ? "" : uEntity.AppRole.Name))
+				.ForMember(uItem => uItem.Permission, opts => opts.MapFrom
+				(
+					uEntity => string.Join(',', uEntity.AppRole
+														.AppRolePermissions
+														.Select(p => p.MstPermissionId))
+				)
+			);
+		});
+
+		public static MapperConfiguration UpdateConf = new(mapper =>
+		{
+			// Map dữ liệu từ AppUser sang UserListItemVM, map thuộc tính RoleName
+			mapper.CreateMap<AppUser, UpdateUserViewModel>()
 				.ForMember(uItem => uItem.RoleName, opts => opts.MapFrom(uEntity => uEntity.AppRole == null ? "" : uEntity.AppRole.Name))
 				.ForMember(uItem => uItem.Permission, opts => opts.MapFrom
 				(

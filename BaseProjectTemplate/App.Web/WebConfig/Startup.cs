@@ -1,5 +1,6 @@
 using App.Data;
 using App.Data.Repositories;
+using App.Web.Services;
 using App.Web.WebConfig.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,7 @@ namespace App.Web.WebConfig
 			services.AddControllersWithViews();
 			services.AddHttpContextAccessor();
 			services.AddAppService(Configuration);
+			services.AddServicesDependencies();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

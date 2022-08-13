@@ -40,6 +40,22 @@ namespace App.Data.DataSeeders
 					UpdatedDate = now,
 					CreatedDate = now,
 					AppRoleId = 1,				// Vai trò được tạo ở AppRoleSeeder
+				}, new AppUser
+				{
+					Id = 2,
+					Username = "admin1",
+					PasswordHash = pwdHash,
+					PasswordSalt = pwdSalt,
+					Address = "Thành phố Hồ Chí Minh",
+					Email = "thanhnguyendt2000@gmail.com",
+					FullName = "Obama",
+					PhoneNumber1 = "0928666157",
+					PhoneNumber2 = "0928666158",
+					CreatedBy = -1,
+					UpdatedBy = -1,
+					UpdatedDate = now,
+					CreatedDate = now,
+					AppRoleId = 1,              // Vai trò được tạo ở AppRoleSeeder
 				}
 			);
 		}

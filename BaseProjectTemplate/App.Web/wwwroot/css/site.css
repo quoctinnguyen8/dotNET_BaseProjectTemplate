@@ -20,3 +20,4 @@
   transition: color 0.3s; }
   .hover\:text-primary:hover {
     color: var(--primary); }
+

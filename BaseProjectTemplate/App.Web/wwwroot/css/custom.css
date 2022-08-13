@@ -1,0 +1,13 @@
+﻿.box-forgot-pass {
+	padding: 0px 0px 20px 0px;
+	gap: 30px;
+	justify-content: center;
+	font-style: italic;
+}
+.box-forgot-pass-link {
+	cursor: pointer;
+	text-decoration: underline;
+}
+	.box-forgot-pass-link:hover {
+		color: black;
+	}

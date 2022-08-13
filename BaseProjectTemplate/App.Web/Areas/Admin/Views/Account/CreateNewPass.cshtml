@@ -1,4 +1,4 @@
-﻿@model App.Web.Areas.Admin.ViewModels.Account.LoginVM
+﻿@model App.Web.Areas.Admin.ViewModels.Account.ForgotPassword
 @{
 	Layout = null;
 }
@@ -26,57 +26,43 @@
 		<div class="card">
 			<div class="card-body login-card-body ">
 				<div class="login-logo">
-					<b>ĐĂNG NHẬP</b>
+					<b>MẬT KHẨU MỚI</b>
 				</div>
 
-				<form method="post" asp-action="Login" asp-controller="Account">
+				<form method="post" asp-action="CreateNewPass" asp-controller="Account">
 					@if (TempData["Mesg"] != null)
 					{
 						<p class="login-box-msg text-danger">@TempData["Mesg"]</p>
 					}
 					<div class="input-group mb-3">
-						<input asp-for="Username" type="text" autofocus class="form-control" required placeholder="Tài khoản">
+						<input asp-for="NewPwd" type="password" autofocus class="form-control" required placeholder="Mật khẩu mới..">
 						<div class="input-group-append">
 							<div class="input-group-text">
-								<span class="fas fa-user"></span>
+								<span class="fas fa-key"></span>
 							</div>
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input asp-for="Password" type="password" class="form-control" required placeholder="Mật khẩu">
+						<input asp-for="ConfirmPassword" type="password" class="form-control" required placeholder="Nhập lại mật khẩu..">
 						<div class="input-group-append">
 							<div class="input-group-text">
-								<span class="fas fa-lock"></span>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<div class="icheck-primary">
-								<input asp-for="RememberMe" checked id="remember">
-								<label for="remember">
-									Giữ tôi luôn đăng nhập
-								</label>
+								<span class="fas fa-key"></span>
 							</div>
 						</div>
 					</div>
 					<div class="row mt-3">
 						<div class="col">
-							<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+							<button type="submit" class="btn btn-primary btn-block">Đổi mật khẩu</button>
 						</div>
 					</div>
 				</form>
 			</div>
 			<!-- /.login-card-body -->
 			<div class="d-flex text-center text-primary box-forgot-pass">
-				<a asp-action="ForgotPassword" asp-controller="Account" class="box-forgot-pass-link" >
-					<span>Quên mật khẩu</span>
+				<a asp-action="Login" asp-controller="Account" class="box-forgot-pass-link" >
+					<span>Trở về</span>
 					</a>
-					@*<a src="$" class="box-forgot-pass-link">
-					<span>Reset mật khẩu</span>
-					</a>*@
 			</div>
-			
 		</div>
 	</div>
 	<!-- /.login-box -->

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class initDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -113,6 +113,33 @@ namespace App.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AppVerifyCode",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TokenString = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Expired = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    IsVerified = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    IdUser = table.Column<int>(type: "int", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()"),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppVerifyCode", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppVerifyCode_AppUser_IdUser",
+                        column: x => x.IdUser,
+                        principalTable: "AppUser",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AppRole",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedDate", "Desc", "DisplayOrder", "Name", "UpdatedBy", "UpdatedDate" },
@@ -163,7 +190,7 @@ namespace App.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUser",
                 columns: new[] { "Id", "Address", "AppRoleId", "Avatar", "BlockedBy", "BlockedTo", "CreatedBy", "CreatedDate", "DeletedDate", "DisplayOrder", "Email", "FullName", "PasswordHash", "PasswordSalt", "PhoneNumber1", "PhoneNumber2", "UpdatedBy", "UpdatedDate", "Username" },
-                values: new object[] { 1, "Thành phố Hồ Chí Minh", 1, null, null, null, -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "admin_test@gmail.com", "Obama", new byte[] { 194, 101, 85, 52, 1, 253, 36, 173, 195, 70, 204, 76, 147, 185, 23, 36, 3, 220, 227, 3, 23, 221, 183, 149, 91, 217, 228, 145, 173, 128, 216, 228, 227, 94, 197, 188, 240, 147, 62, 235, 164, 88, 62, 127, 129, 93, 141, 132, 224, 61, 216, 92, 39, 118, 137, 131, 241, 151, 237, 151, 137, 120, 5, 245 }, new byte[] { 26, 106, 117, 231, 220, 38, 11, 12, 53, 41, 184, 87, 44, 246, 92, 76, 249, 18, 231, 168, 108, 79, 168, 190, 160, 251, 126, 67, 229, 160, 224, 250, 92, 143, 187, 220, 137, 137, 78, 150, 138, 70, 168, 43, 68, 236, 149, 41, 183, 96, 83, 141, 199, 233, 4, 95, 65, 207, 225, 40, 48, 207, 168, 235, 131, 14, 109, 175, 164, 122, 182, 83, 111, 168, 11, 212, 191, 134, 195, 191, 53, 100, 122, 63, 187, 89, 232, 75, 126, 14, 225, 251, 28, 158, 140, 24, 68, 240, 41, 84, 23, 149, 214, 62, 241, 109, 0, 221, 34, 102, 221, 129, 99, 77, 139, 70, 153, 196, 33, 24, 5, 11, 56, 137, 130, 218, 181, 133 }, "0928666158", "0928666156", -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin" });
+                values: new object[] { 1, "Thành phố Hồ Chí Minh", 1, null, null, null, -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "admin_test@gmail.com", "Obama", new byte[] { 161, 55, 244, 215, 169, 179, 144, 226, 16, 152, 75, 104, 24, 212, 190, 85, 253, 19, 128, 253, 195, 185, 142, 14, 189, 111, 158, 176, 111, 232, 174, 179, 35, 175, 169, 233, 76, 175, 172, 52, 241, 3, 19, 232, 39, 118, 183, 103, 240, 71, 44, 178, 60, 94, 168, 88, 59, 128, 62, 115, 144, 14, 31, 1 }, new byte[] { 41, 238, 79, 231, 77, 22, 188, 102, 93, 180, 38, 225, 54, 132, 4, 102, 28, 168, 249, 189, 237, 97, 211, 44, 122, 22, 90, 122, 217, 237, 63, 73, 207, 64, 84, 1, 119, 248, 170, 50, 90, 145, 61, 155, 6, 35, 128, 133, 139, 216, 228, 244, 242, 32, 132, 126, 216, 101, 233, 241, 128, 34, 232, 103, 227, 242, 214, 92, 201, 210, 219, 180, 19, 35, 14, 205, 44, 44, 248, 109, 80, 60, 223, 117, 179, 178, 138, 169, 139, 50, 200, 216, 201, 63, 200, 170, 75, 42, 247, 45, 17, 136, 102, 20, 103, 225, 148, 113, 236, 232, 8, 116, 94, 0, 58, 187, 50, 71, 184, 50, 106, 110, 197, 4, 237, 15, 2, 217 }, "0928666158", "0928666156", -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppRolePermission_AppRoleId",
@@ -185,6 +212,11 @@ namespace App.Data.Migrations
                 table: "AppUser",
                 column: "Username",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppVerifyCode_IdUser",
+                table: "AppVerifyCode",
+                column: "IdUser");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -193,10 +225,13 @@ namespace App.Data.Migrations
                 name: "AppRolePermission");
 
             migrationBuilder.DropTable(
-                name: "AppUser");
+                name: "AppVerifyCode");
 
             migrationBuilder.DropTable(
                 name: "MstPermission");
+
+            migrationBuilder.DropTable(
+                name: "AppUser");
 
             migrationBuilder.DropTable(
                 name: "AppRole");

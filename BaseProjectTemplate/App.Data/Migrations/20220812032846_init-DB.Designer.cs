@@ -4,14 +4,16 @@ using App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App.Data.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    partial class WebAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220812032846_init-DB")]
+    partial class initDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,30 +319,13 @@ namespace App.Data.Migrations
                             CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin_test@gmail.com",
                             FullName = "Obama",
-                            PasswordHash = new byte[] { 11, 207, 142, 165, 129, 9, 191, 32, 89, 202, 104, 110, 198, 107, 85, 81, 70, 27, 54, 83, 55, 247, 94, 213, 146, 122, 173, 41, 51, 36, 58, 59, 240, 134, 227, 152, 227, 216, 39, 125, 66, 20, 145, 103, 87, 175, 119, 150, 163, 157, 84, 208, 247, 138, 8, 27, 127, 105, 154, 210, 209, 208, 16, 142 },
-                            PasswordSalt = new byte[] { 108, 96, 197, 207, 39, 211, 97, 59, 161, 105, 107, 122, 33, 66, 247, 160, 34, 22, 186, 226, 129, 150, 3, 219, 89, 94, 199, 24, 181, 219, 103, 230, 128, 9, 98, 104, 131, 181, 29, 183, 31, 98, 131, 206, 138, 160, 127, 250, 120, 207, 147, 114, 201, 161, 249, 53, 24, 103, 162, 67, 51, 215, 99, 87, 64, 227, 64, 197, 148, 91, 88, 242, 24, 167, 78, 15, 48, 144, 185, 178, 25, 154, 79, 82, 157, 85, 176, 142, 107, 39, 78, 36, 199, 148, 171, 101, 178, 174, 28, 88, 145, 255, 32, 140, 226, 163, 226, 52, 227, 100, 14, 82, 94, 126, 54, 151, 92, 200, 115, 230, 12, 87, 227, 4, 147, 60, 94, 74 },
+                            PasswordHash = new byte[] { 161, 55, 244, 215, 169, 179, 144, 226, 16, 152, 75, 104, 24, 212, 190, 85, 253, 19, 128, 253, 195, 185, 142, 14, 189, 111, 158, 176, 111, 232, 174, 179, 35, 175, 169, 233, 76, 175, 172, 52, 241, 3, 19, 232, 39, 118, 183, 103, 240, 71, 44, 178, 60, 94, 168, 88, 59, 128, 62, 115, 144, 14, 31, 1 },
+                            PasswordSalt = new byte[] { 41, 238, 79, 231, 77, 22, 188, 102, 93, 180, 38, 225, 54, 132, 4, 102, 28, 168, 249, 189, 237, 97, 211, 44, 122, 22, 90, 122, 217, 237, 63, 73, 207, 64, 84, 1, 119, 248, 170, 50, 90, 145, 61, 155, 6, 35, 128, 133, 139, 216, 228, 244, 242, 32, 132, 126, 216, 101, 233, 241, 128, 34, 232, 103, 227, 242, 214, 92, 201, 210, 219, 180, 19, 35, 14, 205, 44, 44, 248, 109, 80, 60, 223, 117, 179, 178, 138, 169, 139, 50, 200, 216, 201, 63, 200, 170, 75, 42, 247, 45, 17, 136, 102, 20, 103, 225, 148, 113, 236, 232, 8, 116, 94, 0, 58, 187, 50, 71, 184, 50, 106, 110, 197, 4, 237, 15, 2, 217 },
                             PhoneNumber1 = "0928666158",
                             PhoneNumber2 = "0928666156",
                             UpdatedBy = -1,
                             UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Thành phố Hồ Chí Minh",
-                            AppRoleId = 1,
-                            CreatedBy = -1,
-                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "thanhnguyendt2000@gmail.com",
-                            FullName = "Obama",
-                            PasswordHash = new byte[] { 11, 207, 142, 165, 129, 9, 191, 32, 89, 202, 104, 110, 198, 107, 85, 81, 70, 27, 54, 83, 55, 247, 94, 213, 146, 122, 173, 41, 51, 36, 58, 59, 240, 134, 227, 152, 227, 216, 39, 125, 66, 20, 145, 103, 87, 175, 119, 150, 163, 157, 84, 208, 247, 138, 8, 27, 127, 105, 154, 210, 209, 208, 16, 142 },
-                            PasswordSalt = new byte[] { 108, 96, 197, 207, 39, 211, 97, 59, 161, 105, 107, 122, 33, 66, 247, 160, 34, 22, 186, 226, 129, 150, 3, 219, 89, 94, 199, 24, 181, 219, 103, 230, 128, 9, 98, 104, 131, 181, 29, 183, 31, 98, 131, 206, 138, 160, 127, 250, 120, 207, 147, 114, 201, 161, 249, 53, 24, 103, 162, 67, 51, 215, 99, 87, 64, 227, 64, 197, 148, 91, 88, 242, 24, 167, 78, 15, 48, 144, 185, 178, 25, 154, 79, 82, 157, 85, 176, 142, 107, 39, 78, 36, 199, 148, 171, 101, 178, 174, 28, 88, 145, 255, 32, 140, 226, 163, 226, 52, 227, 100, 14, 82, 94, 126, 54, 151, 92, 200, 115, 230, 12, 87, 227, 4, 147, 60, 94, 74 },
-                            PhoneNumber1 = "0928666157",
-                            PhoneNumber2 = "0928666158",
-                            UpdatedBy = -1,
-                            UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Username = "admin1"
                         });
                 });
 

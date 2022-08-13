@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    [Migration("20220731064027_Init-Db")]
-    partial class InitDb
+    [Migration("20220812042604_add-user-data")]
+    partial class adduserdata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -319,14 +319,84 @@ namespace App.Data.Migrations
                             CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin_test@gmail.com",
                             FullName = "Obama",
-                            PasswordHash = new byte[] { 194, 101, 85, 52, 1, 253, 36, 173, 195, 70, 204, 76, 147, 185, 23, 36, 3, 220, 227, 3, 23, 221, 183, 149, 91, 217, 228, 145, 173, 128, 216, 228, 227, 94, 197, 188, 240, 147, 62, 235, 164, 88, 62, 127, 129, 93, 141, 132, 224, 61, 216, 92, 39, 118, 137, 131, 241, 151, 237, 151, 137, 120, 5, 245 },
-                            PasswordSalt = new byte[] { 26, 106, 117, 231, 220, 38, 11, 12, 53, 41, 184, 87, 44, 246, 92, 76, 249, 18, 231, 168, 108, 79, 168, 190, 160, 251, 126, 67, 229, 160, 224, 250, 92, 143, 187, 220, 137, 137, 78, 150, 138, 70, 168, 43, 68, 236, 149, 41, 183, 96, 83, 141, 199, 233, 4, 95, 65, 207, 225, 40, 48, 207, 168, 235, 131, 14, 109, 175, 164, 122, 182, 83, 111, 168, 11, 212, 191, 134, 195, 191, 53, 100, 122, 63, 187, 89, 232, 75, 126, 14, 225, 251, 28, 158, 140, 24, 68, 240, 41, 84, 23, 149, 214, 62, 241, 109, 0, 221, 34, 102, 221, 129, 99, 77, 139, 70, 153, 196, 33, 24, 5, 11, 56, 137, 130, 218, 181, 133 },
+                            PasswordHash = new byte[] { 11, 207, 142, 165, 129, 9, 191, 32, 89, 202, 104, 110, 198, 107, 85, 81, 70, 27, 54, 83, 55, 247, 94, 213, 146, 122, 173, 41, 51, 36, 58, 59, 240, 134, 227, 152, 227, 216, 39, 125, 66, 20, 145, 103, 87, 175, 119, 150, 163, 157, 84, 208, 247, 138, 8, 27, 127, 105, 154, 210, 209, 208, 16, 142 },
+                            PasswordSalt = new byte[] { 108, 96, 197, 207, 39, 211, 97, 59, 161, 105, 107, 122, 33, 66, 247, 160, 34, 22, 186, 226, 129, 150, 3, 219, 89, 94, 199, 24, 181, 219, 103, 230, 128, 9, 98, 104, 131, 181, 29, 183, 31, 98, 131, 206, 138, 160, 127, 250, 120, 207, 147, 114, 201, 161, 249, 53, 24, 103, 162, 67, 51, 215, 99, 87, 64, 227, 64, 197, 148, 91, 88, 242, 24, 167, 78, 15, 48, 144, 185, 178, 25, 154, 79, 82, 157, 85, 176, 142, 107, 39, 78, 36, 199, 148, 171, 101, 178, 174, 28, 88, 145, 255, 32, 140, 226, 163, 226, 52, 227, 100, 14, 82, 94, 126, 54, 151, 92, 200, 115, 230, 12, 87, 227, 4, 147, 60, 94, 74 },
                             PhoneNumber1 = "0928666158",
                             PhoneNumber2 = "0928666156",
                             UpdatedBy = -1,
                             UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Thành phố Hồ Chí Minh",
+                            AppRoleId = 1,
+                            CreatedBy = -1,
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "thanhnguyendt2000@gmail.com",
+                            FullName = "Obama",
+                            PasswordHash = new byte[] { 11, 207, 142, 165, 129, 9, 191, 32, 89, 202, 104, 110, 198, 107, 85, 81, 70, 27, 54, 83, 55, 247, 94, 213, 146, 122, 173, 41, 51, 36, 58, 59, 240, 134, 227, 152, 227, 216, 39, 125, 66, 20, 145, 103, 87, 175, 119, 150, 163, 157, 84, 208, 247, 138, 8, 27, 127, 105, 154, 210, 209, 208, 16, 142 },
+                            PasswordSalt = new byte[] { 108, 96, 197, 207, 39, 211, 97, 59, 161, 105, 107, 122, 33, 66, 247, 160, 34, 22, 186, 226, 129, 150, 3, 219, 89, 94, 199, 24, 181, 219, 103, 230, 128, 9, 98, 104, 131, 181, 29, 183, 31, 98, 131, 206, 138, 160, 127, 250, 120, 207, 147, 114, 201, 161, 249, 53, 24, 103, 162, 67, 51, 215, 99, 87, 64, 227, 64, 197, 148, 91, 88, 242, 24, 167, 78, 15, 48, 144, 185, 178, 25, 154, 79, 82, 157, 85, 176, 142, 107, 39, 78, 36, 199, 148, 171, 101, 178, 174, 28, 88, 145, 255, 32, 140, 226, 163, 226, 52, 227, 100, 14, 82, 94, 126, 54, 151, 92, 200, 115, 230, 12, 87, 227, 4, 147, 60, 94, 74 },
+                            PhoneNumber1 = "0928666157",
+                            PhoneNumber2 = "0928666158",
+                            UpdatedBy = -1,
+                            UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Username = "admin1"
                         });
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppVerifyCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Expired")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsVerified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("TokenString")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("AppVerifyCode");
                 });
 
             modelBuilder.Entity("App.Data.Entities.MstPermission", b =>
@@ -528,11 +598,27 @@ namespace App.Data.Migrations
                     b.Navigation("AppRole");
                 });
 
+            modelBuilder.Entity("App.Data.Entities.AppVerifyCode", b =>
+                {
+                    b.HasOne("App.Data.Entities.AppUser", "AppUser")
+                        .WithMany("AppVerifyCodeNavigation")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("App.Data.Entities.AppRole", b =>
                 {
                     b.Navigation("AppRolePermissions");
 
                     b.Navigation("AppUsers");
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppUser", b =>
+                {
+                    b.Navigation("AppVerifyCodeNavigation");
                 });
 
             modelBuilder.Entity("App.Data.Entities.MstPermission", b =>

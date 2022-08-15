@@ -41,9 +41,9 @@ namespace App.Web.Common.Mailer
 			message.Subject = Sender.Subject;
 
 			BodyBuilder bodyBuilder = new BodyBuilder();
-			bodyBuilder.TextBody = Sender.Content + "\n------\n" + mailConfig.Signature;
-
-			message.Body = bodyBuilder.ToMessageBody();
+			bodyBuilder.HtmlBody = Sender.Content;
+			// + "\n------\n" + mailConfig.Signature
+			message.Body =  bodyBuilder.ToMessageBody();
 			try
 			{
 				SmtpClient client = new SmtpClient();

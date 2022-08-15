@@ -1,7 +1,7 @@
 ﻿using App.Data.Entities;
-using App.Web.ViewModels.Account;
-using App.Web.ViewModels.Role;
-using App.Web.ViewModels.User;
+using App.Web.Areas.Admin.ViewModels.Account;
+using App.Web.Areas.Admin.ViewModels.Role;
+using App.Web.Areas.Admin.ViewModels.User;
 using AutoMapper;
 using System;
 using System.Collections.Generic;

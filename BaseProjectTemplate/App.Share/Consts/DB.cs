@@ -37,5 +37,11 @@ namespace App.Share.Consts
 			public const short GROUPNAME_LENGHT				= 100;
 			public const short DESC_LENGHT					= 100;
 		}
+
+		public static class Policy
+        {
+			public const string TABLE_NAME = "Policy";
+			public const short LIKE_DEFAULT_VALUE = 0;
+        }
 	}
 }

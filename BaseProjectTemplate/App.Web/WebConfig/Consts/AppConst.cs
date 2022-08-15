@@ -16,6 +16,9 @@ namespace App.Web.WebConfig
 		// Đường dẫn trang đăng nhập
 		public const string LOGIN_PATH							= "/login";
 
+		// đường dẫn trang đăng nhập admin
+		public const string ADMIN_LOGIN_PATH = "/Admin/Account/Login";
+
 		// Thời gian đăng nhập tối đa
 		public const byte LOGIN_TIMEOUT							= 10; // 10 giờ
 

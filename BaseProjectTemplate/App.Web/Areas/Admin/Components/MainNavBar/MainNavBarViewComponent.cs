@@ -46,6 +46,13 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 					DisplayText = "Quản lý tệp",
 					Icon = "fa-folder-open",
 				},
+				new MenuItem
+				{
+					Action = "MyProfile",
+					Controller = "Account",
+					DisplayText = "Tài khoản của tôi",
+					Icon = "fa-user",
+				},
 				//new MenuItem
 				//{
 				//	DisplayText = "Menu 2 cấp",

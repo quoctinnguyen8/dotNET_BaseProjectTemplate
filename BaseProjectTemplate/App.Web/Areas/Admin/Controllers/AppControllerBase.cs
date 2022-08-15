@@ -36,7 +36,7 @@ namespace App.Web.Areas.Admin.Controllers
 			_logger = LogManager.GetLogger(typeof(AppControllerBase));
 		}
 
-		protected RedirectToActionResult HomePage() => RedirectToAction("Index", "Home");
+		protected RedirectToActionResult HomePage() => RedirectToAction("Index", "Home", new { area = "Admin" });
 
 		/// <summary>
 		/// Gán thông báo lỗi để hiển thị lên view

@@ -14,6 +14,21 @@ namespace App.Share.Consts
 			public const short NAME_LENGTH = 50;
 			public const short DESC_LENGTH = 100;
 		}
+		public static class AppCategoryNews
+		{
+			public const string TABLE_NAME = "AppCategoryNews";
+			public const short MAX_LENGTH = 500;
+			public const string DEFAULT_DATE = "GETDATE()";
+		}
+		public static class AppNews
+		{
+			public const string TABLE_NAME = "AppNews";
+			public const short MAX_LENGTH = 500;
+			public const string DEFAULT_DATE = "GETDATE()";
+			public const bool PUBLIC_NEWS = true;
+			public const string DEFAULT_VALUE = null;
+			public const short COUNT = 0;
+		}
 		public static class AppVerifyCode
 		{
 			public const string TABLE_NAME = "AppVerifyCode";

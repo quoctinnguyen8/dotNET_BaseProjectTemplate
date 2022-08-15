@@ -12,6 +12,7 @@ namespace App.Data.Entities
 		public AppUser()
 		{
 			AppVerifyCodeNavigation = new HashSet<AppVerifyCode>();
+			AppNewsNavigation = new HashSet<AppNews>();
 		}
 		public string Username { get; set; }
 		public byte[] PasswordHash { get; set; }
@@ -27,5 +28,6 @@ namespace App.Data.Entities
 		public int? AppRoleId { get; set; }
 		public AppRole AppRole { get; set; }
 		public ICollection<AppVerifyCode> AppVerifyCodeNavigation { get; set; }
+		public ICollection<AppNews> AppNewsNavigation { get; set; }
 	}
 }

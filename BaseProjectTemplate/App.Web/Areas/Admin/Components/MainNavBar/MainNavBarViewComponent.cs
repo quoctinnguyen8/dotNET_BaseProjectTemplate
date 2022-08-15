@@ -46,6 +46,28 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 					DisplayText = "Quản lý tệp",
 					Icon = "fa-folder-open",
 				},
+				new MenuItem
+				{
+					DisplayText = "Quản lý tin tức",
+					Icon = "fa-folder-open",
+					ChildrenItems = new MenuItem[]
+					{
+						new MenuItem
+						{
+							Action = "Index",
+							Controller = "CategoryNews",
+							DisplayText = "Quản lý thể loại tin",
+							Icon = "fa-user-cog"
+						}
+						//new MenuItem
+						//{
+						//	Action = "Index",
+						//	Controller = "User",
+						//	DisplayText = "Quản lý tài khoản",
+						//	Icon = "fa-user-cog"
+						//}
+					}
+				},
 				//new MenuItem
 				//{
 				//	DisplayText = "Menu 2 cấp",

@@ -7,39 +7,50 @@ using System.Threading.Tasks;
 
 namespace App.Web.WebConfig
 {
-	public static class Router
-	{
-		public static void MapAppRouter(this IEndpointRouteBuilder endpoints)
-		{
-			endpoints.MapControllerRoute(
-					name: "login",
-					pattern: "/login",
-					defaults: new
-					{
-						controller = "Account",
-						action = "Login"
-					});
+    public static class Router
+    {
+        public static void MapAppRouter(this IEndpointRouteBuilder endpoints)
+        {
+            endpoints.MapControllerRoute(
+                    name: "login",
+                    pattern: "/login",
+                    defaults: new
+                    {
+                        controller = "Account",
+                        action = "Login"
+                    });
 
-			// Đường dẫn cho trang lỗi
-			endpoints.MapControllerRoute(
-					name: "error",
-					pattern: "/error/{statusCode}",
-					defaults: new
-					{
-						controller = "Home",
-						action = "Error"
-					});
+            endpoints.MapControllerRoute(
+                name: "/admin-login",
+                pattern: "/Admin/Account/Login",
+                defaults: new
+                {
+                    controller = "Account",
+                    action = "Login",
+                    area = "Admin"
+                }
+                );
 
-			endpoints.MapAreaControllerRoute(
-				areaName: "Admin",
-				name: "Admin",
-				pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
-				);
+            // Đường dẫn cho trang lỗi
+            endpoints.MapControllerRoute(
+                    name: "error",
+                    pattern: "/error/{statusCode}",
+                    defaults: new
+                    {
+                        controller = "Home",
+                        action = "Error"
+                    });
 
-			// Mặc định
-			endpoints.MapControllerRoute(
-					name: "default",
-					pattern: "/{controller=Home}/{action=Index}/{id?}");
-		}
-	}
+            endpoints.MapAreaControllerRoute(
+                areaName: "Admin",
+                name: "Admin",
+                pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+                );
+
+            // Mặc định
+            endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "/{controller=Home}/{action=Index}/{id?}");
+        }
+    }
 }

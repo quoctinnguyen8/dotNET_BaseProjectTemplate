@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class initDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -163,7 +163,7 @@ namespace App.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUser",
                 columns: new[] { "Id", "Address", "AppRoleId", "Avatar", "BlockedBy", "BlockedTo", "CreatedBy", "CreatedDate", "DeletedDate", "DisplayOrder", "Email", "FullName", "PasswordHash", "PasswordSalt", "PhoneNumber1", "PhoneNumber2", "UpdatedBy", "UpdatedDate", "Username" },
-                values: new object[] { 1, "Thành phố Hồ Chí Minh", 1, null, null, null, -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "admin_test@gmail.com", "Obama", new byte[] { 194, 101, 85, 52, 1, 253, 36, 173, 195, 70, 204, 76, 147, 185, 23, 36, 3, 220, 227, 3, 23, 221, 183, 149, 91, 217, 228, 145, 173, 128, 216, 228, 227, 94, 197, 188, 240, 147, 62, 235, 164, 88, 62, 127, 129, 93, 141, 132, 224, 61, 216, 92, 39, 118, 137, 131, 241, 151, 237, 151, 137, 120, 5, 245 }, new byte[] { 26, 106, 117, 231, 220, 38, 11, 12, 53, 41, 184, 87, 44, 246, 92, 76, 249, 18, 231, 168, 108, 79, 168, 190, 160, 251, 126, 67, 229, 160, 224, 250, 92, 143, 187, 220, 137, 137, 78, 150, 138, 70, 168, 43, 68, 236, 149, 41, 183, 96, 83, 141, 199, 233, 4, 95, 65, 207, 225, 40, 48, 207, 168, 235, 131, 14, 109, 175, 164, 122, 182, 83, 111, 168, 11, 212, 191, 134, 195, 191, 53, 100, 122, 63, 187, 89, 232, 75, 126, 14, 225, 251, 28, 158, 140, 24, 68, 240, 41, 84, 23, 149, 214, 62, 241, 109, 0, 221, 34, 102, 221, 129, 99, 77, 139, 70, 153, 196, 33, 24, 5, 11, 56, 137, 130, 218, 181, 133 }, "0928666158", "0928666156", -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin" });
+                values: new object[] { 1, "Thành phố Hồ Chí Minh", 1, null, null, null, -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "admin_test@gmail.com", "Obama", new byte[] { 64, 89, 191, 44, 113, 137, 222, 208, 101, 43, 223, 116, 102, 90, 150, 64, 176, 192, 218, 203, 200, 41, 57, 102, 184, 90, 133, 167, 150, 197, 186, 135, 20, 153, 59, 245, 201, 151, 142, 85, 46, 105, 85, 240, 128, 208, 35, 162, 27, 83, 147, 177, 121, 246, 30, 109, 17, 82, 59, 92, 8, 152, 98, 177 }, new byte[] { 43, 118, 90, 132, 135, 1, 183, 100, 80, 136, 131, 235, 77, 209, 48, 0, 53, 17, 239, 16, 33, 87, 95, 95, 88, 215, 95, 203, 182, 22, 7, 217, 21, 47, 119, 222, 193, 194, 14, 57, 163, 56, 72, 127, 44, 79, 42, 188, 159, 248, 117, 116, 31, 101, 149, 190, 9, 52, 11, 233, 93, 226, 54, 201, 244, 70, 76, 45, 27, 13, 254, 219, 130, 157, 58, 16, 179, 217, 67, 97, 5, 120, 116, 147, 226, 167, 126, 27, 35, 233, 202, 114, 153, 240, 254, 79, 73, 240, 172, 177, 60, 6, 236, 206, 94, 134, 101, 43, 94, 222, 155, 19, 250, 219, 30, 115, 5, 125, 149, 138, 70, 116, 170, 6, 48, 205, 140, 158 }, "0928666158", "0928666156", -1, new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppRolePermission_AppRoleId",

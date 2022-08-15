@@ -1,0 +1,174 @@
+﻿@model App.Web.Areas.Admin.ViewModels.Account.UpdateUserViewModel
+@{
+	ViewData["Title"] = "MyProfile";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@{
+	string wasNullData = "Chưa đặt";
+}
+
+@section head{
+	<style>
+		.bigger-text {
+			font-size: 1.25rem;
+		}
+	</style>
+}
+
+@{
+	if (ViewBag.UpdateMessage != null)
+	{
+		var response = ViewBag.UpdateMessage;
+		if (response.IsSuccess)
+		{
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-check"></i> Alert!</h5>
+				@response.Message
+			</div>
+		}
+		else
+		{
+			<div class="alert alert-warning alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+				@response.Message
+			</div>
+		}
+	}
+}
+
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<!-- Profile Image -->
+				<div class="card card-primary card-outline">
+					<div class="card-body box-profile">
+						<div class="text-center">
+							<img class="profile-user-img img-fluid img-circle" src=@(Model.Avatar ?? "/Images/Avatar/default.png") alt="User profile picture">
+						</div>
+
+						<h3 class="profile-username text-center">@(Model.Username ?? wasNullData)</h3>
+
+						@*<p class="text-muted text-center">@Model.RoleName</p>*@
+
+						<ul class="list-group list-group-unbordered mb-3">
+							<li class="list-group-item">
+								<b>Phân quyền</b>
+								<a class="float-right">@(Model.RoleName ?? "Chưa phân quyền")</a>
+							</li>
+						</ul>
+					</div>
+					<!-- /.card-body -->
+				</div>
+			</div>
+			<!-- /.col -->
+			<div class="col-md-9">
+				<div class="card">
+					<div class="card-header p-2">
+						<ul class="nav nav-pills">
+							<li class="nav-item"><a class="nav-link active" href="#basic-information" data-toggle="tab">Thông tin cơ bản</a></li>
+							<li class="nav-item"><a class="nav-link" href="#authorize" data-toggle="tab">Phân quyền</a></li>
+							<li class="nav-item"><a class="nav-link" href="#update" data-toggle="tab">Chỉnh sửa</a></li>
+						</ul>
+					</div><!-- /.card-header -->
+					<div class="card-body">
+						<div class="tab-content">
+							<div class="tab-pane active" id="basic-information">
+								<!-- /.card-header -->
+								<div class="card-body p-0">
+									<strong><i class="fas fa-book mr-1"></i> Họ tên</strong>
+
+									<p class="text-muted bigger-text">
+										@(Model.FullName ?? wasNullData)
+									</p>
+
+									<hr>
+
+									<strong><i class="fas fa-envelope mr-1"></i> Email</strong>
+
+									<p class="text-muted bigger-text">@(Model.Email ?? wasNullData)</p>
+
+									<hr>
+
+									<strong><i class="fas fa-phone mr-1"></i> Số điện thoại 1</strong>
+
+									<p class="text-muted bigger-text">@(Model.PhoneNumber1 ?? wasNullData)</p>
+
+									<hr>
+
+									<strong><i class="fas fa-phone mr-1"></i> Số điện thoại 2</strong>
+
+									<p class="text-muted bigger-text">@(Model.PhoneNumber2 ?? wasNullData)</p>
+
+									<hr>
+
+									<strong><i class="fas fa-map-marker mr-1"></i> Địa chỉ</strong>
+
+									<p class="text-muted bigger-text">@(Model.Address ?? wasNullData)</p>
+
+									<hr>
+								</div>
+								<!-- /.card-body -->
+							</div>
+							<!-- /.tab-pane -->
+							<div class="tab-pane" id="authorize">
+								<strong><i class="fas fa-key mr-1"></i> Phân quyền</strong>
+								<p class="text-muted bigger-text">@Model.RoleName</p>
+								<hr>
+							</div>
+							<!-- /.tab-pane -->
+
+							<div class="tab-pane" id="update">
+								<form class="form-horizontal" asp-area="Admin" asp-controller="Account" asp-action="MyProfile" method="post">
+									<div class="form-group row">
+										<label asp-for="FullName" class="col-sm-2 col-form-label">Họ và tên</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" asp-for="FullName" placeholder="@(Model.FullName ?? "Họ và tên")">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label asp-for="Email" class="col-sm-2 col-form-label">Email</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" asp-for="Email" placeholder="@(Model.Email ?? "Email")" disabled>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label asp-for="PhoneNumber1" class="col-sm-2 col-form-label">Số điện thoại 1</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" asp-for="PhoneNumber1" placeholder="@(Model.PhoneNumber1 ?? "Số điện thoại 1")">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label asp-for="PhoneNumber2" class="col-sm-2 col-form-label">Số điện thoại 2</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" asp-for="PhoneNumber2" placeholder="@(Model.PhoneNumber2 ?? "Số điện thoại 2")">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label asp-for="Address" class="col-sm-2 col-form-label">Địa chỉ</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" asp-for="Address" placeholder="@(Model.Address ?? "Địa chỉ")">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="offset-sm-2 col-sm-10">
+											<button type="submit" class="btn btn-danger">Lưu</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- /.tab-pane -->
+						</div>
+						<!-- /.tab-content -->
+					</div><!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div><!-- /.container-fluid -->
+</section>

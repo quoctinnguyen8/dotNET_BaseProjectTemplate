@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace App.Web.WebConfig
 		{
 			services.AddDbContext<WebAppDbContext>(option =>
 			{
-				option.UseSqlServer(Configuration.GetConnectionString("Database"));
+				option.UseSqlServer(Configuration.GetConnectionString("Database"))
+				.LogTo(Console.WriteLine, LogLevel.Information);
 			});
 
 			// Đăng ký repositories
@@ -29,7 +31,7 @@ namespace App.Web.WebConfig
 			// Cấu hình đăng nhập
 			services.AddAuthentication(AppConst.COOKIES_AUTH).AddCookie(options =>
 			{
-				options.LoginPath = AppConst.LOGIN_PATH;
+				options.LoginPath = AppConst.ADMIN_LOGIN_PATH;
 				options.ExpireTimeSpan = TimeSpan.FromHours(AppConst.LOGIN_TIMEOUT);
 				options.Cookie.HttpOnly = true;
 			});

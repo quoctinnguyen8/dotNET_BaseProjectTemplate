@@ -23,6 +23,7 @@ namespace App.Web.WebConfig
 				option.UseSqlServer(Configuration.GetConnectionString("Database"));
 			});
 
+			var db = services.BuildServiceProvider().GetService<WebAppDbContext>();
 			// Đăng ký repositories
 			services.AddScoped<GenericRepository>();
 
@@ -54,6 +55,10 @@ namespace App.Web.WebConfig
 			AppMailConfiguration mailConfig = new();
 			mailConfig.LoadFromConfig(Configuration);
 			services.AddSingleton(mailConfig);
+
+			SystemEnv sysEnv = new(db);
+			sysEnv.LoadSysEnv();
+			services.AddSingleton(sysEnv);
 		}
 	}
 }

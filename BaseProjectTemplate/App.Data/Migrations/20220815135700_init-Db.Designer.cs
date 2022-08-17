@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(WebAppDbContext))]
-    [Migration("20220731064027_Init-Db")]
-    partial class InitDb
+    [Migration("20220815135700_init-Db")]
+    partial class initDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -319,8 +319,8 @@ namespace App.Data.Migrations
                             CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin_test@gmail.com",
                             FullName = "Obama",
-                            PasswordHash = new byte[] { 194, 101, 85, 52, 1, 253, 36, 173, 195, 70, 204, 76, 147, 185, 23, 36, 3, 220, 227, 3, 23, 221, 183, 149, 91, 217, 228, 145, 173, 128, 216, 228, 227, 94, 197, 188, 240, 147, 62, 235, 164, 88, 62, 127, 129, 93, 141, 132, 224, 61, 216, 92, 39, 118, 137, 131, 241, 151, 237, 151, 137, 120, 5, 245 },
-                            PasswordSalt = new byte[] { 26, 106, 117, 231, 220, 38, 11, 12, 53, 41, 184, 87, 44, 246, 92, 76, 249, 18, 231, 168, 108, 79, 168, 190, 160, 251, 126, 67, 229, 160, 224, 250, 92, 143, 187, 220, 137, 137, 78, 150, 138, 70, 168, 43, 68, 236, 149, 41, 183, 96, 83, 141, 199, 233, 4, 95, 65, 207, 225, 40, 48, 207, 168, 235, 131, 14, 109, 175, 164, 122, 182, 83, 111, 168, 11, 212, 191, 134, 195, 191, 53, 100, 122, 63, 187, 89, 232, 75, 126, 14, 225, 251, 28, 158, 140, 24, 68, 240, 41, 84, 23, 149, 214, 62, 241, 109, 0, 221, 34, 102, 221, 129, 99, 77, 139, 70, 153, 196, 33, 24, 5, 11, 56, 137, 130, 218, 181, 133 },
+                            PasswordHash = new byte[] { 107, 99, 40, 126, 224, 228, 190, 184, 69, 131, 24, 36, 140, 97, 10, 102, 113, 252, 182, 116, 231, 29, 171, 174, 135, 225, 133, 215, 157, 214, 162, 252, 89, 182, 204, 17, 234, 255, 199, 18, 175, 95, 46, 107, 153, 135, 250, 241, 189, 156, 225, 136, 227, 55, 110, 164, 114, 190, 203, 19, 125, 184, 86, 207 },
+                            PasswordSalt = new byte[] { 131, 61, 182, 189, 221, 91, 171, 88, 130, 62, 249, 91, 13, 48, 71, 133, 193, 95, 155, 100, 42, 223, 175, 17, 200, 243, 113, 57, 26, 135, 47, 196, 6, 103, 215, 191, 181, 125, 65, 242, 238, 237, 114, 168, 156, 89, 26, 118, 189, 78, 107, 185, 71, 214, 36, 199, 20, 220, 99, 9, 15, 67, 3, 205, 241, 136, 139, 197, 125, 226, 254, 102, 169, 237, 226, 97, 204, 193, 189, 64, 180, 93, 38, 12, 150, 211, 206, 121, 246, 206, 190, 8, 41, 241, 120, 164, 220, 8, 136, 176, 138, 64, 146, 8, 217, 179, 109, 214, 185, 0, 141, 131, 49, 86, 64, 198, 235, 66, 84, 244, 86, 245, 124, 108, 64, 59, 56, 31 },
                             PhoneNumber1 = "0928666158",
                             PhoneNumber2 = "0928666156",
                             UpdatedBy = -1,
@@ -497,6 +497,78 @@ namespace App.Data.Migrations
                             Desc = "Quản lý file hệ thống",
                             GroupName = "Quản lý file",
                             Table = "FileManager"
+                        });
+                });
+
+            modelBuilder.Entity("App.Data.Entities.SysEnv", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("SysEnv");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "Logo",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "BrandName",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "BrandAddress",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "BrandPhone",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "Facebook",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "Zalo",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "MessengerEmbeddedCode",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "EmbeddedMap",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "AdminReciverMail",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "KiotVietClientId",
+                            Value = ""
+                        },
+                        new
+                        {
+                            Key = "KiotVietClientSecretKey",
+                            Value = ""
                         });
                 });
 

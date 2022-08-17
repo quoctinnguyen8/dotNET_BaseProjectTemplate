@@ -16,6 +16,7 @@ namespace App.Data
 		public DbSet<AppRolePermission> AppRolePermissions { get; set; }
 		public DbSet<AppUser> AppUsers { get; set; }
 		public DbSet<MstPermission> MstPermissions { get; set; }
+		public DbSet<SysEnv> SysEnvs { get; set; }
 
 		public WebAppDbContext(DbContextOptions options) : base(options)
 		{
@@ -26,12 +27,14 @@ namespace App.Data
 			modelBuilder.ApplyConfiguration(new AppRoleConfig());
 			modelBuilder.ApplyConfiguration(new AppRolePermissionConfig());
 			modelBuilder.ApplyConfiguration(new MstPermissionConfig());
+			modelBuilder.ApplyConfiguration(new SysEnvConfig());
 
 			// Tạo dữ liệu
 			modelBuilder.Entity<MstPermission>().SeedData();
 			modelBuilder.Entity<AppRole>().SeedData();
 			modelBuilder.Entity<AppUser>().SeedData();
 			modelBuilder.Entity<AppRolePermission>().SeedData();
+			modelBuilder.Entity<SysEnv>().SeedData();
 		}
 	}
 }

@@ -1,0 +1,26 @@
+﻿@model SystemEnv;
+
+@{
+	ViewData["Title"] = "System Environment";
+}
+
+<form asp-action="Update" autocomplete="off">
+	<div class="row">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		@foreach (var item in Model.GetKeys())
+		{
+			<div class="col-6">
+				<div class="form-group">
+					<label for="@item" class="control-label">@item</label>
+					<input id="@item" name="@item" class="form-control" value="@Model[item]" />
+				</div>
+			</div>
+		}
+
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
+		<button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Nhập lại</button>
+	</div>
+</form>

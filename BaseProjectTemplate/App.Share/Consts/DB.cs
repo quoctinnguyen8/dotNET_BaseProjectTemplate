@@ -37,5 +37,11 @@ namespace App.Share.Consts
 			public const short GROUPNAME_LENGHT				= 100;
 			public const short DESC_LENGHT					= 100;
 		}
+		public static class SysEnv
+		{
+			public const string TABLE_NAME					= "SysEnv";
+			public const short KEY_LENGTH					= 100;
+			public const short VALUE_LENGTH					= 2000;
+		}
 	}
 }

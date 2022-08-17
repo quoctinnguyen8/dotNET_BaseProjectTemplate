@@ -1,63 +1,92 @@
 ﻿@model IEnumerable<App.Web.ViewModels.User.UserListItemVM>
 
 @{
-	ViewData["Title"] = "Danh sách tài khoản";
+    ViewData["Title"] = "Danh sách tài khoản";
 }
 
 @if (User.IsInPermission(AuthConst.AppUser.CREATE))
 {
-<div class="my-2">
-	<a asp-action="Create" class="btn btn-primary">
-		<i class="fas fa-user-plus"></i> &nbsp; Tạo mới người dùng
-	</a>
-</div>
+    <div class="my-2">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> &nbsp; Tạo mới người dùng
+        </a>
+    </div>
 }
 
 
 <div class="table-responsive">
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Tài khoản</th>
-				<th>Họ tên</th>
-				<th>SĐT</th>
-				<th>Email</th>
-				<th>Vai trò</th>
-				<th>Ngày tạo</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model)
-			{
-			<tr>
-				<td class="fit">@item.RowIndex</td>
-				<td>@item.Username</td>
-				<td>@item.FullName</td>
-				<td>@item.PhoneNumber1</td>
-				<td>@item.Email</td>
-				<td>@item.RoleName</td>
-				<td>@item.CreatedDate.ToDMY()</td>
-				<td class="fit">
-					<a asp-action="Details" asp-route-id="@item.Id"
-						class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
-					@if (User.IsInPermission(AuthConst.AppUser.UPDATE))
-					{
-						<a asp-action="Edit" asp-route-id="@item.Id"
-							class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
-					}
-					@if (User.IsInPermission(AuthConst.AppUser.DELETE))
-					{
-						<a asp-action="Delete" asp-route-id="@item.Id"
-							class="btn btn-outline-secondary btn-sm js-delete-confirm"
-							data-msg="Xác nhận xóa tài khoản [@item.Username]?"><i class="fa fas fa-trash"></i></a>
-					}
-				</td>
-			</tr>
-			}
-		</tbody>
-	</table>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tài khoản</th>
+                <th>Họ tên</th>
+                <th>SĐT</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Ngày tạo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fit">@item.RowIndex</td>
+                    <td>@item.Username</td>
+                    <td>@item.FullName</td>
+                    <td>@item.PhoneNumber1</td>
+                    <td>@item.Email</td>
+                    <td>@item.RoleName</td>
+                    <td>@item.CreatedDate.ToDMY()</td>
+                    <td class="fit">
+                        <a asp-action="Details" asp-route-id="@item.Id"
+                           class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
+                        @if (User.IsInPermission(AuthConst.AppUser.UPDATE))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id"
+                               class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
+                        }
+                        @if (User.IsInPermission(AuthConst.AppUser.DELETE))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id"
+                               class="btn btn-outline-secondary btn-sm js-delete-confirm"
+                               data-msg="Xác nhận xóa tài khoản [@item.Username]?"><i class="fa fas fa-trash"></i></a>
+                        }
+
+                        <!-- Button trigger modal -->
+                        <button type="button" data-id="@item.Id" class="btn btn-outline-secondary btn-sm js-block" data-toggle="modal" data-target="#ModalBlock">
+                            <i class="fas fa-ban"></i>
+                        </button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="ModalBlock" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Khoá tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-block">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary js-succes-block">Khóa tài khoản</button>
+            </div>
+        </div>
+    </div>
+</div>
 <partial name="_Pager" />
+@section scripts{
+    <script src="~/js/user/blockuser.js" asp-append-version="true"></script>
+}

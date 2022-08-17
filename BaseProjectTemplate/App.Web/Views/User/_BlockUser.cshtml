@@ -1,0 +1,48 @@
+﻿@model App.Data.Entities.AppUser
+@*<div class="row">
+	<div class="col-12">
+		<form asp-action="Create" autocomplete="off">
+			<div class="form-group" hidden>
+				<label class="control-label"></label>
+				<input name="Id" value="@Model.Id" class="form-control" />
+				<span class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Khóa đến ngày</label>
+				<input name="BlockedTo" type="date" class="form-control" />
+				<span class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Khóa vĩnh viễn</label>
+				<input name="Permanentblock" type="checkbox" class="form-control" />
+				<span class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary js-succes-block">Khóa tài khoản</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>*@
+<div>
+    <h1 hidden class="id-user">@Model.Id</h1>
+    <h4 class="js-name">bạn đang khóa tài khoản @Model.Username</h4>
+    <hr />
+    <form >
+        <div class="form-group">
+            <label class="control-label">Khóa đến ngày</label>
+            <input name="BlockedTo" type="date" class="form-control js-date" />
+            <span class="text-danger js-message"></span>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input js-check" type="checkbox">
+            <label class="form-check-label" >
+                khóa vĩnh viễn
+            </label>
+            <span class="text-danger js-message"></span>
+        </div>     
+    </form>
+</div>
+

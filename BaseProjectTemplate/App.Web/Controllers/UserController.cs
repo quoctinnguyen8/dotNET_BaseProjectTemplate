@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using X.PagedList;
 
@@ -32,7 +33,7 @@ namespace App.Web.Controllers
 		{
 			// Chú ý dấu ngoặc khi dùng await cùng với GenRowIndex
 			var data = (await _repository
-				.GetAll<AppUser>(u => u.Username != this.CurrentUsername)
+				.GetAll<AppUser>(u => u.Username != this.CurrentUsername&&u.BlockedTo==null)
 				.ProjectTo<UserListItemVM>(AutoMapperProfile.UserIndexConf)
 				.ToPagedListAsync(page, size))
 				.GenRowIndex();
@@ -145,6 +146,37 @@ namespace App.Web.Controllers
 			await _repository.DeleteAsync(user);
 			SetSuccessMesg($"Tài khoản [{user.Username}] được xóa thành công");
 			return RedirectToAction(nameof(Index));
+		}
+		public async Task<IActionResult> _BlockUser(int id)
+        {
+			var data = await _repository.FindAsync<AppUser>(id);
+			return PartialView(data);           
+        }
+		[HttpPost]
+		public async Task<IActionResult> _BlockUser(BlockUserVM data)
+        {
+            try
+            {
+				var user = await _repository.FindAsync<AppUser>(data.Id);
+				user.BlockedBy =Convert.ToInt32( User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                if (data.Permanentblock)
+                {
+					var date = DateTime.Now;
+					var blockTime = date.AddYears(100);
+					user.BlockedTo = blockTime;
+                }
+                else
+                {
+					user.BlockedTo = data.BlockedTo;
+                }
+				SetSuccessMesg($"Khóa tài khoản [{user.Username}] thành công");
+				await _repository.UpdateAsync<AppUser>(user);
+				return Ok(true);
+            }catch
+            {
+				return Ok(false);
+            }
+			
 		}
 	}
 }

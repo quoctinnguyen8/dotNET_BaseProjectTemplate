@@ -17,5 +17,7 @@ namespace App.Web.Areas.Admin.ViewModels.News
 		public string PathImagePost { get; set; }
 		[AppRequired]
 		public int CategoryId { get; set; }
+		[AppRequired]
+		public string? StampLink { get; set; }
 	}
 }

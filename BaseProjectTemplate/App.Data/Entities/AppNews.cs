@@ -20,6 +20,7 @@ namespace App.Data.Entities
 		public bool Published { get; set; }
 		public DateTime? PublishedAt { get; set; }
 		public string? PathImagePost { get; set; }
+		public string? StampLink { get; set; }
 		public int UserId { get; set; }
 		public int CategoryId { get; set; }
 		public AppUser Users { get; set; }

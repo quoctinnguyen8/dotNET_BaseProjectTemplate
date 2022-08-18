@@ -1,5 +1,6 @@
 ﻿using App.Data.Entities;
 using App.Data.Repositories;
+using App.Share.Consts;
 using App.Share.Extensions;
 using App.Web.Areas.Admin.ViewModels.News;
 using App.Web.Common;
@@ -20,7 +21,7 @@ namespace App.Web.Areas.Admin.Controllers
 		{
 			_repository = repository;
 		}
-
+		[AppAuthorize()]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			var data = (await _repository
@@ -30,8 +31,9 @@ namespace App.Web.Areas.Admin.Controllers
 			.GenRowIndex();
 			return View(data);
 		}
+		[AppAuthorize(AuthConst.AppNews.CREATE)]
 		public IActionResult Create() => View();
-
+		[AppAuthorize(AuthConst.AppNews.CREATE)]
 		[HttpPost]
 		public async Task<IActionResult> Create(AddOrUpdateNewsVM model)
 		{
@@ -45,13 +47,12 @@ namespace App.Web.Areas.Admin.Controllers
 				SetErrorMesg("Bài viết này đã tồn tại");
 				return View(model);
 			}
-			//var user = CurrentUserId;
-			// lỗi đăng nhập không đăng nhập được nên không get dc user ai đó fix cái đăng nhập đi
+		
 			try
 			{
+				var user = CurrentUserId;
 				var news = _mapper.Map<AppNews>(model);
-				news.UserId = 2;
-				//news.UserId = user;
+				news.UserId = user;
 				news.Slug = news.Title.Slugify();
 				await _repository.AddAsync(news);
 				SetSuccessMesg($"Thêm bài viết '{news.Title}' thành công");
@@ -63,6 +64,7 @@ namespace App.Web.Areas.Admin.Controllers
 				return View(model);
 			}
 		}
+		[AppAuthorize(AuthConst.AppNews.UPDATE)]
 		public async Task<IActionResult> Edit(int id)
 		{
 			var post = await _repository.FindAsync<AppNews>(id);
@@ -74,7 +76,7 @@ namespace App.Web.Areas.Admin.Controllers
 			var postVM = _mapper.Map<AddOrUpdateNewsVM>(post);
 			return View(postVM);
 		}
-		//[AppAuthorize(AuthConst.AppUser.UPDATE)]
+		[AppAuthorize(AuthConst.AppNews.UPDATE)]
 		[HttpPost]
 		public async Task<IActionResult> Edit(AddOrUpdateNewsVM model)
 		{
@@ -110,6 +112,7 @@ namespace App.Web.Areas.Admin.Controllers
 				return View(model);
 			}
 		}
+		[AppAuthorize(AuthConst.AppNews.DELETE)]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var news = await _repository.FindAsync<AppNews>(id);
@@ -122,6 +125,7 @@ namespace App.Web.Areas.Admin.Controllers
 			SetSuccessMesg($"Bài viết '{news.Title}' được xóa thành công");
 			return RedirectToAction(nameof(Index));
 		}
+		[AppAuthorize(AuthConst.AppNews.PUBLIC)]
 		public async Task<IActionResult> PublicNews(int id)
 		{
 			var post = await _repository.FindAsync<AppNews>(id);
@@ -136,6 +140,7 @@ namespace App.Web.Areas.Admin.Controllers
 			SetSuccessMesg($"Công khai bài viết [{post.Title}] thành công");
 			return RedirectToAction(nameof(Index));
 		}
+		[AppAuthorize(AuthConst.AppNews.UNPUBLIC)]
 		public async Task<IActionResult> UnPublicNews(int id)
 		{
 			var post = await _repository.FindAsync<AppNews>(id);

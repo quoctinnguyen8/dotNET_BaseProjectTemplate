@@ -29,7 +29,7 @@
 					<b>ĐĂNG NHẬP</b>
 				</div>
 
-				<form method="post" asp-action="Login" asp-controller="Account">
+				<form method="post" asp-action="Login" asp-controller="Account" asp-area="Admin">
 					@if (TempData["Mesg"] != null)
 					{
 						<p class="login-box-msg text-danger">@TempData["Mesg"]</p>

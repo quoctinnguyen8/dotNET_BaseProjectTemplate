@@ -1,0 +1,32 @@
+﻿@model App.Web.Areas.Admin.ViewModels.News.AddOrUpdateNewsVM
+
+@{
+    ViewData["Title"] = $"Edit bài viết {Model.Title}";
+}
+
+@section head{
+    <link href="~/lib/bs4-autocomplete/css/bs4-autocomplete.css" rel="stylesheet" />
+    <link href="~/summernote/summernote-bs4.min.css" rel="stylesheet" />
+}
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <partial name="_AddOrUpdateNews" model="Model" />
+                <div class="form-group">
+                    <input type="submit" value="Cập nhật bài viết" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section scripts{
+    <script src="~/lib/bs4-autocomplete/js/bs4-autocomplete.js"></script>
+    <script src="~/js/file-news-manager/news_file_manager.js"></script>
+    @await Html.PartialAsync("_Summernote", new {height = 500, selector = "#Content"})
+    }
+

@@ -1,5 +1,8 @@
 ﻿using App.Web.WebConfig;
 using System;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace App.Web.Common.Helpers

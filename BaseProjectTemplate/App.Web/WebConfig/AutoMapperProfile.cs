@@ -1,6 +1,7 @@
 ﻿using App.Data.Entities;
 using App.Web.Areas.Admin.ViewModels.Account;
 using App.Web.Areas.Admin.ViewModels.CategoryNews;
+using App.Web.Areas.Admin.ViewModels.News;
 using App.Web.Areas.Admin.ViewModels.Role;
 using App.Web.Areas.Admin.ViewModels.User;
 using AutoMapper;
@@ -20,6 +21,14 @@ namespace App.Web.WebConfig
 
 			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
 			CreateMap<AppUser, UserAddOrEditVM>();
+
+			CreateMap<AppCategoryNews, AddOrUpdateCategoryNewsVM>();
+
+			CreateMap<AddOrUpdateCategoryNewsVM, AppCategoryNews>();
+
+			CreateMap<AddOrUpdateNewsVM, AppNews>();
+
+			CreateMap<AppNews, AddOrUpdateNewsVM>();
 		}
 		public static MapperConfiguration RoleIndexConf = new (mapper =>
 		{
@@ -62,6 +71,11 @@ namespace App.Web.WebConfig
 		public static MapperConfiguration CategoryNewsConf = new(mapper =>
 		{
 			mapper.CreateMap<AppCategoryNews, ListItemCategoryNewsVM>();
+		});
+
+		public static MapperConfiguration NewsConf = new(mapper =>
+		{
+			mapper.CreateMap<AppNews, ListItemNewsVM>();
 		});
 	}
 }

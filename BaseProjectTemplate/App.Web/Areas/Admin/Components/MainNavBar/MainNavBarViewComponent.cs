@@ -58,14 +58,14 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 							Controller = "CategoryNews",
 							DisplayText = "Quản lý thể loại tin",
 							Icon = "fa-user-cog"
+						},
+						new MenuItem
+						{
+							Action = "Index",
+							Controller = "News",
+							DisplayText = "Quản lý bài viết",
+							Icon = "fa-user-cog"
 						}
-						//new MenuItem
-						//{
-						//	Action = "Index",
-						//	Controller = "User",
-						//	DisplayText = "Quản lý tài khoản",
-						//	Icon = "fa-user-cog"
-						//}
 					}
 				},
 				//new MenuItem

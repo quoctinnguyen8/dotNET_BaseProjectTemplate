@@ -19,8 +19,9 @@ namespace App.Data.Entities
 		public float Votes { get; set; }
 		public bool Published { get; set; }
 		public DateTime? PublishedAt { get; set; }
-		public string? PathImagePost { get; set; }
-		public string? StampLink { get; set; }
+		public string? CoverImgPath { get; set; }
+		public string? CoverImgThumbnailPath { get; set; }
+		public string? StampPath { get; set; }
 		public int UserId { get; set; }
 		public int CategoryId { get; set; }
 		public AppUser Users { get; set; }

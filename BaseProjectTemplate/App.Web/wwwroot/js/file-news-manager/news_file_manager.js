@@ -10,15 +10,13 @@ $(document).ready(function () {
 			destroyOnClose: true,
 			getFileCallback: function (files, fm) {
 				var domain = window.location.origin + "/";
-				let result = files.url.replace(domain, "/");
-				let maskLink = files.tmb.replace(domain, "/");
-
+				let resultPath = files.url.replace(domain, "/");
+				let thumbnailPath = files.tmb.replace(domain, "/");
 				document.getElementById('selectedImages').innerHTML = "";
-				$('#selectedImages').append(`<img class="image-review" src ="${result}" />`);
-
+				$('#selectedImages').append(`<img class="image-review" src ="${resultPath}" />`);
 				if (files.mime != 'directory') {
-					$("#PathImagePost").val(result);
-					$("#StampLink").val(maskLink);
+					$("#CoverImgPath").val(resultPath);
+					$("#CoverImgThumbnailPath").val(thumbnailPath);
 					fm.destroy();
 					return false;
 				}

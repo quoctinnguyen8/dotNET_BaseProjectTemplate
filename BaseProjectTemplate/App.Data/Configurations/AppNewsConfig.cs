@@ -50,7 +50,7 @@ namespace App.Data.Configurations
 			builder.Property(s => s.Views)
 				.HasDefaultValue(DB.AppNews.COUNT);
 
-			builder.Property(s => s.PathImagePost)
+			builder.Property(s => s.CoverImgPath)
 				.IsRequired(false)
 				.HasDefaultValue(DB.AppNews.DEFAULT_VALUE);
 

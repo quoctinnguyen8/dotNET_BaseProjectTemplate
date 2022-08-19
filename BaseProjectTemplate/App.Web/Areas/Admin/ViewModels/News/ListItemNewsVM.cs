@@ -12,6 +12,6 @@ namespace App.Web.Areas.Admin.ViewModels.News
 		public float Votes { get; set; }
 		public bool Published { get; set; }
 		public DateTime? PublishedAt { get; set; }
-		public string? PathImagePost { get; set; }
+		public string? CoverImgPath { get; set; }
 	}
 }

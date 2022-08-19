@@ -64,7 +64,7 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 							Action = "Index",
 							Controller = "News",
 							DisplayText = "Quản lý bài viết",
-							Icon = "fa-newspaper"
+							Icon = "fa-file-alt"
 						}
 					}
 				},

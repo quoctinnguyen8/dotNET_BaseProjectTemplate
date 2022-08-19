@@ -21,5 +21,13 @@ namespace App.Web.WebConfig
 			public const string PERMISSION_IDS_REGEX					= @"((?<!^,)\d+(,(?!$)|$))+";
 			public const string PERMISSION_IDS_REGEX_ERR_MESG			= "Dữ liệu không hợp lệ, hãy thử làm mới trang";
 		}
+		public static class CategoryNewsVM
+		{
+			public const short MIN_LENGTH = 10;
+		}
+		public static class NewsVM
+		{
+			public const short MIN_LENGTH = 10;
+		}
 	}
 }

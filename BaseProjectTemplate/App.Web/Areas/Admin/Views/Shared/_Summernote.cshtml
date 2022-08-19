@@ -1,0 +1,121 @@
+﻿@model dynamic
+@{
+    int height = Model.height ?? 200;
+    string selector = Model.selector;
+}
+
+<link rel="stylesheet" href="~/lib/jqueryui/themes/base/theme.css" />
+<link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="~/lib/elfinder/css/elfinder.full.css" />
+<link rel="stylesheet" href="~/lib/elfinder/css/theme.min.css" />
+
+<script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+<script src="~/lib/elfinder/js/elfinder.min.js"></script>
+
+<script src="~/summernote/summernote-bs4.js"></script>
+
+<script>
+    (function (factory) {
+        if (typeof define === 'function' && define.amd) {
+            define(['jquery'], factory);
+        } 
+        else if (typeof module === 'object' && module.exports) {
+            module.exports = factory(require('jquery'));
+        } else {
+            factory(window.jQuery);
+        }
+    }(function ($) {
+      $.extend($.summernote.plugins, {
+            'elfinder': function (context) {
+                var self = this;
+                var ui = $.summernote.ui;
+                context.memo('button.elfinder', function () {
+                    var button = ui.button({
+                        contents: '<i class="note-icon-picture"/> elFinder',
+                        tooltip: 'Quản lý file',
+                        click: function () {
+                            elfinderDialog(context); 
+                            console.log(context);
+                        }
+                    });
+                    var $elfinder = button.render();
+                    return $elfinder;
+                });
+                this.destroy = function () {
+                    this.$panel.remove();
+                    this.$panel = null;
+                };
+            }
+        });
+    }));
+function elfinderDialog(editor) {
+  	    var fm = $('<div/>').dialogelfinder({
+  		url : '/file-manager/connector',
+        baseUrl: "/lib/elfinder/",  
+  		lang : 'vi',
+  		width : 840,
+  		height: 450,
+  		destroyOnClose : true,
+  		getFileCallback : function(files, fm) {
+            var domain = window.location.origin + "/";
+			let result = files.url.replace(domain, "/");
+            editor.invoke('editor.insertImage', result);
+  		},
+  		commandsOptions : {
+  			getfile : {
+  			    oncomplete : 'close',
+  			    folders : false
+  			}
+  		}
+  	}).dialogelfinder('instance');
+}
+
+    $(document).ready(function() {
+        $('@selector').summernote({
+            placeholder: 'Enter content....',
+            tabsize: 2,
+            height: @height,
+            minHeight: 100,
+            maxHeight: 300,
+            focus: true,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+                ['custom', ['elfinder']],
+            ],
+              popover: {
+                         image: [
+                    ['custom', ['elfinder']],
+                    ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+                    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                    ['remove', ['removeMedia']]
+                ],
+                        link: [
+                            ['link', ['linkDialogShow', 'unlink']]
+                        ],
+                        table: [
+                            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+                        ],
+                        air: [
+                            ['color', ['color']],
+                            ['font', ['bold', 'underline', 'clear']],
+                            ['para', ['ul', 'paragraph']],
+                            ['table', ['table']],
+                            ['insert', ['link', 'picture']]
+                        ]
+                    },
+                    codemirror: {
+                        theme: 'monokai'
+                    }
+        });
+    });
+
+</Script>

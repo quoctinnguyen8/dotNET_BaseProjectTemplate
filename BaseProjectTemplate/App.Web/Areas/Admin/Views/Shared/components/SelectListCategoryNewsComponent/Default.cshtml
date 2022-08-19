@@ -1,0 +1,6 @@
+﻿@model App.Web.Areas.Admin.ViewModels.News.AddOrUpdateNewsVM
+
+<select asp-for="CategoryId"
+		asp-items="(SelectList)ViewBag.CategoryNews"
+		class="selectpicker form-control" title="Category">
+</select>

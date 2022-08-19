@@ -1,0 +1,47 @@
+﻿@model App.Web.Areas.Admin.ViewModels.News.AddOrUpdateNewsVM
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label required">Tiêu đề</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Tóm tắt</label>
+            <input asp-for="Summary" class="form-control" />
+            <span asp-validation-for="Summary" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label required">Thể loại</label>
+            <vc:select-list-category-news-component news="Model" />
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label required">Ảnh bìa</label>
+            <div id="elfinder-background"></div>
+            <input asp-for="CoverImgThumbnailPath" hidden type="text" style="width:500px;">
+             <input asp-for="CoverImgPath" hidden type="text" style="width:500px;">
+            <button id="selectedImages" type="button" class="btn btn-elfinder">
+                @{
+                    if (Model is null)
+                    {
+                        <span>Ảnh bìa bài viết</span>
+                    }
+                    else
+                    {
+                        <img class="image-review" src ="@Model.CoverImgPath" />
+                    }
+                }
+            </button>
+            <span asp-validation-for="CoverImgPath" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Content" class="control-label"></label>
+    <textarea asp-for="Content" class="form-control"> </textarea>
+    <span asp-validation-for="Content" class="text-danger"></span>
+</div>

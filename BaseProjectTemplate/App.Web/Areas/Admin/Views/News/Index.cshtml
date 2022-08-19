@@ -1,0 +1,110 @@
+﻿@model IEnumerable<App.Web.Areas.Admin.ViewModels.News.ListItemNewsVM>
+
+@{
+    ViewData["Title"] = "Danh sách tin tức ";
+}
+
+@if (User.IsInPermission(AuthConst.AppNews.CREATE))
+{
+    <div class="my-2">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-book-medical"></i> &nbsp; Tạo mới bài viết
+        </a>
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Trạng thái</th>
+                <th>Tiêu đề</th>
+                <th class="text-center">Hình</th>
+                <th>Tóm tắt</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fit">@item.RowIndex</td>
+                    @{
+                        if (item.Published)
+                        {
+                            if (User.IsInPermission(AuthConst.AppNews.UNPUBLIC))
+                            {
+                                <td class="td-status-news">
+                                    <a asp-action="UnPublicNews" asp-route-id="@item.Id"
+                       class="btn btn-outline-danger btn-sm js-delete-confirm"
+                       data-msg="Xác nhận không công khai bài viết [@item.Title]?">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="td-status-news">
+                                    <div class="btn btn-outline-danger">
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            if (User.IsInPermission(AuthConst.AppNews.PUBLIC))
+                            {
+                                <td class="td-status-news">
+                                    <a asp-action="PublicNews" asp-route-id="@item.Id"
+                       class="btn btn-outline-success btn-sm js-delete-confirm"
+                       data-msg="Xác nhận công khai bài viết [@item.Title]?">
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="td-status-news">
+                                    <div class="btn btn-outline-success">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </td>
+                            }
+                        }
+                    }
+                    <td>@item.Title</td>
+                    <td class="text-center">
+                        @{
+                            if (item.CoverImgPath != null)
+                            {
+                                <img src="@item.CoverImgPath" class="item-news-image" />
+                            }
+                            else
+                            {
+                                <img src="~/files/logo.png" style=" width: 50px;height: 50px;object-fit: cover;" />
+                            }
+                        }
+                    </td>
+                    <td>@item.Summary</td>
+                    <td class="fit">
+                        @if (User.IsInPermission(AuthConst.AppNews.UPDATE))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id"
+                       class="btn btn-outline-warning btn-sm"><i class="fa fas fa-pen"></i></a>
+                        }
+                        @if (User.IsInPermission(AuthConst.AppNews.DELETE))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id"
+                       class="btn btn-outline-danger btn-sm js-delete-confirm"
+                       data-msg="Xác nhận xóa bái viết [@item.Title]?"><i class="fa fas fa-trash"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<partial name="_Pager" />

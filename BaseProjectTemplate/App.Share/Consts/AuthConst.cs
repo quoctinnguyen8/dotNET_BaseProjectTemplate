@@ -33,6 +33,21 @@ namespace App.Share.Consts
 		{
 			public const int MANAGE_ALL_USER_FILES		= 1205;
 		}
-
+		public static class AppNews
+        {
+			public const int VIEW_LIST = 1301;
+			public const int CREATE = 1302;
+			public const int UPDATE = 1303;
+			public const int DELETE = 1304;
+			public const int PUBLIC = 1305;
+			public const int UNPUBLIC = 1306;
+		}
+		public static class AppCategoryNews
+		{
+			public const int VIEW_LIST = 1401;
+			public const int CREATE = 1402;
+			public const int UPDATE = 1403;
+			public const int DELETE = 1404;
+		}
 	}
 }

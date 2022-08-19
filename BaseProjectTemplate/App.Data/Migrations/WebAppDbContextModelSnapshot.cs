@@ -19,6 +19,145 @@ namespace App.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("App.Data.Entities.AppCategoryNews", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Slug")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppCategoryNews");
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppNews", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverImgPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverImgThumbnailPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Published")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("StampPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Summary")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("Views")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(0L);
+
+                    b.Property<float>("Votes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(0f);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex(new[] { "Slug" }, "uq_slug")
+                        .IsUnique();
+
+                    b.ToTable("AppNews");
+                });
+
             modelBuilder.Entity("App.Data.Entities.AppRole", b =>
                 {
                     b.Property<int>("Id")
@@ -317,14 +456,84 @@ namespace App.Data.Migrations
                             CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin_test@gmail.com",
                             FullName = "Obama",
-                            PasswordHash = new byte[] { 194, 101, 85, 52, 1, 253, 36, 173, 195, 70, 204, 76, 147, 185, 23, 36, 3, 220, 227, 3, 23, 221, 183, 149, 91, 217, 228, 145, 173, 128, 216, 228, 227, 94, 197, 188, 240, 147, 62, 235, 164, 88, 62, 127, 129, 93, 141, 132, 224, 61, 216, 92, 39, 118, 137, 131, 241, 151, 237, 151, 137, 120, 5, 245 },
-                            PasswordSalt = new byte[] { 26, 106, 117, 231, 220, 38, 11, 12, 53, 41, 184, 87, 44, 246, 92, 76, 249, 18, 231, 168, 108, 79, 168, 190, 160, 251, 126, 67, 229, 160, 224, 250, 92, 143, 187, 220, 137, 137, 78, 150, 138, 70, 168, 43, 68, 236, 149, 41, 183, 96, 83, 141, 199, 233, 4, 95, 65, 207, 225, 40, 48, 207, 168, 235, 131, 14, 109, 175, 164, 122, 182, 83, 111, 168, 11, 212, 191, 134, 195, 191, 53, 100, 122, 63, 187, 89, 232, 75, 126, 14, 225, 251, 28, 158, 140, 24, 68, 240, 41, 84, 23, 149, 214, 62, 241, 109, 0, 221, 34, 102, 221, 129, 99, 77, 139, 70, 153, 196, 33, 24, 5, 11, 56, 137, 130, 218, 181, 133 },
+                            PasswordHash = new byte[] { 6, 42, 105, 215, 201, 199, 188, 230, 66, 64, 1, 195, 229, 18, 35, 96, 121, 190, 243, 185, 68, 77, 194, 149, 129, 224, 122, 104, 66, 207, 212, 35, 231, 147, 48, 243, 100, 123, 251, 26, 69, 114, 88, 120, 70, 76, 86, 93, 95, 69, 225, 253, 205, 91, 39, 93, 2, 126, 220, 189, 223, 2, 177, 212 },
+                            PasswordSalt = new byte[] { 249, 68, 129, 154, 78, 206, 41, 68, 3, 11, 138, 14, 209, 92, 185, 74, 161, 183, 216, 192, 1, 179, 145, 108, 110, 126, 218, 183, 247, 168, 102, 55, 107, 73, 215, 92, 173, 56, 221, 56, 170, 131, 79, 68, 94, 206, 36, 251, 47, 134, 74, 37, 56, 126, 130, 95, 209, 150, 185, 90, 57, 4, 192, 115, 221, 80, 24, 111, 192, 109, 81, 63, 66, 224, 132, 26, 118, 74, 235, 255, 245, 144, 187, 229, 117, 126, 42, 180, 74, 5, 198, 242, 104, 156, 155, 51, 91, 141, 56, 128, 153, 39, 45, 6, 13, 80, 108, 111, 207, 246, 55, 107, 93, 160, 59, 132, 133, 243, 185, 16, 210, 109, 103, 222, 204, 69, 39, 172 },
                             PhoneNumber1 = "0928666158",
                             PhoneNumber2 = "0928666156",
                             UpdatedBy = -1,
                             UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Thành phố Hồ Chí Minh",
+                            AppRoleId = 1,
+                            CreatedBy = -1,
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "thanhnguyendt2000@gmail.com",
+                            FullName = "Obama",
+                            PasswordHash = new byte[] { 6, 42, 105, 215, 201, 199, 188, 230, 66, 64, 1, 195, 229, 18, 35, 96, 121, 190, 243, 185, 68, 77, 194, 149, 129, 224, 122, 104, 66, 207, 212, 35, 231, 147, 48, 243, 100, 123, 251, 26, 69, 114, 88, 120, 70, 76, 86, 93, 95, 69, 225, 253, 205, 91, 39, 93, 2, 126, 220, 189, 223, 2, 177, 212 },
+                            PasswordSalt = new byte[] { 249, 68, 129, 154, 78, 206, 41, 68, 3, 11, 138, 14, 209, 92, 185, 74, 161, 183, 216, 192, 1, 179, 145, 108, 110, 126, 218, 183, 247, 168, 102, 55, 107, 73, 215, 92, 173, 56, 221, 56, 170, 131, 79, 68, 94, 206, 36, 251, 47, 134, 74, 37, 56, 126, 130, 95, 209, 150, 185, 90, 57, 4, 192, 115, 221, 80, 24, 111, 192, 109, 81, 63, 66, 224, 132, 26, 118, 74, 235, 255, 245, 144, 187, 229, 117, 126, 42, 180, 74, 5, 198, 242, 104, 156, 155, 51, 91, 141, 56, 128, 153, 39, 45, 6, 13, 80, 108, 111, 207, 246, 55, 107, 93, 160, 59, 132, 133, 243, 185, 16, 210, 109, 103, 222, 204, 69, 39, 172 },
+                            PhoneNumber1 = "0928666157",
+                            PhoneNumber2 = "0928666158",
+                            UpdatedBy = -1,
+                            UpdatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Username = "admin1"
                         });
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppVerifyCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Expired")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsVerified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("TokenString")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("AppVerifyCode");
                 });
 
             modelBuilder.Entity("App.Data.Entities.MstPermission", b =>
@@ -495,7 +704,116 @@ namespace App.Data.Migrations
                             Desc = "Quản lý file hệ thống",
                             GroupName = "Quản lý file",
                             Table = "FileManager"
+                        },
+                        new
+                        {
+                            Id = 1301,
+                            Code = "VIEW_LIST",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Xem danh sách bài viết",
+                            GroupName = "Quản lý tin tức",
+                            Table = "AppNews"
+                        },
+                        new
+                        {
+                            Id = 1302,
+                            Code = "CREATE",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Thêm bài viết",
+                            GroupName = "Quản lý tin tức",
+                            Table = "AppNews"
+                        },
+                        new
+                        {
+                            Id = 1303,
+                            Code = "UPDATE",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Cập nhật bài viết",
+                            GroupName = "Quản lý tin tức",
+                            Table = "AppNews"
+                        },
+                        new
+                        {
+                            Id = 1304,
+                            Code = "DELETE",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Xóa bài viết",
+                            GroupName = "Quản lý tin tức",
+                            Table = "AppNews"
+                        },
+                        new
+                        {
+                            Id = 1305,
+                            Code = "PUBLIC",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Công khai bài viết",
+                            GroupName = "Quản lý tin tức",
+                            Table = "AppNews"
+                        },
+                        new
+                        {
+                            Id = 1306,
+                            Code = "UNPUBLIC",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Gỡ bỏ bài viết",
+                            GroupName = "Quản lý tin tức",
+                            Table = "AppNews"
+                        },
+                        new
+                        {
+                            Id = 1401,
+                            Code = "VIEW_LIST",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Xem danh sách thể loại tin",
+                            GroupName = "Quản lý thể loại tin",
+                            Table = "AppCategoryNews"
+                        },
+                        new
+                        {
+                            Id = 1402,
+                            Code = "CREATE",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Thêm thể loại bài viết",
+                            GroupName = "Quản lý thể loại tin",
+                            Table = "AppCategoryNews"
+                        },
+                        new
+                        {
+                            Id = 1403,
+                            Code = "UPDATE",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Cập nhật thể loại bài viết",
+                            GroupName = "Quản lý thể loại tin",
+                            Table = "AppCategoryNews"
+                        },
+                        new
+                        {
+                            Id = 1404,
+                            Code = "DELETE",
+                            CreatedDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Desc = "Xóa thể loại bài viết",
+                            GroupName = "Quản lý thể loại tin",
+                            Table = "AppCategoryNews"
                         });
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppNews", b =>
+                {
+                    b.HasOne("App.Data.Entities.AppCategoryNews", "CategoryNews")
+                        .WithMany("NewsNavigation")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("App.Data.Entities.AppUser", "Users")
+                        .WithMany("AppNewsNavigation")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CategoryNews");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("App.Data.Entities.AppRolePermission", b =>
@@ -526,11 +844,34 @@ namespace App.Data.Migrations
                     b.Navigation("AppRole");
                 });
 
+            modelBuilder.Entity("App.Data.Entities.AppVerifyCode", b =>
+                {
+                    b.HasOne("App.Data.Entities.AppUser", "AppUser")
+                        .WithMany("AppVerifyCodeNavigation")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppCategoryNews", b =>
+                {
+                    b.Navigation("NewsNavigation");
+                });
+
             modelBuilder.Entity("App.Data.Entities.AppRole", b =>
                 {
                     b.Navigation("AppRolePermissions");
 
                     b.Navigation("AppUsers");
+                });
+
+            modelBuilder.Entity("App.Data.Entities.AppUser", b =>
+                {
+                    b.Navigation("AppNewsNavigation");
+
+                    b.Navigation("AppVerifyCodeNavigation");
                 });
 
             modelBuilder.Entity("App.Data.Entities.MstPermission", b =>

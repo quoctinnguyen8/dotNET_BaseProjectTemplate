@@ -1,0 +1,25 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@model IEnumerable<object>
+
+@{
+	string _params = "";
+	foreach (var item in Context.Request.Query)
+	{
+		if (item.Key != "page")
+		{
+			_params += $"&{item.Key}={item.Value}";
+		}
+	}
+}
+<div class="my-4">
+@Html.PagedListPager((IPagedList)Model,
+	page => Url.Action("Index", new { page = page }) + _params,
+	new PagedListRenderOptions
+	{
+		LiElementClasses = new string[] { "page-item" },
+		PageClasses = new string[] { "page-link" },
+	})
+</div>

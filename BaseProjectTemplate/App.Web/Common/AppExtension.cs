@@ -1,7 +1,6 @@
 ﻿using App.Share.Consts;
 using App.Share.Extensions;
 using App.Web.WebConfig;
-using App.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using X.PagedList;
+using App.Web.Areas.Admin.ViewModels;
 
 namespace App.Web.Common
 {

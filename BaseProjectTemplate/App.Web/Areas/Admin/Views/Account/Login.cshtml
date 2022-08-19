@@ -1,0 +1,90 @@
+﻿@model App.Web.Areas.Admin.ViewModels.Account.LoginVM
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Đăng nhập</title>
+	<link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true" />
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/adminLTE/plugins/fontawesome-free/css/all.min.css">
+	<!-- icheck bootstrap -->
+	<link rel="stylesheet" href="/adminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/adminLTE/dist/css/adminlte.min.css">
+	<link rel="stylesheet" href="/css/custom.css">
+</head>
+<body class="hold-transition login-page">
+	<div class="login-box" style="margin-top:-120px;">
+		<!-- /.login-logo -->
+		<div class="card">
+			<div class="card-body login-card-body ">
+				<div class="login-logo">
+					<b>ĐĂNG NHẬP</b>
+				</div>
+
+				<form method="post" asp-action="Login" asp-controller="Account" asp-area="Admin">
+					@if (TempData["Mesg"] != null)
+					{
+						<p class="login-box-msg text-danger">@TempData["Mesg"]</p>
+					}
+					<div class="input-group mb-3">
+						<input asp-for="Username" type="text" autofocus class="form-control" required placeholder="Tài khoản">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input asp-for="Password" type="password" class="form-control" required placeholder="Mật khẩu">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<div class="icheck-primary">
+								<input asp-for="RememberMe" checked id="remember">
+								<label for="remember">
+									Giữ tôi luôn đăng nhập
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-3">
+						<div class="col">
+							<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /.login-card-body -->
+			<div class="d-flex text-center text-primary box-forgot-pass">
+				<a asp-action="ForgotPassword" asp-controller="Account" class="box-forgot-pass-link" >
+					<span>Quên mật khẩu</span>
+					</a>
+					@*<a src="$" class="box-forgot-pass-link">
+					<span>Reset mật khẩu</span>
+					</a>*@
+			</div>
+			
+		</div>
+	</div>
+	<!-- /.login-box -->
+	<!-- jQuery -->
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/adminLTE/dist/js/adminlte.min.js"></script>
+</body>
+</html>

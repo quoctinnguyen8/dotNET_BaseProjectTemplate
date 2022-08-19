@@ -76,6 +76,20 @@ namespace App.Data.Repositories
 			LogDebugQuery(query);
 			return await query.SingleOrDefaultAsync();
 		}
+		public virtual async Task<TEntity> GetOneOrderAsync<TEntity>(
+		Expression<Func<TEntity, bool>> where,
+		bool selectFromTrash = false)
+		where TEntity : AppEntityBase
+		{
+			var defaultWhere = GetDefaultWhereExpr<TEntity>(selectFromTrash);
+			var query = _db.Set<TEntity>()
+				.OrderByDescending(o => o.CreatedDate)
+						.AsNoTracking()
+						.Where(defaultWhere)
+						.Where(where);
+			LogDebugQuery(query);
+			return await query.FirstOrDefaultAsync();
+		}
 
 		public virtual async Task<TViewModel> GetOneAsync<TEntity, TViewModel>(
 			Expression<Func<TEntity, bool>> where,

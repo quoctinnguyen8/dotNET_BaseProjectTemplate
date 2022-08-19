@@ -30,6 +30,12 @@ namespace App.Web.WebConfig
 						action = "Error"
 					});
 
+			endpoints.MapAreaControllerRoute(
+				areaName: "Admin",
+				name: "Admin",
+				pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+				);
+
 			// Mặc định
 			endpoints.MapControllerRoute(
 					name: "default",

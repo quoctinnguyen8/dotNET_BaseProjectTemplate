@@ -1,7 +1,9 @@
 ﻿using App.Data.Entities;
-using App.Web.ViewModels.Account;
-using App.Web.ViewModels.Role;
-using App.Web.ViewModels.User;
+using App.Web.Areas.Admin.ViewModels.Account;
+using App.Web.Areas.Admin.ViewModels.CategoryNews;
+using App.Web.Areas.Admin.ViewModels.News;
+using App.Web.Areas.Admin.ViewModels.Role;
+using App.Web.Areas.Admin.ViewModels.User;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -19,8 +21,15 @@ namespace App.Web.WebConfig
 
 			// Map dữ liệu từ kiểu AppUser sang UserAddOrEditVM
 			CreateMap<AppUser, UserAddOrEditVM>();
-		}
 
+			CreateMap<AppCategoryNews, AddOrUpdateCategoryNewsVM>();
+
+			CreateMap<AddOrUpdateCategoryNewsVM, AppCategoryNews>();
+
+			CreateMap<AddOrUpdateNewsVM, AppNews>();
+
+			CreateMap<AppNews, AddOrUpdateNewsVM>();
+		}
 		public static MapperConfiguration RoleIndexConf = new (mapper =>
 		{
 			// Map dữ liệu từ kiểu AppRole sang RoleListItemVM
@@ -57,6 +66,16 @@ namespace App.Web.WebConfig
 			mapper.CreateMap<AppUser, RoleDeleteVM_User>();
 			// Map dữ liệu thuộc tính cha
 			mapper.CreateMap<AppRole, RoleDeleteVM>();
+		});
+
+		public static MapperConfiguration CategoryNewsConf = new(mapper =>
+		{
+			mapper.CreateMap<AppCategoryNews, ListItemCategoryNewsVM>();
+		});
+
+		public static MapperConfiguration NewsConf = new(mapper =>
+		{
+			mapper.CreateMap<AppNews, ListItemNewsVM>();
 		});
 	}
 }

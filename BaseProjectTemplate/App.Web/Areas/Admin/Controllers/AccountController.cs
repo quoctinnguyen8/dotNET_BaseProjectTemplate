@@ -29,11 +29,12 @@ namespace App.Web.Areas.Admin.Controllers
 		private readonly IAccountService _accountService;
 		private readonly IHostingEnvironment _env;
 
-		public AccountController(IHostingEnvironment env, AppMailConfiguration mailConfig, GenericRepository repository, IMapper mapper) : base(mapper)
+		public AccountController(IAccountService  accountService,IHostingEnvironment env, AppMailConfiguration mailConfig, GenericRepository repository, IMapper mapper) : base(mapper)
 		{
 			_repository = repository;
 			_mailConfig = mailConfig;
 			_env = env;
+			_accountService = accountService;
 		}
 
         public IActionResult Login() => User.Identity.IsAuthenticated ? HomePage() : View();
@@ -283,8 +284,7 @@ namespace App.Web.Areas.Admin.Controllers
 		public async Task<IActionResult> MyProfile()
 		{
 			ViewBag.Title = "Tài khoản của tôi";
-			var currentUserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-			return View(await _accountService.GetUserById(currentUserId));
+			return View(await _accountService.GetUserById(CurrentUserId));
 		}
 
 		[HttpPost]

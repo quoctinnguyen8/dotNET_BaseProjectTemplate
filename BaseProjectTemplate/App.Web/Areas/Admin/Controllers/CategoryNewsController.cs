@@ -24,7 +24,7 @@ namespace App.Web.Areas.Admin.Controllers
 		{
 			_repository = repository;
 		}
-		//[AppAuthorize()]
+		[AppAuthorize()]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			var data = (await _repository
@@ -34,9 +34,9 @@ namespace App.Web.Areas.Admin.Controllers
 			.GenRowIndex();
 			return View(data);
 		}
-		//[AppAuthorize(AuthConst.AppUser.CREATE)]
+		[AppAuthorize(AuthConst.AppCategoryNews.CREATE)]
 		public IActionResult Create() => View();
-		//[AppAuthorize(AuthConst.AppUser.CREATE)]
+		[AppAuthorize(AuthConst.AppCategoryNews.CREATE)]
 		[HttpPost]
 		public async Task<IActionResult> Create(AddOrUpdateCategoryNewsVM model)
 		{
@@ -65,7 +65,7 @@ namespace App.Web.Areas.Admin.Controllers
 				return View(model);
 			}
 		}
-		//[AppAuthorize(AuthConst.AppUser.UPDATE)]
+		[AppAuthorize(AuthConst.AppCategoryNews.UPDATE)]
 		public async Task<IActionResult> Edit(int id)
 		{
 			var cate = await _repository.FindAsync<AppCategoryNews>(id);
@@ -77,7 +77,7 @@ namespace App.Web.Areas.Admin.Controllers
 			var categoryVM = _mapper.Map<AddOrUpdateCategoryNewsVM>(cate);
 			return View(categoryVM);
 		}
-		//[AppAuthorize(AuthConst.AppUser.UPDATE)]
+		[AppAuthorize(AuthConst.AppCategoryNews.UPDATE)]
 		[HttpPost]
 		public async Task<IActionResult> Edit(AddOrUpdateCategoryNewsVM model)
 		{
@@ -113,7 +113,7 @@ namespace App.Web.Areas.Admin.Controllers
 				return View(model);
 			}
 		}
-		//[AppAuthorize(AuthConst.AppUser.DELETE)]
+		[AppAuthorize(AuthConst.AppCategoryNews.DELETE)]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var category = await _repository.FindAsync<AppCategoryNews>(id);

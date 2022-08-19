@@ -162,6 +162,108 @@ namespace App.Data.DataSeeders
 				}
 			);
 			#endregion
+
+			#region Data quản lý tin tức
+			groupName = "Quản lý tin tức";
+			builder.HasData(
+				new MstPermission
+				{
+					Id = AuthConst.AppNews.VIEW_LIST,
+					Code = "VIEW_LIST",
+					Table = DB.AppNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Xem danh sách bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppNews.CREATE,
+					Code = "CREATE",
+					Table = DB.AppNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Thêm bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppNews.UPDATE,
+					Code = "UPDATE",
+					Table = DB.AppNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Cập nhật bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppNews.DELETE,
+					Code = "DELETE",
+					Table = DB.AppNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Xóa bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppNews.PUBLIC,
+					Code = "PUBLIC",
+					Table = DB.AppNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Công khai bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppNews.UNPUBLIC,
+					Code = "UNPUBLIC",
+					Table = DB.AppNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Gỡ bỏ bài viết",
+					CreatedDate = now
+				}
+				);
+			#endregion
+
+			#region Data quản lý thể loại tin tức
+			groupName = "Quản lý thể loại tin";
+			builder.HasData(
+				new MstPermission
+				{
+					Id = AuthConst.AppCategoryNews.VIEW_LIST,
+					Code = "VIEW_LIST",
+					Table = DB.AppCategoryNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Xem danh sách thể loại tin",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppCategoryNews.CREATE,
+					Code = "CREATE",
+					Table = DB.AppCategoryNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Thêm thể loại bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppCategoryNews.UPDATE,
+					Code = "UPDATE",
+					Table = DB.AppCategoryNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Cập nhật thể loại bài viết",
+					CreatedDate = now
+				},
+				new MstPermission
+				{
+					Id = AuthConst.AppCategoryNews.DELETE,
+					Code = "DELETE",
+					Table = DB.AppCategoryNews.TABLE_NAME,
+					GroupName = groupName,
+					Desc = "Xóa thể loại bài viết",
+					CreatedDate = now
+				}
+				);
+			#endregion
 		}
 	}
 }

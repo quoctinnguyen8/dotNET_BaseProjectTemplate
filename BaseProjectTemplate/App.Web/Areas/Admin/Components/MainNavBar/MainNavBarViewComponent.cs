@@ -49,7 +49,7 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 				new MenuItem
 				{
 					DisplayText = "Quản lý tin tức",
-					Icon = "fa-folder-open",
+					Icon = "fa-newspaper",
 					ChildrenItems = new MenuItem[]
 					{
 						new MenuItem
@@ -57,14 +57,14 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 							Action = "Index",
 							Controller = "CategoryNews",
 							DisplayText = "Quản lý thể loại tin",
-							Icon = "fa-user-cog"
+							Icon = "fa-th-large"
 						},
 						new MenuItem
 						{
 							Action = "Index",
 							Controller = "News",
 							DisplayText = "Quản lý bài viết",
-							Icon = "fa-user-cog"
+							Icon = "fa-newspaper"
 						}
 					}
 				},

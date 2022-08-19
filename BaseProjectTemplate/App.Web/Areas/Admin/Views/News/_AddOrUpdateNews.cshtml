@@ -22,7 +22,8 @@
         <div class="form-group">
             <label class="control-label required">Ảnh bìa</label>
             <div id="elfinder-background"></div>
-            <input asp-for="PathImagePost" hidden type="text" style="width:500px;">
+            <input asp-for="StampLink" hidden type="text" style="width:500px;">
+             <input asp-for="PathImagePost" hidden type="text" style="width:500px;">
             <button id="selectedImages" type="button" class="btn btn-elfinder">
                 @{
                     if (Model is null)

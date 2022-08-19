@@ -1,0 +1,29 @@
+﻿@model App.Web.Areas.Admin.ViewModels.CategoryNews.AddOrUpdateCategoryNewsVM
+
+@{
+    ViewData["Title"] = $"Cập nhật thể loại {Model.Title}";
+}
+@section head{
+	<link href="~/lib/bs4-autocomplete/css/bs4-autocomplete.css" rel="stylesheet" />
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="small mb-2">
+			Cập nhật lần cuối lúc @Model?.UpdatedDate.ToDMYHM()
+		</div>
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <partial name="_AddOrUpdate" model="Model"/>
+           <div class="form-group">
+				<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
+				<button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Nhập lại</button>
+			</div>
+        </form>
+    </div>
+</div>
+<partial name="_BackToList" />
+@section scripts{
+	<script src="~/lib/bs4-autocomplete/js/bs4-autocomplete.js"></script>
+}
+

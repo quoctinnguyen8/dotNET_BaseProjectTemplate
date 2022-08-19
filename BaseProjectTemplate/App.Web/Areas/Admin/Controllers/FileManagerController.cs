@@ -21,14 +21,14 @@ namespace App.Web.Areas.Admin.Controllers
 		}
 
 		[Route("file-manager")]
-		[AppAuthorize()]
+		//[AppAuthorize()]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
 		[Route("file-manager/connector")]
-		[AppAuthorize()]
+		//[AppAuthorize()]
 		public async Task<IActionResult> Connector()
 		{
 			var connector = GetConnector();

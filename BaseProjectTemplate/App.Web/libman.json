@@ -13,6 +13,10 @@
     {
       "library": "jqueryui@1.12.1",
       "destination": "wwwroot/lib/jqueryui/"
+    },
+    {
+      "library": "summernote@0.8.20",
+      "destination": "wwwroot/summernote/"
     }
   ]
 }

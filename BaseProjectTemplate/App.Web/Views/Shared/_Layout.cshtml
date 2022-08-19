@@ -1,76 +1,42 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE HTML>
+<html lang="vi">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>@ViewBag.Title</title>
-	<link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true"/>
-	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="/adminLTE/plugins/fontawesome-free/css/all.min.css">
-	<!-- Theme style -->
-	<link rel="stylesheet" href="/adminLTE/dist/css/adminlte.min.css">
-
-	<link href="~/lib/bs4-toast-snackbar/css/toast-snackbar.css" rel="stylesheet" asp-append-version="true"/>
-
-	<link href="~/css/site.css" rel="stylesheet" asp-append-version="true"/>
-
-	@RenderSection("head", false)
+    <meta charset="utf-8">
+    <meta name="language" content="vi_VN">
+    <meta name="author" content="Source demo">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="#ffffff">
+    <title id="hdtitle">Source demo</title>
+    <meta name="description" content="Source demo">
+    <meta name="keywords" content="Source demo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/clientLTE/dist/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="~/clientLTE/dist/css/header.css?v=1.0.6">
+    <link rel="stylesheet" href="~/clientLTE/dist/css/app.css?v=1.0.6">
+    <link rel="stylesheet" type="text/css" href="~/clientLTE/dist/css/Montserrat.css">
+    <link rel="stylesheet" type="text/css" href="~/clientLTE/dist/css/style.css">
+    @RenderSection("Css", false)
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-	<!-- Site wrapper -->
-	<div class="wrapper">
-		<partial name="_HeaderBar" />
-
-		@*<vc:main-nav-bar></vc:main-nav-bar>*@
-
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
-			<!-- Main content -->
-			<section class="content p-4">
-
-				<partial name="_Noti" />
-
-				<!-- Default box -->
-				<div class="card">
-					<div class="card-header">
-						<h3 class="h3">@ViewBag.Title</h3>
-					</div>
-					<div class="card-body">
-						@RenderBody()
-					</div>
-					<!-- /.card-body -->
-				</div>
-				<!-- /.card -->
-
-			</section>
-			<!-- /.content -->
-		</div>
-		<!-- /.content-wrapper -->
-
-		<footer class="main-footer">
-			Project
-		</footer>
-
-	</div>
-	@*<partial name="_ChangePassword" model="null" />*@
-	<!-- ./wrapper -->
-	<!-- jQuery -->
-	<script src="/lib/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap 4 -->
-	<script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Thư viện toast-->
-	<script src="~/lib/bs4-toast-snackbar/js/toast-snackbar.js"></script>
-	<!-- AdminLTE App -->
-	<script src="/adminLTE/dist/js/adminlte.min.js"></script>
-	<!-- Validation -->
-	<partial name="_ValidationScriptsPartial" />
-	<!-- Thư viện modal -->
-	<script src="~/lib/bs4-modal/modal.js"></script>
-	<!-- Javascript dùng chung -->
-	<script src="~/js/site.js" asp-append-version="true"></script>
-
-	@RenderSection("scripts", false)
+<body id="home-page">
+    <partial name="_HeaderWidget" />
+    <partial name="_HeaderBar" />
+    <div class="container">
+        @RenderBody()
+    </div>
+    <partial name="_FooterSupport" />
+    <partial name="_Footer" />
+    <div class="login-overlay"></div>
+    <partial name="_LoginBox" />
+    @*Link js*@
+    <div class="scroll-down"><span>scroll down</span></div>
+    <div class="go-top"></div>
+    <script type="text/javascript" src="~/clientLTE/dist/js/jquery.js"></script>
+    <script type="text/javascript" src="~/clientLTE/dist/js/validate.js?v=1.0.6"></script>
+    <script type="text/javascript" src="~/clientLTE/dist/js/app.js?v=1.0.6"></script>
+    <script type="text/javascript" src="~/clientLTE/dist/js/cart.js?v=1.0.6"></script>
+    @RenderSection("JavaScript", false)
 </body>
+
 </html>

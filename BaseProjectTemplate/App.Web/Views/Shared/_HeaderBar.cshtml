@@ -1,20 +1,220 @@
-﻿@using System.Security.Claims
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-	<!-- Left navbar links -->
-	<ul class="navbar-nav">
-		<li class="nav-item">
-			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-		</li>
-	</ul>
-
-	<!-- Right navbar links -->
-	<ul class="navbar-nav ml-auto">
-		<li class="nav-item px-3">
-			Xin chào @Context.User.Identity.Name
-		</li>
-
-		<li class="nav-item px-3">
-			<a asp-action="Logout" asp-controller="Account">Đăng xuất</a>
-		</li>
-	</ul>
-</nav>
+﻿<header class="header">
+    <div class="company-header">
+        <div class="logo">
+            <img src="~/clientLTE/dist/images/logo.svg" />
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="nav">
+            <ul>
+                <li data-page="home-page"><a href="./index.html" data-name="page-95" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Trang chủ</a></li>
+                </li>
+                <li data-page="about-page">
+                    <a href="./gioi-thieu.html" data-name="page-96" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Giới
+                        thiệu
+                    </a>
+                </li>
+                </li>
+                <li data-page="furniture-page">
+                    <a href="./noi-that.html" data-name="page-93" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Nội
+                        thất
+                    </a>
+                    <div class="sub-menu">
+                        <div class="outer-menu">
+                            <div class="all-sub">
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Bộ sưu tập mới</span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-372" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">New Collection</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-371" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Hàng sắp về</a></li>
+                                    </ul>
+                                </div>
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Phòng khách</span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-393" data-title="Sofa đơn" data-description="" data-keyword="">Sofa đơn</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-377" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Sofa 2 chỗ</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-394" data-title="Sofa 3 chỗ" data-description="" data-keyword="">Sofa 3 chỗ</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-391" data-title="Sofa 4 chỗ " data-description="" data-keyword="">Sofa 4 chỗ </a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-392" data-title="Sofa góc" data-description="" data-keyword="">Sofa góc</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-378" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Sofa giường</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-380" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Bàn cafe</a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-412" data-title="Bàn bên" data-description="" data-keyword="">Bàn bên</a>
+                                        </li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-379" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Ghế thư giãn</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-408" data-title="Tủ trang trí" data-description="" data-keywordhang-moi-ve.html="">Tủ trang trí</a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-407" data-title="Tủ TV" data-description="" data-keyword="">Tủ TV</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Phòng ăn</span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-373" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Bàn ăn</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-374" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Ghế ăn</a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-375" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                                                Ghế quầy
+                                                bar
+                                            </a>
+                                        </li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-376" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Tủ bên</a></li>
+                                    </ul>
+                                </div>
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Phòng ngủ</span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-381" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Giường ngủ</a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-382" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                                                Tủ đầu
+                                                giường
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-383" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                                                Bàn ghế
+                                                làm việc
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                </li>
+                <li data-page="accessories-page">
+                    <a href="./noi-that.html" data-name="page-328" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Sản phẩm
+                        trang trí
+                    </a>
+                    <div class="sub-menu">
+                        <div class="outer-menu">
+                            <div class="all-sub">
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Bộ sưu tập mới</span></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-335" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                                                Hàng mới
+                                                về
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Phụ kiện</span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-301" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Thảm</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-411" data-title="Gối và khăn phủ" data-description="" data-keyword="">Gối và khăn phủ</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-388" data-title="Khung tranh &amp; Gương" data-description="" data-keyword="">Khung tranh &amp; Gương</a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-384" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                                                Nến
+                                                đèn
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-387" data-title="Bình Hoa" data-description="" data-keyword="">
+                                                Bình
+                                                Hoa
+                                            </a>
+                                        </li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-413" data-title="Dung dịch làm sạch" data-description="" data-keyword="">Dung dịch làm sạch</a></li>
+                                    </ul>
+                                </div>
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Đèn </span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-346" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Đèn trần </a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-390" data-title="Đèn sàn" data-description="" data-keyword="">Đèn sàn</a>
+                                        </li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-347" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Đèn bàn</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-348" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Đèn treo tường</a></li>
+                                    </ul>
+                                </div>
+                                <div class="item-sub">
+                                    <ul>
+                                        <li><span class="sub-name">Tranh treo tường</span></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-410" data-title="Tranh in" data-description="" data-keyword="">Tranh in</a></li>
+                                        <li><a href="./hang-moi-ve.html" data-name="cate-417" data-title="Tranh sơn dầu" data-description="" data-keyword="">Tranh sơn dầu</a></li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-350" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                                                Tranh
+                                                kính
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="./hang-moi-ve.html" data-name="cate-351" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Khác</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                </li>
+                <li data-page="our-stores-page">
+                    <a href="./cua-hang-aconcept.html" data-name="page-330" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Cửa
+                        hàng
+                    </a>
+                </li>
+                </li>
+                <li data-page="service-page">
+                    <a href="./dich-vu.html" data-name="page-164" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Dịch
+                        vụ
+                    </a>
+                </li>
+                </li>
+                <li data-page="inspiration-page">
+                    <a href="./thu-vien.html" data-name="page-269" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Thư
+                        viện
+                    </a>
+                </li>
+                </li>
+                <li data-page="news-page"><a href="./tin-tuc.html" data-name="page-94" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">Tin tức</a> </li>
+                </li>
+                <li data-page="policy-page">
+                    <a href="./chinh-sach.html" data-name="page-395" data-title="Source demo" data-description="Source demo" data-keyword="Source demo">
+                        Chính
+                        sách
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <ul>
+            <li><button class="search-but" aria-label="search"></button></li>
+            <li>
+                <a class="cart-shopping" href="./gio-hang.html" aria-label="cart">
+                    <span class="cart-icon"></span> <span class="cart-text">0</span>
+                </a>
+            </li>
+            <li>
+                <a class="login-but" href="javascript:void(0);" aria-label="lang"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="search-form">
+        <div class="form-row-search">
+            <form onsubmit="return false;" action="./tim-kiem.html" id="search" method="get">
+                <input type="text" id="qsearch" name="qsearch" data-holder="Tìm kiếm..." value="Tìm kiếm..." data-default="Tìm kiếm..." aria-label="search">
+                <input type="hidden" id="defaultvalue" name="defaultvalue" value="Tìm kiếm..." aria-label="hidden">
+                <input type="hidden" id="errorsearch" name="errorsearch" value="Từ khóa không được dưới 2 kí tự, vui lòng nhập lại từ khóa tìm kiếm!" aria-label="hidden">
+                <input type="hidden" id="href_sear ch" name="href_search" value="./tim-kiem.html" aria-label="hidden">
+            </form>
+        </div>
+    </div>
+    <div class="nav-overlay"></div>
+    <div class="nav-but"></div>
+</header> 

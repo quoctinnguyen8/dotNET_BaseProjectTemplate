@@ -89,11 +89,11 @@ namespace App.Web.Areas.Admin.Controllers
             return Redirect(returnUrl);
         }
 
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(AppConst.COOKIES_AUTH);
-            return RedirectToAction(nameof(Login));
-        }
+		public async Task<IActionResult> Logout()
+		{
+			await HttpContext.SignOutAsync(AppConst.COOKIES_AUTH);
+			return Redirect("/admin/account/login");
+		}
 
         public IActionResult AccessDenied() => View();
 
@@ -202,7 +202,7 @@ namespace App.Web.Areas.Admin.Controllers
 		public async Task<IActionResult> CheckCodeChangePass(string code)
 		{
 			var checkCodeUser = await _repository.GetOneOrderAsync<AppVerifyCode>(s => s.TokenString.Equals(code));
-			if(checkCodeUser == null)
+			if (checkCodeUser == null)
 			{
 				TempData["Mesg"] = "Code không tồn tại !";
 				return RedirectToAction(nameof(CheckCodeChangePass));
@@ -212,7 +212,7 @@ namespace App.Web.Areas.Admin.Controllers
 				TempData["Mesg"] = "Code hết hạn !";
 				return RedirectToAction(nameof(CheckCodeChangePass));
 			}
-			return RedirectToAction(nameof(CreateNewPass), new { code = checkCodeUser.TokenString});
+			return RedirectToAction(nameof(CreateNewPass), new { code = checkCodeUser.TokenString });
 		}
 		[HttpGet]
 		public IActionResult CreateNewPass(string code)
@@ -226,7 +226,7 @@ namespace App.Web.Areas.Admin.Controllers
 			var code = TempData["CodeUser"];
 			var infoCode = await _repository.GetOneOrderAsync<AppVerifyCode>(s => s.TokenString.Equals(code));
 			var infoUser = await _repository.GetOneAsync<AppUser>(s => s.Id.Equals(infoCode.IdUser));
-			if(infoUser != null)
+			if (infoUser != null)
 			{
 				var hashResult = this.HashHMACSHA512(model.NewPwd);
 				infoUser.PasswordHash = hashResult.Value;
@@ -275,8 +275,8 @@ namespace App.Web.Areas.Admin.Controllers
 				SetSuccessMesg("Đổi mật khẩu thành công");
 			}
 			return RedirectToAction("Login", "Account");
-		} 
-		
+		}
+
 		// Tạo thư mục lưu file cho user khi đăng nhập (nếu chưa có)
 		private static void CreateDirIfNotExist(string username)
 		{

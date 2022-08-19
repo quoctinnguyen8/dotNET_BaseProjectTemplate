@@ -93,7 +93,7 @@ namespace App.Web.Areas.Admin.Controllers
 				SetErrorMesg(PAGE_NOT_FOUND_MESG);
 				return RedirectToAction(nameof(Index));
 			}
-			if (await _repository.AnyAsync<AppCategoryNews>(u => u.Title.Equals(model.Title)))
+			if (await _repository.AnyAsync<AppCategoryNews>(u => u.Title.Equals(model.Title) && u.Title != category.Title))
 			{
 				SetErrorMesg("Thể loại này đã tồn tại !");
 				return View(model);

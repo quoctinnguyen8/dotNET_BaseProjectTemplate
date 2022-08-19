@@ -14,10 +14,10 @@ namespace App.Web.Areas.Admin.ViewModels.News
 		public string? Summary { get; set; }
 		public string? Content { get; set; }
 		[AppRequired]
-		public string PathImagePost { get; set; }
-		[AppRequired]
 		public int CategoryId { get; set; }
 		[AppRequired]
-		public string? StampLink { get; set; }
+		public string? CoverImgPath { get; set; }
+		public string? CoverImgThumbnailPath { get; set; }
+		public string? StampPath { get; set; }
 	}
 }

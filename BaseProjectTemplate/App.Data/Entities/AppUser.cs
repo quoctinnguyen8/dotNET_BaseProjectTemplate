@@ -9,6 +9,11 @@ namespace App.Data.Entities
 {
 	public class AppUser : AppEntityBase
 	{
+		public AppUser()
+		{
+			AppVerifyCodeNavigation = new HashSet<AppVerifyCode>();
+			AppNewsNavigation = new HashSet<AppNews>();
+		}
 		public string Username { get; set; }
 		public byte[] PasswordHash { get; set; }
 		public byte[] PasswordSalt { get; set; }
@@ -21,7 +26,8 @@ namespace App.Data.Entities
 		public DateTime? BlockedTo { get; set; }
 		public int? BlockedBy { get; set; }
 		public int? AppRoleId { get; set; }
-
 		public AppRole AppRole { get; set; }
+		public ICollection<AppVerifyCode> AppVerifyCodeNavigation { get; set; }
+		public ICollection<AppNews> AppNewsNavigation { get; set; }
 	}
 }

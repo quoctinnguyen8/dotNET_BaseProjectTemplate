@@ -16,6 +16,9 @@ namespace App.Data
 		public DbSet<AppRolePermission> AppRolePermissions { get; set; }
 		public DbSet<AppUser> AppUsers { get; set; }
 		public DbSet<MstPermission> MstPermissions { get; set; }
+		public DbSet<AppVerifyCode> AppVerifyCodes { get; set; }
+		public DbSet<AppNews> AppNews { get; set; }
+		public DbSet<AppCategoryNews> AppCategoryNews { get; set; }
 
 		public WebAppDbContext(DbContextOptions options) : base(options)
 		{
@@ -26,6 +29,9 @@ namespace App.Data
 			modelBuilder.ApplyConfiguration(new AppRoleConfig());
 			modelBuilder.ApplyConfiguration(new AppRolePermissionConfig());
 			modelBuilder.ApplyConfiguration(new MstPermissionConfig());
+			modelBuilder.ApplyConfiguration(new AppVerifyCodeConfig());
+			modelBuilder.ApplyConfiguration(new AppCategoryNewsConfig());
+			modelBuilder.ApplyConfiguration(new AppNewsConfig());
 
 			// Tạo dữ liệu
 			modelBuilder.Entity<MstPermission>().SeedData();

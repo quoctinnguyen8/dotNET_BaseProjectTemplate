@@ -33,5 +33,9 @@ namespace App.Web.WebConfig
 																	"text/html",					// .html
 																	"text/css",						// .css
 																};
+		// key Random pass
+		public const string UPPER_CASE = "QWERTYUIOPASDFGHJKLZXCVBNM";
+		public const string LOWER_CASE = "qwertyuiopasdfghjklzxcvbnm";
+		public const string DIGITS = "1234567890";
 	}
 }

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<App.Web.Areas.Admin.ViewModels.CategoryNews.ListItemCategoryNewsVM>
+
+@{
+	ViewData["Title"] = "Danh sách thể loại tin tức";
+}
+
+@*@if (User.IsInPermission(AuthConst.AppUser.CREATE))
+{*@
+<div class="my-2">
+	<a asp-action="Create" class="btn btn-primary">
+		<i class="fas fa-user-plus"></i> &nbsp; Tạo mới thể loại
+	</a>
+</div>
+@*}*@
+
+
+<div class="table-responsive">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Tiêu đề</th>
+				<th>Slug</th>
+				<th>Mô tả</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+			<tr>
+				<td class="fit">@item.RowIndex</td>
+				<td>@item.Title</td>
+				<td>@item.Slug</td>
+				<td>@item.Content</td>
+				<td class="fit">
+					<a asp-action="Details" asp-route-id="@item.Id"
+						class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
+				@*	@if (User.IsInPermission(AuthConst.AppUser.UPDATE))
+					{*@
+						<a asp-action="Edit" asp-route-id="@item.Id"
+							class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
+					@*}*@
+				@*	@if (User.IsInPermission(AuthConst.AppUser.DELETE))
+					{*@
+						<a asp-action="Delete" asp-route-id="@item.Id"
+							class="btn btn-outline-secondary btn-sm js-delete-confirm"
+							data-msg="Xác nhận xóa thể loại [@item.Title]?"><i class="fa fas fa-trash"></i></a>
+					@*}*@
+				</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+<partial name="_Pager" />

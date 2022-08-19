@@ -48,10 +48,25 @@ namespace App.Web.Areas.Admin.Components.MainNavBar
 				},
 				new MenuItem
 				{
-					Action = "MyProfile",
-					Controller = "Account",
-					DisplayText = "Tài khoản của tôi",
-					Icon = "fa-user",
+					DisplayText = "Quản lý tin tức",
+					Icon = "fa-folder-open",
+					ChildrenItems = new MenuItem[]
+					{
+						new MenuItem
+						{
+							Action = "Index",
+							Controller = "CategoryNews",
+							DisplayText = "Quản lý thể loại tin",
+							Icon = "fa-user-cog"
+						}
+						//new MenuItem
+						//{
+						//	Action = "Index",
+						//	Controller = "User",
+						//	DisplayText = "Quản lý tài khoản",
+						//	Icon = "fa-user-cog"
+						//}
+					}
 				},
 				//new MenuItem
 				//{

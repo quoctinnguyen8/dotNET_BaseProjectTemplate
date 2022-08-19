@@ -37,7 +37,8 @@ namespace App.Web.WebConfig
 			services.AddControllersWithViews();
 			services.AddHttpContextAccessor();
 			services.AddAppService(Configuration);
-			services.AddServicesDependencies();
+			//DI
+			services.AddServiceRepositories();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

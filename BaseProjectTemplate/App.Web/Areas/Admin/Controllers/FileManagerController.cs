@@ -24,6 +24,7 @@ namespace App.Web.Areas.Admin.Controllers
 		[AppAuthorize()]
 		public IActionResult Index()
 		{
+			ViewBag.FullScreen = true;
 			return View();
 		}
 

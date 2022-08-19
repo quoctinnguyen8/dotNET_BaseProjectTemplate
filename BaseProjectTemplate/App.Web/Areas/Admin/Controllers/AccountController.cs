@@ -17,6 +17,8 @@ using App.Web.Common.Mailer;
 using Microsoft.AspNetCore.Hosting;
 using RazorEngine;
 using RazorEngine.Templating;
+using Microsoft.AspNetCore.Authorization;
+using App.Web.Services.AppUser;
 
 namespace App.Web.Areas.Admin.Controllers
 {
@@ -24,6 +26,7 @@ namespace App.Web.Areas.Admin.Controllers
 	{
 		readonly GenericRepository _repository;
 		private readonly AppMailConfiguration _mailConfig;
+		private readonly IAccountService _accountService;
 		private readonly IHostingEnvironment _env;
 
 		public AccountController(IHostingEnvironment env, AppMailConfiguration mailConfig, GenericRepository repository, IMapper mapper) : base(mapper)
@@ -275,6 +278,41 @@ namespace App.Web.Areas.Admin.Controllers
 				SetSuccessMesg("Đổi mật khẩu thành công");
 			}
 			return RedirectToAction("Login", "Account");
+		}
+		[Authorize(AuthenticationSchemes = AppConst.COOKIES_AUTH)]
+		public async Task<IActionResult> MyProfile()
+		{
+			ViewBag.Title = "Tài khoản của tôi";
+			var currentUserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+			return View(await _accountService.GetUserById(currentUserId));
+		}
+
+		[HttpPost]
+		[Authorize(AuthenticationSchemes = AppConst.COOKIES_AUTH)]
+		public async Task<IActionResult> MyProfile(AcceptUpdateViewModel data)
+		{
+			try
+			{
+				data.Id = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+				await _accountService.UpdateUser(data);
+				ViewBag.Title = "Tài khoản của tôi";
+				ViewBag.UpdateMessage = new UpdateStatusViewModel()
+				{
+					IsSuccess = true,
+					Message = "Cập nhật thành công"
+				};
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				ViewBag.UpdateMessage = new UpdateStatusViewModel()
+				{
+					IsSuccess = false,
+					Message = "Cập nhật thất bại, thử lại sau ít phút"
+				};
+			}
+
+			return View(await _accountService.GetUserById(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier))));
 		}
 
 		// Tạo thư mục lưu file cho user khi đăng nhập (nếu chưa có)

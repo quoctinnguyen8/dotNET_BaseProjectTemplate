@@ -12,11 +12,11 @@ $(document).ready(function () {
 				var domain = window.location.origin + "/";
 				let resultPath = files.url.replace(domain, "/");
 				let thumbnailPath = files.tmb.replace(domain, "/");
-				document.getElementById('selectedImages').innerHTML = "";
-				$('#selectedImages').append(`<img class="image-review" src ="${resultPath}" />`);
+				$(".selectedImages").html('');
+				$(".selectedImages").append(`<img class="image-review" src ="${resultPath}" />`);
 				if (files.mime != 'directory') {
-					$("#CoverImgPath").val(resultPath);
-					$("#CoverImgThumbnailPath").val(thumbnailPath);
+					$(".image-input-path").val(resultPath);
+					$(".image-input-thumbnailPath").val(thumbnailPath);
 					fm.destroy();
 					return false;
 				}
@@ -28,5 +28,6 @@ $(document).ready(function () {
 				}
 			}
 		}).dialogelfinder('instance');
+		console.log(fm)
 	});
 });

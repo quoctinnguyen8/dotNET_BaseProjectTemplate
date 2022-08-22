@@ -22,9 +22,9 @@
         <div class="form-group">
             <label class="control-label required">Ảnh bìa</label>
             <div id="elfinder-background"></div>
-            <input asp-for="CoverImgThumbnailPath" hidden type="text" style="width:500px;">
-             <input asp-for="CoverImgPath" hidden type="text" style="width:500px;">
-            <button id="selectedImages" type="button" class="btn btn-elfinder">
+            <input asp-for="CoverImgThumbnailPath" class="image-input-thumbnailPath" hidden type="text">
+            <input asp-for="CoverImgPath" class="image-input-path" hidden type="text">
+            <button type="button" class="btn btn-elfinder selectedImages">
                 @{
                     if (Model is null)
                     {
@@ -32,7 +32,7 @@
                     }
                     else
                     {
-                        <img class="image-review" src ="@Model.CoverImgPath" />
+                        <img class="image-review" src="@Model.CoverImgPath" />
                     }
                 }
             </button>

@@ -47,7 +47,7 @@ namespace App.Web.Areas.Admin.Controllers
 				SetErrorMesg("Bài viết này đã tồn tại");
 				return View(model);
 			}
-		
+
 			try
 			{
 				var user = CurrentUserId;

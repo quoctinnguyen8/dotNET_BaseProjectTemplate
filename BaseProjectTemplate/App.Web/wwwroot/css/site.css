@@ -1,57 +1,68 @@
 ﻿.required:after {
-  content: ' *';
-  color: red; }
+	content: ' *';
+	color: red;
+}
 
 .fit {
-  width: 1%;
-  white-space: nowrap; }
+	width: 1%;
+	white-space: nowrap;
+}
 
 .fake-d-none {
-  display: block !important;
-  width: 0;
-  height: 0;
-  padding: 0 !important;
-  border: 0 !important; }
+	display: block !important;
+	width: 0;
+	height: 0;
+	padding: 0 !important;
+	border: 0 !important;
+}
 
 .hover\:pointer:hover {
-  cursor: pointer; }
+	cursor: pointer;
+}
 
 .hover\:text-primary {
-  transition: color 0.3s; }
-  .hover\:text-primary:hover {
-    color: var(--primary); }
+	transition: color 0.3s;
+}
+
+	.hover\:text-primary:hover {
+		color: var(--primary);
+	}
 
 .elfinder .dialogelfinder {
-    z-index: 1039;
+	z-index: 1039;
 }
+
 .image-review {
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    object-fit: cover;
-    border-radius: 4px;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	object-fit: cover;
+	border-radius: 4px;
 }
-#selectedImages {
-    text-align: center;
-    padding: 2px;
-    width: 100%;
-    height: 210px;
-    border: 2px dashed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.selectedImages {
+	text-align: center;
+	padding: 2px;
+	width: 100%;
+	height: 210px;
+	border: 2px dashed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-#selectedImages:hover{
-    background-color: aliceblue;
-} 
+
+	.selectedImages:hover {
+		background-color: aliceblue;
+	}
 
 .item-news-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 4px;
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 4px;
 }
+
 .td-status-news {
-    text-align: center;
-   line-height: 46px;
+	text-align: center;
+	line-height: 46px;
 }

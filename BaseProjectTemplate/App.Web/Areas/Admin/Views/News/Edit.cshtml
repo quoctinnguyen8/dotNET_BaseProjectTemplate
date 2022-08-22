@@ -15,12 +15,12 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <partial name="_AddOrUpdateNews" model="Model" />
                 <div class="form-group">
-                    <input type="submit" value="Cập nhật bài viết" class="btn btn-primary" />
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
                 </div>
             </form>
         </div>
     </div>
-<partial name="_BackToList" />
+    <partial name="_BackToList" />
 
     @section scripts{
     <script src="~/lib/bs4-autocomplete/js/bs4-autocomplete.js"></script>

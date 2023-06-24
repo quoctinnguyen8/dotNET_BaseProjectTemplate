@@ -168,7 +168,7 @@ namespace App.Web.Controllers
 				return RedirectToAction(nameof(Index));
 			}
 
-			var data = await _repository.FindAsync<AppRole, RoleDeleteVM>(id.Value,AutoMapperProfile.RoleDeleteConf);
+			var data = await _repository.FindAsync<AppRole, RoleDeleteVM>(id.Value, AutoMapperProfile.RoleDeleteConf);
 
 			if (data == null)
 			{
@@ -214,16 +214,18 @@ namespace App.Web.Controllers
 				var users = await _repository.GetAll<AppUser>(where: u => u.AppRoleId == data.Id).ToListAsync();
 				// Cập nhật vai trò mới
 				users.ForEach(u => u.AppRoleId = data.NewId);
-				
+
 				await _repository.BeginTransactionAsync();
 
 				// Cập nhật role mới cho users
 				await _repository.UpdateAsync(users);
 				// Xóa role cũ
-				await _repository.DeleteAsync<AppUser>(data.Id);
+				await _repository.DeleteAsync<AppRole>(data.Id);
+				// Lấy thông tin role mới
+				var newRolwName = await _repository.GetOneAsync<AppRole, string>(data.NewId, selector: r => r.Name);
 				await _repository.CommitTransactionAsync();
 
-				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công");
+				SetSuccessMesg($"Xóa vai trò [{data.Name}] thành công và đã chuyển {users.Count} tài khoản sang vai trò [{newRolwName}]");
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)

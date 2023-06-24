@@ -44,5 +44,43 @@ namespace App.Data.Repositories
 		{
 			return await _db.Set<TEntity>().AnyAsync(expr);
 		}
+
+		public virtual IQueryable<TEntity> Get<TEntity>(bool selectFromTrash = false)
+			where TEntity : AppEntityBase
+		{
+			var defaultWhere = GetDefaultWhereExpr<TEntity>(selectFromTrash);
+			var query = _db.Set<TEntity>()
+						.AsNoTracking()
+						.Where(defaultWhere);
+			LogDebugQuery(query);
+			return query;
+		}
+
+		public virtual IQueryable<TEntity> GetMst<TEntity>(bool selectFromTrash = false)
+			where TEntity : MstEntityBase
+		{
+			var defaultWhere = GetDefaultWhereExprMst<TEntity>(selectFromTrash);
+			var query = _db.Set<TEntity>()
+						.AsNoTracking()
+						.Where(defaultWhere);
+			LogDebugQuery(query);
+			return query;
+		}
+
+		public virtual IQueryable<TEntity> GetWithTrash<TEntity>()
+			where TEntity : AppEntityBase
+		{
+			var query = _db.Set<TEntity>().AsNoTracking();
+			LogDebugQuery(query);
+			return query;
+		}
+
+		public virtual IQueryable<TEntity> GetWithTrashMst<TEntity>()
+			where TEntity : MstEntityBase
+		{
+			var query = _db.Set<TEntity>().AsNoTracking();
+			LogDebugQuery(query);
+			return query;
+		}
 	}
 }

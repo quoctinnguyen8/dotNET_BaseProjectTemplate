@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace DNews.Shared.Attributes
+namespace App.Shared.Attributes
 {
 	public class AppPhoneAttribute : RegularExpressionAttribute
 	{

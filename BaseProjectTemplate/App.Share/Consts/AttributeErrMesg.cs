@@ -18,5 +18,7 @@ namespace App.Share.Consts
 		public const string REQUIRED			= "Trường này là bắt buộc";
 		public const string STRING_LEN			= "Phải từ {0} ký tự đến {1} ký tự";
 		public const string USERNAME			= "Tên đăng nhập không hợp lệ";
+		public const string MAX					= "Giá trị tối đa là {0}";
+		public const string MIN					= "Giá trị tối thiểu là {0}";
 	}
 }

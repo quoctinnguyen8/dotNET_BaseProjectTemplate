@@ -1,7 +1,7 @@
 ﻿using App.Share.Consts;
 using System.ComponentModel.DataAnnotations;
 
-namespace DNews.Shared.Attributes
+namespace App.Shared.Attributes
 {
 	public class AppEmailAttribute : RegularExpressionAttribute
 	{

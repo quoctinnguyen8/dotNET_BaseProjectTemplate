@@ -1,7 +1,7 @@
 ﻿using App.Share.Consts;
 using System.ComponentModel.DataAnnotations;
 
-namespace DNews.Shared.Attributes
+namespace App.Shared.Attributes
 {
 	public class AppUsernameAttribute : RegularExpressionAttribute
 	{
@@ -14,7 +14,7 @@ namespace DNews.Shared.Attributes
 			 └─────┬─────┘└─────┬─────┘
 				   │            chỉ chấp nhận chữ thường, chữ hoa, số và _.
 				   |
-				   chông chấp nhận __ hoặc .. hoặc _. hoặc ._
+				   không chấp nhận __ hoặc .. hoặc _. hoặc ._
 			*/
 		}
 	}

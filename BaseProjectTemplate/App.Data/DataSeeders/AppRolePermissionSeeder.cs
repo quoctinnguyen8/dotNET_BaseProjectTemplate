@@ -17,6 +17,7 @@ namespace App.Data.DataSeeders
 		{
 			var now = new DateTime(year: 2021, month: 12, day: 10);
 			// Danh sách các class chứa permission
+			// Không seed data ở bảng này để tránh lỗi khi chạy trên production
 			Type[] classType = new Type[]
 			{
 				typeof(AuthConst.AppRole),

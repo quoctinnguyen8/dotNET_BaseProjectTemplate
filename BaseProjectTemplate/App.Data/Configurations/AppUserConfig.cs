@@ -44,9 +44,6 @@ namespace App.Data.Configurations
 			builder.Property(m => m.PasswordHash)
 				.HasMaxLength(DB.AppUser.PWD_LENGTH);
 
-			builder.Property(m => m.PasswordSalt)
-				.HasMaxLength(DB.AppUser.PWD_LENGTH);
-
 			builder.Property(m => m.PhoneNumber1)
 				.HasMaxLength(DB.AppUser.PHONE_LENGTH)
 				.IsUnicode(false);

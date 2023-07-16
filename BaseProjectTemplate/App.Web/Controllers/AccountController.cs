@@ -49,8 +49,7 @@ namespace App.Web.Controllers
 				return RedirectToAction(nameof(Login));
 			}
 
-			var pwdHash = this.HashHMACSHA512WithKey(model.Password, user.PasswordSalt);
-			if (!pwdHash.SequenceEqual(user.PasswordHash))
+			if (!BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
 			{
 				TempData["Mesg"] = "Tên đăng nhập hoặc mật khẩu không chính xác";
 				return RedirectToAction(nameof(Login));
@@ -94,16 +93,13 @@ namespace App.Web.Controllers
 		public async Task<IActionResult> ChangePassword(ChangePassword model)
 		{
 			var user = await _repository.FindAsync<AppUser>(this.CurrentUserId);
-			var encryptPassword = this.HashHMACSHA512WithKey(model.Pwd, user.PasswordSalt);
-			if (!encryptPassword.SequenceEqual(user.PasswordHash))
+			if (!BCrypt.Net.BCrypt.Verify(model.Pwd, user.PasswordHash))
 			{
 				SetErrorMesg("Mật khẩu cũ không chính xác");
 				return Redirect(Referer);
 			}
 
-			var hashResult = this.HashHMACSHA512(model.NewPwd);
-			user.PasswordHash = hashResult.Value;
-			user.PasswordSalt = hashResult.Key;
+			user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.NewPwd);
 			await _repository.UpdateAsync<AppUser>(user);
 
 			if (model.LogoutAfterChangePwd)

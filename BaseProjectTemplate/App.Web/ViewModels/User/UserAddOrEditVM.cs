@@ -45,7 +45,6 @@ namespace App.Web.ViewModels.User
 		public int? AppRoleId { get; set; }
 		public DateTime? UpdatedDate { get; set; }
 
-		public byte[] PasswordHash { get; internal set; }
-		public byte[] PasswordSalt { get; internal set; }
+		public string PasswordHash { get; internal set; }
 	}
 }

@@ -9,8 +9,7 @@ namespace App.Web.ViewModels.Account
 	{
 		public int Id { get; set; }
 		public string Username { get; set; }
-		public byte[] PasswordHash { get; set; }
-		public byte[] PasswordSalt { get; set; }
+		public string PasswordHash { get; set; }
 		public string FullName { get; set; }
 		public string PhoneNumber1 { get; set; }
 		public string Email { get; set; }

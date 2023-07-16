@@ -16,12 +16,8 @@ namespace App.Data.DataSeeders
 		{
 			var now = new DateTime(year: 2021, month: 11, day: 10);
 
-			// Tạo mật khẩu
-			var defaultPassword = "1111";
-			HMACSHA512 hmac = new();
-			var pwByte = Encoding.UTF8.GetBytes(defaultPassword);
-			var pwdHash = hmac.ComputeHash(pwByte);
-			var pwdSalt = hmac.Key;
+			// Mật khẩu là 1111
+			var pwdHash = "$2a$11$HZ.CieHz9YW4VUSSWCAu/OIeHBbtiMBo1GBu5l/uCIpmYAS70ibo6";
 
 			// Tạo thông tin tài khoản admin
 			builder.HasData(
@@ -29,7 +25,6 @@ namespace App.Data.DataSeeders
 					Id = 1,
 					Username = "admin",
 					PasswordHash = pwdHash,
-					PasswordSalt = pwdSalt,
 					Address = "Thành phố Hồ Chí Minh",
 					Email = "admin_test@gmail.com",
 					FullName = "Obama",

@@ -61,9 +61,7 @@ namespace App.Web.Controllers
 
 			try
 			{
-				var hashResult = HashHMACSHA512(model.Password);
-				model.PasswordHash = hashResult.Value;
-				model.PasswordSalt = hashResult.Key;
+				model.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
 				var user = _mapper.Map<AppUser>(model);
 				await _repository.AddAsync(user);
 				SetSuccessMesg($"Thêm tài khoản [{user.Username}] thành công");

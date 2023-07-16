@@ -51,7 +51,7 @@ $.fn.extend({
 
 		let selectEles = this;
 		let htmlInput = `<div class="bs4-dropdown-container position-relative">
-							<button class="form-control text-left bs4-dropdown" data-toggle="dropdown">${this.setting.placeholder[0]}</button>
+							<button type="button" class="form-control text-left bs4-dropdown" data-toggle="dropdown">${this.setting.placeholder[0]}</button>
 							<div class="dropdown-menu w-100" style="z-index:${this.setting.zIndex}">
 								<div class="px-3 mb-2">
 									<input type="search" class="form-control" placeholder="${this.setting.placeholder[1]}" />

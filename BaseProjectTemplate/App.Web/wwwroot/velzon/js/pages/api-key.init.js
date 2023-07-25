@@ -236,7 +236,7 @@ addBtn.addEventListener("click", function (e) {
         apiKeyList.add({
             id: '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ' + count + "</a>",
             name: apiKeyNameField.value,
-            createBy: document.querySelector("#page-header-user-dropdown .user-name-text").innerHTML,
+            createBy: 'TinNQ',
             apikey: '<input type="text" class="form-control apikey-value" readonly value="' + apiKeyField.value + '">',
             status: isStatus("Active"),
             create_date: current,

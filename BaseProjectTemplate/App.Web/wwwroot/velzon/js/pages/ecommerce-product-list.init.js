@@ -688,14 +688,6 @@ function checkRemoveItem() {
 				var checkboxes = document.querySelectorAll('.checkbox-product-list input:checked');
 				isSelected = checkboxes.length;
 
-				if (event.target.closest('tr').classList.contains("gridjs-tr-selected")) {
-					document.getElementById("select-content").innerHTML = isSelected;
-					(isSelected > 0) ? document.getElementById("selection-element").style.display = 'block' : document.getElementById("selection-element").style.display = 'none';
-				} else {
-
-					document.getElementById("select-content").innerHTML = isSelected;
-					(isSelected > 0) ? document.getElementById("selection-element").style.display = 'block' : document.getElementById("selection-element").style.display = 'none';
-				}
 			});
 		});
 		removeItems();

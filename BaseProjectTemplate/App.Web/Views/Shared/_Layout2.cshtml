@@ -21,6 +21,7 @@
 	<link href="~/velzon/css/app.min.css" rel="stylesheet" type="text/css" />
 	<!-- custom Css-->
 	<link href="~/velzon/css/custom.min.css" rel="stylesheet" type="text/css" />
+	@RenderSection("head", false)
 </head>
 
 <body>
@@ -92,6 +93,7 @@
 
 	<!-- App js -->
 	<script src="~/velzon/js/app.js"></script>
+	@RenderSection("scripts", false)
 </body>
 
 </html>

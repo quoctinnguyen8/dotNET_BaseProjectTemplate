@@ -10,6 +10,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\Shared\AlpineJSComponent\.gitkeep" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Shared\AlpineJSComponent\.gitkeep">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-archive.svg" />
     <None Include="wwwroot\css\elfinder\themes\bootstrap-LibreICONS\img\libre-arrow-left.svg" />

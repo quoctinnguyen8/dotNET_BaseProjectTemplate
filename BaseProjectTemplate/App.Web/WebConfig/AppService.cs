@@ -2,6 +2,7 @@
 using App.Data.Repositories;
 using App.Web.Common;
 using App.Web.Common.Mailer;
+using App.Web.Common.NavBar;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +54,9 @@ namespace App.Web.WebConfig
 			AppMailConfiguration mailConfig = new();
 			mailConfig.LoadFromConfig(Configuration);
 			services.AddSingleton(mailConfig);
+
+			// Khởi tạo giá trị global cho navbar
+			services.AddSingleton<NavBarVelzonViewModel>();
 		}
 	}
 }

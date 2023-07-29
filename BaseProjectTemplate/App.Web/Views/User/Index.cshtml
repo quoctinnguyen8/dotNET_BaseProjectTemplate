@@ -2,6 +2,7 @@
 
 @{
 	ViewData["Title"] = "Danh sách tài khoản";
+	ViewBag.NavBarCodePage = NavBarCodePage.USER_LIST;
 }
 
 @if (User.IsInPermission(AuthConst.AppUser.CREATE))

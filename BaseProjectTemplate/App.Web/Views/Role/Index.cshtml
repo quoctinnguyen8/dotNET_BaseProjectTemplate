@@ -2,6 +2,7 @@
 
 @{
 	ViewData["Title"] = "Danh sách vai trò";
+	ViewBag.NavBarCodePage = NavBarCodePage.ROLE_LIST;
 }
 
 @if (User.IsInPermission(AuthConst.AppRole.CREATE))

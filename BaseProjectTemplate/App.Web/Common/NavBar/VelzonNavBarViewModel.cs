@@ -22,67 +22,67 @@ namespace App.Web.Common.NavBar
 					IsNavBarTitle = true,
 					DisplayText = "MENU"
 				},
-				//new NavBarItemLv1
-				//{
-				//	CodePage = NavBarCodePage.USER_LIST,
-				//	Url = linkGenerator.GetPathByAction("Index", "User"),
-				//	DisplayText = "Quản lý tài khoản",
-				//	Icon = "mdi-account-cog",
-				//	Permission = AuthConst.AppUser.VIEW_LIST,
-				//},
-				//new NavBarItemLv1
-				//{
-				//	CodePage = NavBarCodePage.ROLE_LIST,
-				//	Url = linkGenerator.GetPathByAction("Index", "Role"),
-				//	DisplayText = "Quản lý phân quyền",
-				//	Icon = "mdi-shield-account",
-				//	Permission = AuthConst.AppRole.VIEW_LIST,
-				//},
-				//new NavBarItemLv1
-				//{
-				//	CodePage = NavBarCodePage.FILE_MANAGER,
-				//	Url = linkGenerator.GetPathByAction("Index", "FileManager"),
-				//	DisplayText = "Quản lý tệp",
-				//	Icon = "mdi-folder",
-				//},
 				new NavBarItemLv1
 				{
-					DisplayText = "Menu 2 cấp",
-					Icon = "mdi-alert",
-					CodePage = "1000",
-					NavBarItemLv2 = new NavBarItemLv2[]
-					{
-						new NavBarItemLv2
-						{
-							CodePage = NavBarCodePage.USER_LIST,
-							Url = linkGenerator.GetPathByAction("Index", "User"),
-							DisplayText = "Quản lý tài khoản",
-							Permission = AuthConst.AppUser.VIEW_LIST,
-						},
-						new NavBarItemLv2
-						{
-							CodePage = NavBarCodePage.ROLE_LIST,
-							Url = linkGenerator.GetPathByAction("Index", "Role"),
-							DisplayText = "Quản lý phân quyền",
-							Permission = AuthConst.AppRole.VIEW_LIST,
-							NavBarItemLv3 = new NavBarItemLv3[]
-							{
-								new NavBarItemLv3
-								{
-									CodePage = NavBarCodePage.FILE_MANAGER,
-									Url = linkGenerator.GetPathByAction("Index", "FileManager"),
-									DisplayText = "Quản lý tệp",
-								},
-								new NavBarItemLv3
-								{
-									CodePage = "",
-									Url = linkGenerator.GetPathByAction("Index", "Home"),
-									DisplayText = "Home",
-								},
-							}
-						}
-					}
+					CodePage = NavBarCodePage.USER_LIST,
+					Url = linkGenerator.GetPathByAction("Index", "User"),
+					DisplayText = "Quản lý tài khoản",
+					Icon = "mdi-account-cog",
+					Permission = AuthConst.AppUser.VIEW_LIST,
 				},
+				new NavBarItemLv1
+				{
+					CodePage = NavBarCodePage.ROLE_LIST,
+					Url = linkGenerator.GetPathByAction("Index", "Role"),
+					DisplayText = "Quản lý phân quyền",
+					Icon = "mdi-shield-account",
+					Permission = AuthConst.AppRole.VIEW_LIST,
+				},
+				new NavBarItemLv1
+				{
+					CodePage = NavBarCodePage.FILE_MANAGER,
+					Url = linkGenerator.GetPathByAction("Index", "FileManager"),
+					DisplayText = "Quản lý tệp",
+					Icon = "mdi-folder",
+				},
+				//new NavBarItemLv1
+				//{
+				//	DisplayText = "Menu 2 cấp",
+				//	Icon = "mdi-alert",
+				//	CodePage = "1000",
+				//	NavBarItemLv2 = new NavBarItemLv2[]
+				//	{
+				//		new NavBarItemLv2
+				//		{
+				//			CodePage = NavBarCodePage.USER_LIST,
+				//			Url = linkGenerator.GetPathByAction("Index", "User"),
+				//			DisplayText = "Quản lý tài khoản",
+				//			Permission = AuthConst.AppUser.VIEW_LIST,
+				//		},
+				//		new NavBarItemLv2
+				//		{
+				//			CodePage = NavBarCodePage.ROLE_LIST,
+				//			Url = linkGenerator.GetPathByAction("Index", "Role"),
+				//			DisplayText = "Quản lý phân quyền",
+				//			Permission = AuthConst.AppRole.VIEW_LIST,
+				//			NavBarItemLv3 = new NavBarItemLv3[]
+				//			{
+				//				new NavBarItemLv3
+				//				{
+				//					CodePage = NavBarCodePage.FILE_MANAGER,
+				//					Url = linkGenerator.GetPathByAction("Index", "FileManager"),
+				//					DisplayText = "Quản lý tệp",
+				//				},
+				//				new NavBarItemLv3
+				//				{
+				//					CodePage = "",
+				//					Url = linkGenerator.GetPathByAction("Index", "Home"),
+				//					DisplayText = "Home",
+				//				},
+				//			}
+				//		}
+				//	}
+				//},
 			});
 		}
 		public List<NavBarItemLv1> Items { get; set; }

@@ -42,17 +42,17 @@
 				<td>@item.CreatedDate.ToDMY()</td>
 				<td class="fit">
 					<a asp-action="Details" asp-route-id="@item.Id"
-						class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
+						class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-eye"></i></a>
 					@if (User.IsInPermission(AuthConst.AppUser.UPDATE))
 					{
 						<a asp-action="Edit" asp-route-id="@item.Id"
-							class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
+							class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-pen"></i></a>
 					}
 					@if (User.IsInPermission(AuthConst.AppUser.DELETE))
 					{
 						<a asp-action="Delete" asp-route-id="@item.Id"
 							class="btn btn-outline-secondary btn-sm js-delete-confirm"
-							data-msg="Xác nhận xóa tài khoản [@item.Username]?"><i class="fa fas fa-trash"></i></a>
+							data-msg="Xác nhận xóa tài khoản [@item.Username]?"><i class="mdi mdi-trash-can"></i></a>
 					}
 				</td>
 			</tr>

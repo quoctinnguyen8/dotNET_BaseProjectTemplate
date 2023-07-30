@@ -12,17 +12,17 @@
 					</div>
 					<div class="card-body">
 						<div class="form-group hover:text-primary">
-							<div class="custom-control custom-switch">
-								<input id="@item.FirstOrDefault()?.Table" type="checkbox" class="custom-control-input check-all" />
+							<div class="form-check form-switch">
+								<input id="@item.FirstOrDefault()?.Table" type="checkbox" class="custom-control-input form-check-input check-all" />
 								<label for="@item.FirstOrDefault()?.Table" class="custom-control-label form-check-label w-100 hover:pointer">Chọn tất cả</label>
 							</div>
 						</div>
 						@foreach (var per in item)
 						{
 							<div class="form-group hover:text-primary">
-								<div class="custom-control custom-switch">
+								<div class="custom-control custom-switch form-check">
 									<input id="permission-@per.Id" type="checkbox" data-id="@per.Id"
-										   class="custom-control-input check-permission" />
+										   class="custom-control-input form-check-input check-permission" />
 									<label for="permission-@per.Id"
 										   class="custom-control-label form-check-label w-100 hover:pointer">@per.Desc <small>(@per.Id)</small></label>
 									</div>

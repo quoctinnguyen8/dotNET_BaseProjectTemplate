@@ -79,10 +79,13 @@
 	<button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
 		<i class="ri-arrow-up-line"></i>
 	</button>
+
+	<partial name="_ChangePassword" model="null" />
 	<!--end back-to-top-->
 
 	<partial name="_ThemeSetting" />
-
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<partial name="_ValidationScriptsPartial" />
 	<!-- JAVASCRIPT -->
 	<script src="~/velzon/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="~/velzon/libs/simplebar/simplebar.min.js"></script>

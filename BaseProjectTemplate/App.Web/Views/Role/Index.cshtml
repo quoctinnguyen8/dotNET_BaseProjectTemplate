@@ -35,16 +35,16 @@
 					<td class="fit">@item.CreatedDate.ToDMYHM()</td>
 					<td class="fit">
 						<a href="#"
-						   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-eye"></i></a>
+						   class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-eye"></i></a>
 						@if (User.IsInPermission(AuthConst.AppRole.UPDATE))
 						{
 							<a asp-action="Edit" asp-route-id="@item.Id"
-							   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-pen"></i></a>
+							   class="btn btn-outline-success btn-sm"><i class="mdi mdi-pen"></i></a>
 						}
 						@if (User.IsInPermission(AuthConst.AppRole.DELETE))
 						{
 							<a asp-action="Delete" asp-route-id="@item.Id"
-							   class="btn btn-outline-secondary btn-sm"><i class="fa fas fa-trash"></i></a>
+							   class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can"></i></a>
 						}
 					</td>
 				</tr>

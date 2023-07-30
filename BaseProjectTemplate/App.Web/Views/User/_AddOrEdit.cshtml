@@ -4,7 +4,7 @@
 }
 <div class="row">
 	<div class="col-sm-5">
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="Username" class="control-label">Tên đăng nhập</label>
 			@if (ViewContext.GetCurrentActionName() == "Create")
 			{
@@ -16,7 +16,7 @@
 			}
 			<span asp-validation-for="Username" class="text-danger"></span>
 		</div>
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="Password" class="control-label">Mật khẩu</label>
 			@if (disabled)
 			{
@@ -28,7 +28,7 @@
 				<span asp-validation-for="Password" class="text-danger"></span>
 			}
 		</div>
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="ConfirmPwd" class="control-label">Xác nhận mật khẩu</label>
 			@if (disabled)
 			{
@@ -40,7 +40,7 @@
 				<span asp-validation-for="ConfirmPwd" class="text-danger"></span>
 			}
 		</div>
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="AppRoleId" class="control-label">Vai trò trên trang</label>
 			<select asp-for="AppRoleId" class="form-control">
 				<vc:list-role seleteted-id="@Model?.AppRoleId" exclude-ids="null"></vc:list-role>
@@ -49,33 +49,33 @@
 		</div>
 	</div>
 	<div class="col-sm-7">
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="FullName" class="control-label">Họ tên</label>
 			<input asp-for="FullName" class="form-control" />
 			<span asp-validation-for="FullName" class="text-danger"></span>
 		</div>
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="Email" class="control-label">Email</label>
 			<input asp-for="Email" class="form-control" />
 			<span asp-validation-for="Email" class="text-danger"></span>
 		</div>
 		<div class="row">
 			<div class="col">
-				<div class="form-group mt-2">
+				<div class="mt-2">
 					<label asp-for="PhoneNumber1" class="control-label">Số điện thoại</label>
 					<input asp-for="PhoneNumber1" class="form-control" />
 					<span asp-validation-for="PhoneNumber1" class="text-danger"></span>
 				</div>
 			</div>
 			<div class="col">
-				<div class="form-group mt-2">
+				<div class="mt-2">
 					<label asp-for="PhoneNumber2" class="control-label">SĐT dự phòng</label>
 					<input asp-for="PhoneNumber2" class="form-control" />
 					<span asp-validation-for="PhoneNumber2" class="text-danger"></span>
 				</div>
 			</div>
 		</div>
-		<div class="form-group mt-2">
+		<div class="mt-2">
 			<label asp-for="Address" class="control-label">Địa chỉ</label>
 			<input asp-for="Address" class="form-control" />
 			<span asp-validation-for="Address" class="text-danger"></span>

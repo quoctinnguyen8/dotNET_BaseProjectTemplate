@@ -17,15 +17,15 @@
 			<p class="small mb-2">Cập nhật lần cuối lúc @Model.UpdatedDate.ToDMYHM()</p>
 			<input asp-for="Id" type="hidden" />
 			<input asp-for="Name" type="hidden" />
-			<div class="form-group">
+			<div class="mt-2">
 				<label>Tên vai trò</label>
 				<input class="form-control" readonly value="@Model.Name" />
 			</div>
-			<div class="form-group">
+			<div class="mt-2">
 				<label>Mô tả</label>
 				<input class="form-control" readonly value="@Model.Desc" />
 			</div>
-			<div class="form-group">
+			<div class="mt-2">
 				<label asp-for="NewId">Vai trò thay thế</label>
 				<select asp-for="NewId" class="form-control">
 					<vc:list-role seleteted-id="null" exclude-ids="new int[] { Model.Id }"></vc:list-role>

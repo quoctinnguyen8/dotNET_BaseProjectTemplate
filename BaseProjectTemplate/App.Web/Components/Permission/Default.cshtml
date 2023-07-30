@@ -11,7 +11,7 @@
 						<h5 class="card-title">@item.Key</h5>
 					</div>
 					<div class="card-body">
-						<div class="form-group hover:text-primary">
+						<div class="mt-2 hover:text-primary">
 							<div class="form-check form-switch">
 								<input id="@item.FirstOrDefault()?.Table" type="checkbox" class="custom-control-input form-check-input check-all" />
 								<label for="@item.FirstOrDefault()?.Table" class="custom-control-label form-check-label w-100 hover:pointer">Chọn tất cả</label>
@@ -19,7 +19,7 @@
 						</div>
 						@foreach (var per in item)
 						{
-							<div class="form-group hover:text-primary">
+							<div class="mt-2 hover:text-primary">
 								<div class="form-check form-switch">
 									<input id="permission-@per.Id" type="checkbox" data-id="@per.Id" role="switch" 
 										   class="form-check-input check-permission" />

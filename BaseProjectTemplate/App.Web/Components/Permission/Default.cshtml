@@ -6,7 +6,7 @@
 		{
 
 			<div class="col-sm-6 col-md-4 col-xl-3 js-group-permission">
-				<div class="card">
+				<div class="card border">
 					<div class="card-header">
 						<h5 class="card-title">@item.Key</h5>
 					</div>
@@ -20,11 +20,11 @@
 						@foreach (var per in item)
 						{
 							<div class="form-group hover:text-primary">
-								<div class="custom-control custom-switch form-check">
-									<input id="permission-@per.Id" type="checkbox" data-id="@per.Id"
-										   class="custom-control-input form-check-input check-permission" />
+								<div class="form-check form-switch">
+									<input id="permission-@per.Id" type="checkbox" data-id="@per.Id" role="switch" 
+										   class="form-check-input check-permission" />
 									<label for="permission-@per.Id"
-										   class="custom-control-label form-check-label w-100 hover:pointer">@per.Desc <small>(@per.Id)</small></label>
+										   class="form-check-label w-100 hover:pointer">@per.Desc <small>(@per.Id)</small></label>
 									</div>
 								</div>
 							}

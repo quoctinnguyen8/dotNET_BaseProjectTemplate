@@ -9,7 +9,7 @@
 {
 	<div class="my-2">
 		<a asp-action="Create" class="btn btn-primary">
-			<i class="fas fa-plus-circle"></i> &nbsp; Thêm mới vai trò
+			<i class="mdi mdi-plus"></i> &nbsp; Thêm mới vai trò
 		</a>
 	</div>
 }
@@ -38,8 +38,8 @@
 						   class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-eye"></i></a>
 						@if (User.IsInPermission(AuthConst.AppRole.UPDATE))
 						{
-							<a asp-action="Edit" asp-route-id="@item.Id"
-							   class="btn btn-outline-success btn-sm"><i class="mdi mdi-pen"></i></a>
+							<a asp-action="Edit" asp-route-id="@item.Id" title="Edit"
+							   class="btn btn-outline-secondary btn-sm"><i class="mdi mdi-pencil"></i></a>
 						}
 						@if (User.IsInPermission(AuthConst.AppRole.DELETE))
 						{

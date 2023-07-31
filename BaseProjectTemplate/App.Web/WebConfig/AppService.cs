@@ -2,8 +2,7 @@
 using App.Data.Repositories;
 using App.Web.Common;
 using App.Web.Common.Mailer;
-using App.Web.Services;
-using App.Web.Services.Interfaces;
+using App.Web.Services.JWTService;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -19,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace App.Web.WebConfig
 {
-	public static class AppService
+    public static class AppService
 	{
 		public static void AddAppService(this IServiceCollection services, IConfiguration Configuration)
 		{
@@ -74,7 +73,7 @@ namespace App.Web.WebConfig
 			services.AddSingleton(mailConfig);
 
 			// Đăng ký token service
-			services.AddScoped<ITokenService, TokenService>();
+			services.AddScoped<TokenService>();
 		}
 	}
 }

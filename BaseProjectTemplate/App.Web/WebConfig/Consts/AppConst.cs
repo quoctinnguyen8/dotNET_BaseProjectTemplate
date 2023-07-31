@@ -34,6 +34,5 @@ namespace App.Web.WebConfig
 		// Cấu hình cho đăng nhập bằng JWT
 		public const string JWT_AUTH							= "Bearer";
 		public const string SESSION_TOKEN						= "Token";
-		public const short EXPIRED_DURATIONS_HOURS				= 1;
 	}
 }

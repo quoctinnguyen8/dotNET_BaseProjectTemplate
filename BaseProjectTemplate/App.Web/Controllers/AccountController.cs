@@ -2,6 +2,7 @@
 using App.Data.Repositories;
 using App.Share.Extensions;
 using App.Web.Common.Helpers;
+using App.Web.Services.Interfaces;
 using App.Web.ViewModels.Account;
 using App.Web.WebConfig;
 using AutoMapper;
@@ -9,6 +10,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,10 +23,12 @@ namespace App.Web.Controllers
 	public class AccountController : AppControllerBase
 	{
 		readonly GenericRepository _repository;
+		private readonly ITokenService _tokenService;
 
-		public AccountController(GenericRepository repository, IMapper mapper) : base(mapper)
+		public AccountController(GenericRepository repository, IMapper mapper, ITokenService tokenService) : base(mapper)
 		{
 			_repository = repository;
+			_tokenService = tokenService;
 		}
 
 		public IActionResult Login() => User.Identity.IsAuthenticated ? HomePage() : View();
@@ -55,26 +59,15 @@ namespace App.Web.Controllers
 				return RedirectToAction(nameof(Login));
 			}
 
-			var claims = new List<Claim> {
-							new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-							new Claim(ClaimTypes.Name, user.Username),
-							new Claim(ClaimTypes.Email, user.Email),
-							new Claim(AppClaimTypes.FullName, user.FullName),
-							new Claim(AppClaimTypes.PhoneNumber, user.PhoneNumber1),
-							new Claim(AppClaimTypes.RoleName, user.RoleName),
-							new Claim(AppClaimTypes.Permissions, user.Permission),
-						};
-			var claimsIdentity = new ClaimsIdentity(claims, AppConst.COOKIES_AUTH);
-			var principal = new ClaimsPrincipal(claimsIdentity);
-			var authenPropeties = new AuthenticationProperties()
-			{
-				ExpiresUtc = DateTime.UtcNow.AddHours(AppConst.LOGIN_TIMEOUT),
-				IsPersistent = model.RememberMe
-			};
-			await HttpContext.SignInAsync(AppConst.COOKIES_AUTH, principal, authenPropeties);
-
 			CreateDirIfNotExist(model.Username);
 			var returnUrl = Request.Query["ReturnUrl"].ToString();
+
+			var token = _tokenService.GenerateToken(user);
+			if (token == null)
+			{
+				return View();
+			}
+			HttpContext.Response.Cookies.Append(AppConst.SESSION_TOKEN, token);
 			if (returnUrl.IsNullOrEmpty())
 			{
 				return HomePage();
@@ -82,9 +75,9 @@ namespace App.Web.Controllers
 			return Redirect(returnUrl);
 		}
 
-		public async Task<IActionResult> Logout()
+		public IActionResult Logout()
 		{
-			await HttpContext.SignOutAsync(AppConst.COOKIES_AUTH);
+			HttpContext.Response.Cookies.Delete(AppConst.SESSION_TOKEN);
 			return RedirectToAction(nameof(Login));
 		}
 

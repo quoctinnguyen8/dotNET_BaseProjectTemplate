@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace App.Web.Controllers
@@ -31,6 +32,10 @@ namespace App.Web.Controllers
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error(int statusCode)
 		{
+			if(statusCode == (int)HttpStatusCode.Unauthorized)
+			{
+				return RedirectToAction("Login", "Account");
+			}
 			return View(statusCode.ToString());
 		}
 	}

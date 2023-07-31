@@ -2,14 +2,19 @@
 using App.Data.Repositories;
 using App.Web.Common;
 using App.Web.Common.Mailer;
+using App.Web.Services;
+using App.Web.Services.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace App.Web.WebConfig
@@ -27,11 +32,25 @@ namespace App.Web.WebConfig
 			services.AddScoped<GenericRepository>();
 
 			// Cấu hình đăng nhập
-			services.AddAuthentication(AppConst.COOKIES_AUTH).AddCookie(options =>
+			var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
+			services.AddAuthentication(x =>
 			{
-				options.LoginPath = AppConst.LOGIN_PATH;
-				options.ExpireTimeSpan = TimeSpan.FromHours(AppConst.LOGIN_TIMEOUT);
-				options.Cookie.HttpOnly = true;
+				x.DefaultAuthenticateScheme = AppConst.JWT_AUTH;
+				x.DefaultChallengeScheme = AppConst.JWT_AUTH;
+			})
+			.AddJwtBearer(options =>
+			{
+				options.RequireHttpsMetadata = false;
+				options.SaveToken = true;
+				options.TokenValidationParameters = new TokenValidationParameters
+				{
+					ValidateIssuerSigningKey = true,
+					IssuerSigningKey = new SymmetricSecurityKey(key),
+					ValidateIssuer = true,
+					ValidateAudience = true,
+					ValidIssuer = Configuration["Jwt:Issuer"],
+					ValidAudience = Configuration["Jwt:Audience"],
+				};
 			});
 
 			// Cấu hình AutoMapper
@@ -53,6 +72,9 @@ namespace App.Web.WebConfig
 			AppMailConfiguration mailConfig = new();
 			mailConfig.LoadFromConfig(Configuration);
 			services.AddSingleton(mailConfig);
+
+			// Đăng ký token service
+			services.AddScoped<ITokenService, TokenService>();
 		}
 	}
 }

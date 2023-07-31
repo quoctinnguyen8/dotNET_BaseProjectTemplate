@@ -3,6 +3,7 @@ using App.Data.Repositories;
 using App.Web.WebConfig.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace App.Web.WebConfig
@@ -51,6 +53,25 @@ namespace App.Web.WebConfig
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
+			app.UseStatusCodePages(async (context) => {
+				var request = context.HttpContext.Request;
+				var response = context.HttpContext.Response;
+				if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+				// you may also check requests path to do this only for specific methods
+				// && request.Path.Value.StartsWith("/specificPath")
+				{
+					response.Redirect("/login");
+				}
+			});
+			app.Use(async (context, next) =>
+			{
+				var token = context.Request.Cookies[AppConst.SESSION_TOKEN];
+				if (!string.IsNullOrEmpty(token))
+				{
+					context.Request.Headers.Add("Authorization", "Bearer " + token);
+				}
+				await next();
+			});
 			// Điều hướng khi gặp lỗi
 			app.UseStatusCodePagesWithReExecute("/error/{0}");
 

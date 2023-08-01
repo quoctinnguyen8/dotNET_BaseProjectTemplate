@@ -62,7 +62,7 @@ namespace App.Web.WebConfig
 				}
 				await next();
 			});
-			// Điều hướng khi gặp lỗi
+			// Điều hướng khi gặp lỗi, bao gồm cả lỗi 401 (Unauthorized)
 			app.UseStatusCodePagesWithReExecute("/error/{0}");
 
 			app.UseHttpsRedirection();

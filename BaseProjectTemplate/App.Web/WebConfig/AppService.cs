@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace App.Web.WebConfig
 {
-    public static class AppService
+	public static class AppService
 	{
 		public static void AddAppService(this IServiceCollection services, IConfiguration Configuration)
 		{
@@ -32,12 +32,11 @@ namespace App.Web.WebConfig
 
 			// Cấu hình đăng nhập
 			var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
-			services.AddAuthentication(x =>
+			services.AddAuthentication(auth =>
 			{
-				x.DefaultAuthenticateScheme = AppConst.JWT_AUTH;
-				x.DefaultChallengeScheme = AppConst.JWT_AUTH;
-			})
-			.AddJwtBearer(options =>
+				auth.DefaultAuthenticateScheme = AppConst.JWT_AUTH;
+				auth.DefaultChallengeScheme = AppConst.JWT_AUTH;
+			}).AddJwtBearer(options =>
 			{
 				options.RequireHttpsMetadata = false;
 				options.SaveToken = true;

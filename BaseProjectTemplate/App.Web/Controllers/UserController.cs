@@ -27,7 +27,7 @@ namespace App.Web.Controllers
 			_repository = repository;
 		}
 
-		[AppAuthorize()]
+		[AppAuthorize(AuthConst.AppUser.VIEW_LIST)]
 		public async Task<IActionResult> Index(int page = 1, int size = DEFAULT_PAGE_SIZE)
 		{
 			// Chú ý dấu ngoặc khi dùng await cùng với GenRowIndex

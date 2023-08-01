@@ -10,66 +10,67 @@ using Microsoft.Extensions.Configuration;
 
 namespace App.Web.Services.JWTService
 {
-    public class TokenService
-    {
-        private readonly IConfiguration _configuration;
-        public TokenService(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-        public string GenerateToken(UserDataForApp user)
-        {
-            var claims = new List<Claim> {
-                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                            new Claim(ClaimTypes.Name, user.Username),
-                            new Claim(ClaimTypes.Email, user.Email),
-                            new Claim(AppClaimTypes.FullName, user.FullName),
-                            new Claim(AppClaimTypes.PhoneNumber, user.PhoneNumber1),
-                            new Claim(AppClaimTypes.RoleName, user.RoleName),
-                            new Claim(AppClaimTypes.Permissions, user.Permission),
-                        };
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-            var secretKey = new SymmetricSecurityKey(key);
-            var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
+	public class TokenService
+	{
+		private readonly IConfiguration _configuration;
+		public TokenService(IConfiguration configuration)
+		{
+			_configuration = configuration;
+		}
+		public string GenerateToken(UserDataForApp user)
+		{
+			var claims = new List<Claim> {
+							new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+							new Claim(ClaimTypes.Name, user.Username),
+							new Claim(ClaimTypes.Email, user.Email),
+							new Claim(AppClaimTypes.FullName, user.FullName),
+							new Claim(AppClaimTypes.PhoneNumber, user.PhoneNumber1),
+							new Claim(AppClaimTypes.RoleName, user.RoleName),
+							new Claim(AppClaimTypes.Permissions, user.Permission),
+						};
+			var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+			var secretKey = new SymmetricSecurityKey(key);
+			var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature);
+			var timeout = Convert.ToInt32(_configuration.GetSection("Jwt:TokenValidityInMinutes").Value);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Issuer = _configuration.GetSection("Jwt:Issuer").Value,
-                Audience = _configuration.GetSection("Jwt:Audience").Value,
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(AppConst.LOGIN_TIMEOUT),
-                SigningCredentials = signingCredentials
-            };
+			var tokenDescriptor = new SecurityTokenDescriptor
+			{
+				Issuer = _configuration.GetSection("Jwt:Issuer").Value,
+				Audience = _configuration.GetSection("Jwt:Audience").Value,
+				Subject = new ClaimsIdentity(claims),
+				Expires = DateTime.Now.AddMinutes(timeout),
+				SigningCredentials = signingCredentials
+			};
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
 
-            return tokenHandler.WriteToken(token);
-        }
+			return tokenHandler.WriteToken(token);
+		}
 
-        public bool ValidateToken(string key, string issuer, string audience, string token)
-        {
-            var mySecret = Encoding.UTF8.GetBytes(key);
-            var mySecurityKey = new SymmetricSecurityKey(mySecret);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            try
-            {
-                tokenHandler.ValidateToken(token,
-                new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidIssuer = issuer,
-                    ValidAudience = issuer,
-                    IssuerSigningKey = mySecurityKey,
-                }, out SecurityToken validatedToken);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
-    }
+		public bool ValidateToken(string key, string issuer, string audience, string token)
+		{
+			var mySecret = Encoding.UTF8.GetBytes(key);
+			var mySecurityKey = new SymmetricSecurityKey(mySecret);
+			var tokenHandler = new JwtSecurityTokenHandler();
+			try
+			{
+				tokenHandler.ValidateToken(token,
+				new TokenValidationParameters
+				{
+					ValidateIssuerSigningKey = true,
+					ValidateIssuer = true,
+					ValidateAudience = true,
+					ValidIssuer = issuer,
+					ValidAudience = issuer,
+					IssuerSigningKey = mySecurityKey,
+				}, out SecurityToken validatedToken);
+			}
+			catch
+			{
+				return false;
+			}
+			return true;
+		}
+	}
 }

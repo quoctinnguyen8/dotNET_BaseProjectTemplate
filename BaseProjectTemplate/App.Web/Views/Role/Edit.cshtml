@@ -39,15 +39,12 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<div class="mt-2">
-				<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu</button>
-				<button type="reset" class="btn btn-default"><i class="fa fa-undo"></i> Nhập lại</button>
-			</div>
+			<partial name="Form/_FormAction" />
 		</div>
 	</div>
 </form>
 
-<partial name="_BackToList" />
+<partial name="Form/_BackToList" />
 
 @section scripts {
 	<script src="~/lib/masonry/masonry.pkgd.min.js"></script>

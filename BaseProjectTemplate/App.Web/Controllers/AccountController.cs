@@ -8,6 +8,7 @@ using App.Web.WebConfig;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -67,7 +68,10 @@ namespace App.Web.Controllers
 			{
 				return View();
 			}
-			HttpContext.Response.Cookies.Append(AppConst.SESSION_TOKEN, token);
+			HttpContext.Response.Cookies.Append(AppConst.SESSION_TOKEN, token, new CookieOptions
+			{
+				HttpOnly = true,
+			});
 			if (returnUrl.IsNullOrEmpty())
 			{
 				return HomePage();

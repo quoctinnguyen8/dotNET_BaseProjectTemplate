@@ -48,6 +48,7 @@ namespace App.Web.WebConfig
 					ValidateAudience = true,
 					ValidIssuer = Configuration["Jwt:Issuer"],
 					ValidAudience = Configuration["Jwt:Audience"],
+					ClockSkew = TimeSpan.Zero
 				};
 			});
 

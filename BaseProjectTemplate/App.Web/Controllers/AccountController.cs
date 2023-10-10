@@ -90,6 +90,8 @@ namespace App.Web.Controllers
 
 		public IActionResult AccessDenied() => View();
 
+		public IActionResult ChangePassword() => View();
+		[HttpPost]
 		public async Task<IActionResult> ChangePassword(ChangePassword model)
 		{
 			var user = await _repository.FindAsync<AppUser>(this.CurrentUserId);

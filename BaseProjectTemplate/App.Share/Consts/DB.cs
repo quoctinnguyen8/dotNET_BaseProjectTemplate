@@ -34,8 +34,8 @@ namespace App.Share.Consts
 			public const string TABLE_NAME					= "MstPermission";
 			public const short CODE_LENGTH					= 50;
 			public const short TABLE_LENGTH					= 50;
-			public const short GROUPNAME_LENGHT				= 100;
-			public const short DESC_LENGHT					= 100;
+			public const short GROUPNAME_LENGTH				= 100;
+			public const short DESC_LENGTH					= 100;
 		}
 	}
 }
